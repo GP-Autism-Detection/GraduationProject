@@ -9,7 +9,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(),
+     //appBar: AppBar(
+       // title: Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
+      //),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
@@ -17,7 +19,8 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
+                Image(image: NetworkImage('https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
+                //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
                 SizedBox(height : 40.0),     // masaf ben login w textbox
                 TextFormField(
                   controller: emailController,
@@ -66,11 +69,24 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Don\'t have an account?'),
+                    Text('Don\'t have an account ?'),
                     TextButton(onPressed: ( ){
 
                     }, child:
                         Text('Register Now')
+                    ),
+
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Forgot your Password ?'),
+                    TextButton(onPressed: ( ){
+
+                    }, child:
+                    Text('Reset Password')
                     ),
 
                   ],
