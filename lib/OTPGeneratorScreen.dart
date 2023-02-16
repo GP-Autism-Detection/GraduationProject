@@ -7,6 +7,8 @@ class OTPGeneratorScreen extends StatelessWidget {
 
   var emailController = TextEditingController();
 
+  var FormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -17,49 +19,61 @@ class OTPGeneratorScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image(image: NetworkImage('https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
-                //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
-                SizedBox(height : 40.0),     // masaf ben login w textbox
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                      labelText: 'Please Enter your Email Address',    // aw hint text bs bttshal lma tktb
-                      border:OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.email)                          // icon fl a5er posticon
+            child: Form(
+              key: FormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image(image: NetworkImage('https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
+                  //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
+                  SizedBox(height : 40.0),     // masaf ben login w textbox
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                        labelText: 'Please Enter your Email Address',    // aw hint text bs bttshal lma tktb
+                        border:OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.email)                          // icon fl a5er posticon
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    onFieldSubmitted: (String value){            // aw onchanged be return ay change
+                      print(value);
+                    },
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return 'email address must not be empty';
+                      }
+                      return null;
+                    },
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (String value){            // aw onchanged be return ay change
-                    print(value);
-                  },
-                ),
-                // space fe el col --> height
+                  // space fe el col --> height
 
-                SizedBox( height: 15,),
-                Container(
-                  width: double.infinity,
-                  color: Colors.blue,
-                  child: MaterialButton(onPressed: (){
-                    print(emailController.text);
+                  SizedBox( height: 15,),
+                  Container(
+                    width: double.infinity,
+                    color: Colors.blue,
+                    child: MaterialButton(onPressed: (){
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OTPVerifyToResetPass()),
-                    );
+                      if(FormKey.currentState!.validate() ) {
+                        print(emailController.text);
 
-                  },
-                    child: Text(
-                      'Send an OTP to your Email',           // mafe4 width so wrap to container
-                      style: TextStyle(
-                        color: Colors.white,
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OTPVerifyToResetPass()),
+                        );
+                      }
+                    },
+                      child: Text(
+                        'Send an OTP to your Email',           // mafe4 width so wrap to container
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                ),                 // onPressed ---> annonumse func --> (){}
+                  ),                 // onPressed ---> annonumse func --> (){}
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
