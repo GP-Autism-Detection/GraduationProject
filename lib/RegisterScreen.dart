@@ -42,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
                 TextFormField(
                   controller: passwordController,       // return el value le gwa el textbox
                   decoration: InputDecoration(
-                      labelText: 'Please Enter your Password',    // aw hint text bs bttshal lma tktb
+                      labelText: 'Please Create your Password',    // aw hint text bs bttshal lma tktb
                       border:OutlineInputBorder(),
                       prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
                       suffixIcon: Icon(Icons.remove_red_eye)

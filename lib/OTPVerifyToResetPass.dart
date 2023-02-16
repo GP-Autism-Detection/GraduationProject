@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project_app/OTPVerificationScreen.dart';
-import 'package:graduation_project_app/OTPVerifyToResetPass.dart';
+import 'package:graduation_project_app/ResetPasswordScreen.dart';
 
-class OTPGeneratorScreen extends StatelessWidget {
+class OTPVerifyToResetPass extends StatelessWidget {
 
-  var emailController = TextEditingController();
+  var OtpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +23,13 @@ class OTPGeneratorScreen extends StatelessWidget {
                 //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
                 SizedBox(height : 40.0),     // masaf ben login w textbox
                 TextFormField(
-                  controller: emailController,
+                  controller: OtpController,
                   decoration: InputDecoration(
-                      labelText: 'Please Enter your Email Address',    // aw hint text bs bttshal lma tktb
+                      labelText: 'Please Enter the Verification Code',    // aw hint text bs bttshal lma tktb
                       border:OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.email)                          // icon fl a5er posticon
+                      prefixIcon: Icon(Icons.verified)                          // icon fl a5er posticon
                   ),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.number,
                   onFieldSubmitted: (String value){            // aw onchanged be return ay change
                     print(value);
                   },
@@ -42,16 +41,15 @@ class OTPGeneratorScreen extends StatelessWidget {
                   width: double.infinity,
                   color: Colors.blue,
                   child: MaterialButton(onPressed: (){
-                    print(emailController.text);
-
+                    print(OtpController.text);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OTPVerifyToResetPass()),
+                      MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
                     );
 
                   },
                     child: Text(
-                      'Send an OTP to your Email',           // mafe4 width so wrap to container
+                      'Verify',           // mafe4 width so wrap to container
                       style: TextStyle(
                         color: Colors.white,
                       ),

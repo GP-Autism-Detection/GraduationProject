@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/OTPVerificationScreen.dart';
 import 'package:graduation_project_app/OTPVerifyToResetPass.dart';
 
-class OTPGeneratorScreen extends StatelessWidget {
+class ResetPasswordScreen extends StatelessWidget {
 
   var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var ConfirmpasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +39,54 @@ class OTPGeneratorScreen extends StatelessWidget {
                   },
                 ),
                 // space fe el col --> height
-
+                SizedBox( height: 15,),
+                TextFormField(
+                  controller: passwordController,       // return el value le gwa el textbox
+                  decoration: InputDecoration(
+                      labelText: 'Please Enter new Password',    // aw hint text bs bttshal lma tktb
+                      border:OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
+                      suffixIcon: Icon(Icons.remove_red_eye)
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                  onFieldSubmitted: (String value){            // aw onchanged be return ay change
+                    print(value);
+                  },
+                ),
+                SizedBox( height: 15,),
+                TextFormField(
+                  controller: ConfirmpasswordController,       // return el value le gwa el textbox
+                  decoration: InputDecoration(
+                      labelText: 'Please Confirm your Password',    // aw hint text bs bttshal lma tktb
+                      border:OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
+                      suffixIcon: Icon(Icons.remove_red_eye)
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                  onFieldSubmitted: (String value){            // aw onchanged be return ay change
+                    print(value);
+                  },
+                ),
                 SizedBox( height: 15,),
                 Container(
                   width: double.infinity,
                   color: Colors.blue,
                   child: MaterialButton(onPressed: (){
                     print(emailController.text);
+                    print(passwordController.text);
+                    if(passwordController.text == ConfirmpasswordController.text){
+                      print('Pass identical');
+                    }
+                    else{
+                      print('diffrence pass');
+                    }
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OTPVerifyToResetPass()),
-                    );
 
                   },
                     child: Text(
-                      'Send an OTP to your Email',           // mafe4 width so wrap to container
+                      'Reset Password',           // mafe4 width so wrap to container
                       style: TextStyle(
                         color: Colors.white,
                       ),
