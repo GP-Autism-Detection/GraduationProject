@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     border:OutlineInputBorder(),
                     prefixIcon: Icon(Icons.email)                          // icon fl a5er posticon
                   ),
+
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (String value){            // aw onchanged be return ay change
                        print(value);
@@ -80,9 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       if(value!.isEmpty) {
                         return 'password must not be empty';
                       }
-                      if (value!.length > 0 && value!.length < 8) {
-                        return ' password must be larger than 8 digits';
-                      }
+                    //  if (value!.length > 0 && value!.length < 8) {
+                      //  return ' password must be larger than 8 digits';
+                      //}
                       return null;
                     },
 
