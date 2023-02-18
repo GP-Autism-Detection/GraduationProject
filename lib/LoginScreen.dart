@@ -96,8 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       if(FormKey.currentState!.validate() ) {
                         print(emailController.text);
                         print(passwordController.text);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MenuScreen(),
+                            ),
+                          );
                       }
-
                     },
                     child: Text(
                       'LOGIN',           // mafe4 width so wrap to container
