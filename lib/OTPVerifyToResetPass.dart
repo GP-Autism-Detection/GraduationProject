@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ResetPasswordScreen.dart';
 
@@ -78,3 +78,4 @@ class OTPVerifyToResetPass extends StatelessWidget {
     );
   }
 }
+*/

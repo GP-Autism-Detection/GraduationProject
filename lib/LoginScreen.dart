@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
@@ -13,6 +14,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  FirebaseAuth Auth = FirebaseAuth.instance;    // server auth db
+  @override
+  void initstate(){
+    super.initState();
+    Auth.authStateChanges().listen((User) {
+      if(User == null) {
+        print("no user");
+      }
+        else{
+          print("there is a user");
+      }
+    });
+  }
+
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var FormKey = GlobalKey<FormState>();
@@ -97,16 +114,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: double.infinity,
                     color: Colors.blue,
-                    child: MaterialButton(onPressed: (){
+                    child: MaterialButton(onPressed: () async{
                       if(FormKey.currentState!.validate() ) {
+
+                        try{
+                          UserCredential Credentail = await Auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MenuScreen()),
+                          );
+                        }on FirebaseAuthException catch(e){
+                          if(e.code == 'wrong-password'){
+                            print('wrong password');
+                            final snackBar1 = SnackBar(
+                              content: const Text('Wrong Passwsord'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+                          }
+                          else if(e.code == 'user-not-found'){
+                            print('User not found');
+                            final snackBar2 = SnackBar(
+                              content: const Text('User not registered'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar2);
+                          }
+                        }
+
+
                         print(emailController.text);
                         print(passwordController.text);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MenuScreen(),
-                            ),
-                          );
+
                       }
                     },
                     child: Text(

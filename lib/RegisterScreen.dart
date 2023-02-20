@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/LoginScreen.dart';
+import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/OTPVerificationScreen.dart';
 
@@ -10,6 +13,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
+  FirebaseAuth Auth = FirebaseAuth.instance;
+
   var emailController = TextEditingController();
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
@@ -151,17 +157,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     width: double.infinity,
                     color: Colors.blue,
-                    child: MaterialButton(onPressed: (){
+                    child: MaterialButton(onPressed: () async{
                       if(FormKey.currentState!.validate() ) {
-                        print(emailController.text);
-                        print(passwordController.text);
+                       try{
+                        UserCredential Credentail = await Auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
 
+                        final snackBar1 = SnackBar(
+                          content: const Text('account has been registered successfuly!'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar1);
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => OTPVerificationScreen()),
-                        );
-                      }
+                          MaterialPageRoute(builder: (context) => MenuScreen()),
 
+                        );
+                       }on FirebaseAuthException catch(e){
+                         if(e.code== 'email-already-in-use'){
+                           print ('email already exist');
+                           final snackBar = SnackBar(
+                               content: const Text('email already exist!, You can login now!'),
+                               action: SnackBarAction(
+                                 label: 'Login Screen',
+                                 onPressed: () {
+                                   Navigator.push(
+                                     context,
+                                     MaterialPageRoute(builder: (context) => LoginScreen()),
+                                   );
+                                   // Some code to undo the change.
+                                 },
+                               )
+                               );
+                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                         }
+
+                       }
+
+                        print(emailController.text);
+                        print(passwordController.text);
+                      }
 
                     },
                       child: Text(

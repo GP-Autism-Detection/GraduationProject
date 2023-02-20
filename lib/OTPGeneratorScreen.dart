@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/OTPVerificationScreen.dart';
 import 'package:graduation_project_app/OTPVerifyToResetPass.dart';
+import 'package:graduation_project_app/RegisterScreen.dart';
 
 class OTPGeneratorScreen extends StatelessWidget {
+
+  FirebaseAuth Auth = FirebaseAuth.instance;
 
   var emailController = TextEditingController();
 
@@ -54,20 +59,42 @@ class OTPGeneratorScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     color: Colors.blue,
-                    child: MaterialButton(onPressed: (){
-
+                    child: MaterialButton(onPressed: ()async{
                       if(FormKey.currentState!.validate() ) {
+                        try{
+                          await Auth.sendPasswordResetEmail(email: emailController.text.trim());
+                          final snackBar = SnackBar(
+                            content: const Text('Email has been sent successfuly, reset password and login!'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                          );
+                        }on FirebaseAuthException catch(e){
+                             print ('auth/user-not-found');
+                             final snackBar = SnackBar(
+                               content: const Text('this mail not registered'),
+                                 action: SnackBarAction(
+                                   label: 'Register Now!',
+                                   onPressed: () {
+                                     Navigator.push(
+                                       context,
+                                       MaterialPageRoute(builder: (context) => RegisterScreen()),
+                                     );
+                                     // Some code to undo the change.
+                                   },
+                                 )
+                             );
+                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+
                         print(emailController.text);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OTPVerifyToResetPass()),
-                        );
                       }
                     },
                       child: Text(
-                        'Send an OTP to your Email',           // mafe4 width so wrap to container
+                        'Send a Link to your Email',           // mafe4 width so wrap to container
                         style: TextStyle(
                           color: Colors.white,
                         ),

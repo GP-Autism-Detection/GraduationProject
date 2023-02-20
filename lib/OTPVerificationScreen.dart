@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OTPVerificationScreen extends StatelessWidget {
@@ -72,3 +72,4 @@ class OTPVerificationScreen extends StatelessWidget {
     );
   }
 }
+*/
