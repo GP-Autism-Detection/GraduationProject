@@ -11,6 +11,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   var emailController = TextEditingController();
+  var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   var ConfirmpasswordController = TextEditingController();
   var FormKey = GlobalKey<FormState>();
@@ -49,10 +50,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value!.isEmpty){
                         return 'email address must not be empty';
                       }
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return "Please enter a valid email address";
+                      }
                       return null;
                     },
                   ),
                          // space fe el col --> height
+                  SizedBox( height: 15,),
+                  TextFormField(
+                    controller: usernameController,
+                    decoration: InputDecoration(
+                        labelText: 'Please Enter your Name',    // aw hint text bs bttshal lma tktb
+                        border:OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person)                          // icon fl a5er posticon
+                    ),
+                    keyboardType: TextInputType.name,
+                    onFieldSubmitted: (String value){            // aw onchanged be return ay change
+                      print(value);
+                    },
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return 'User Name must not be empty';
+                      }
+                      return null;
+                    },
+                  ),
+                  // space fe el col --> height
                   SizedBox( height: 15,),
                   TextFormField(
                     controller: passwordController,       // return el value le gwa el textbox

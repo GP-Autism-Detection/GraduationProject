@@ -42,6 +42,9 @@ class OTPGeneratorScreen extends StatelessWidget {
                       if(value!.isEmpty){
                         return 'email address must not be empty';
                       }
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return "Please enter a valid email address";
+                      }
                       return null;
                     },
                   ),

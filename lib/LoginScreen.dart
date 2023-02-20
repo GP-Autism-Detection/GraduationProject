@@ -4,6 +4,8 @@ import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/OTPVerificationScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 
+import 'MenuScreen.dart';
+
 class LoginScreen extends StatefulWidget {
 
   @override
@@ -49,6 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (value){
                       if(value!.isEmpty){
                         return 'email address must not be empty';
+                      }
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return "Please enter a valid email address";
                       }
                       return null;
                     },

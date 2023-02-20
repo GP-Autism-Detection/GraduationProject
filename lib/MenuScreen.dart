@@ -34,7 +34,8 @@ class MenuScreen extends StatelessWidget {
                         children: [
                           Image(
                             image: NetworkImage(
-                                'https://cdn-icons-png.flaticon.com/512/4243/4243421.png'),
+                                'http'
+                                    's://cdn-icons-png.flaticon.com/512/4243/4243421.png'),
                             height: 80.0,
                             width: 80.0,
                             fit: BoxFit.cover,

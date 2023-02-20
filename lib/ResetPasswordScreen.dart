@@ -35,7 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   Image(image: NetworkImage('https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
                   //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
                   SizedBox(height : 40.0),     // masaf ben login w textbox
-                  TextFormField(
+                 /* TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
                         labelText: 'Please Enter your Email Address',    // aw hint text bs bttshal lma tktb
@@ -52,7 +52,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       }
                       return null;
                     },
-                  ),
+                  ),*/
                   // space fe el col --> height
                   SizedBox( height: 15,),
                   TextFormField(
