@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/TestScreen.dart';
-
-import 'TestScreen.dart';
+import '/NearestCentersScreen.dart';
 
 class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -116,34 +115,44 @@ class MenuScreen extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                              'https://cdn-icons-png.flaticon.com/512/4243/4243416.png'),
-                          height: 80.0,
-                          width: 80.0,
-                          fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NearestCentersScreen(),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Text(
-                          'Nearest Centers',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                      );
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: NetworkImage(
+                                'https://cdn-icons-png.flaticon.com/512/4243/4243416.png'),
+                            height: 80.0,
+                            width: 80.0,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        10.0,
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Nearest Centers',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      color: Colors.grey[400],
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.0,
+                        ),
+                        color: Colors.grey[400],
+                      ),
                     ),
                   ),
                 ),
