@@ -62,6 +62,9 @@ class _TestScreen extends State<TestScreen> {
               ),
             ),
           ),
+          SizedBox(
+            height: 180,
+          ),
           Container(
             width: double.infinity,
             color: Colors.blueAccent,
@@ -75,6 +78,9 @@ class _TestScreen extends State<TestScreen> {
               ),
             ),
 
+          ),
+          SizedBox(
+            height: 20,
           ),
           Container(
             width: double.infinity,
