@@ -1,35 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/Centers.dart';
+import 'firebaseStorage.dart';
 
-class NearestCentersScreen extends StatelessWidget {
+class NearestCentersScreen extends StatefulWidget {
   const NearestCentersScreen({Key? key}) : super(key: key);
 
+  @override
+  State<NearestCentersScreen> createState() => _NearestCentersScreenState();
+}
+
+class _NearestCentersScreenState extends State<NearestCentersScreen> {
+  List<centers> center =[];
+  _getData() async{
+    center = await firebaseStorage().getAllData();
+    setState(() {
+
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Centers for help',
+          'Help Centers',
         ),
       ),
-      body: Padding(
+      body: center.isEmpty ? Center(child: CircularProgressIndicator()) : Padding(
         padding: const EdgeInsets.all(20.0),
         child: Expanded(
           child: ListView.separated(
-            itemBuilder: (context, index) => buildMenuitem(),
+            itemBuilder: (context, index) => buildMenuitem(index),
             separatorBuilder: (context, index) => Divider(),
-            itemCount: 15,
+            itemCount: center.length,
           ),
         ),
       ),
     );
   }
 
-  Widget buildMenuitem() => Expanded(
+  Widget buildMenuitem(int index) => Expanded(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'The Egyptian Autistic Society',
+          center[index].Name,
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
@@ -45,7 +65,7 @@ class NearestCentersScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '16 Street 213, Maadi as Sarayat Al Gharbeyah',
+                    center[index].Address,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -56,7 +76,7 @@ class NearestCentersScreen extends StatelessWidget {
                     height: 2.0,
                   ),
                   Text(
-                    'Maadi, Cairo',
+                    center[index].Area,
                     style: TextStyle(
                       fontSize: 14.0,
                     ),
@@ -65,7 +85,7 @@ class NearestCentersScreen extends StatelessWidget {
                     height: 2.0,
                   ),
                   Text(
-                    'Contact number: 01234567899',
+                    center[index].ContactNum,
                     style: TextStyle(
                       fontSize: 14.0,
                     ),
@@ -78,7 +98,7 @@ class NearestCentersScreen extends StatelessWidget {
             ),
             Image(
               image: NetworkImage(
-                  'https://lh3.googleusercontent.com/p/AF1QipP5cSqO_I7-jamGIJzuow2gpmL_n4JaaQKXwqB7=s1360-w1360-h1020'),
+                  center[index].Image),
               height: 80.0,
               width: 80.0,
               fit: BoxFit.cover,

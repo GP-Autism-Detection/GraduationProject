@@ -12,12 +12,14 @@ class MenuScreen extends StatelessWidget {
         title: Text(
           'Menu',
         ),
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder:(_) => ProfileScreen()));
-          },
-        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder:(_) => ProfileScreen()));
+            },
+          ),
+        ],
       ),
       body: Column(children: [
         Expanded(
@@ -146,7 +148,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Nearest Centers',
+                            'Help Centers',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,

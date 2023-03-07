@@ -20,8 +20,20 @@ class User{
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       name: map['name'] ?? '',
-      email: map['email'] ?? '',
+      email: map['mail'] ?? '',
       password: map['password'] ?? '',
+    );
+  }
+
+  User copyWith({
+    String? name,
+    String? email,
+    String? password,
+  }) {
+    return User(
+      name: name == null || name == "" ? this.name : name,
+      email: email  == null || email == "" ? this.email : email,
+      password: password  == null || password == "" ? this.password : password,
     );
   }
 }
