@@ -57,8 +57,8 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                     child: MaterialButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => QuizScreen()),
+                          context,
+                          MaterialPageRoute(builder: (context) => QuizScreen()),
                         );
                       },
                       padding:

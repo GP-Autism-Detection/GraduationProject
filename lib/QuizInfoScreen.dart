@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
+
 class QuizInfoScreen extends StatefulWidget {
   const QuizInfoScreen({Key? key}) : super(key: key);
 
@@ -13,16 +14,21 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Autism Test",style: TextStyle(fontSize: 25),),
+        title: Text(
+          "Autism Test",
+          style: TextStyle(fontSize: 25),
+        ),
         actions: [
-          IconButton(onPressed: ()
-          {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuScreen()),
-            );
-          },
-            icon: const Icon(Icons.home),iconSize: 40,)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MenuScreen()),
+              );
+            },
+            icon: const Icon(Icons.home),
+            iconSize: 40,
+          )
         ],
       ),
       body: Padding(
@@ -35,11 +41,14 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
                 padding: EdgeInsets.all(10),
                 child: Text(
                   "Scores of 13 or above may indicate Autism Spectrum Disorder.",
-                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.justify,
                 ),
               ),
-             // SizedBox(height: 50.0),
+              // SizedBox(height: 50.0),
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(

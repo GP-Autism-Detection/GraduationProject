@@ -11,18 +11,18 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user;
-  _getData() async{
+  _getData() async {
     user = await firebaseStorage().getUserData();
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   @override
   void initState() {
     // TODO: implement initState
     _getData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:firebase_storage/firebase_storage.dart';
 
-class firebaseStorage{
+class firebaseStorage {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   fb.FirebaseAuth firebaseAuth = fb.FirebaseAuth.instance;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/QuestionsModelScreen.dart';
-import 'package:graduation_project_app/QuuizInfoScreen.dart';
+import 'package:graduation_project_app/QuizInfoScreen.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -19,24 +19,28 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Autism Test",style: TextStyle(fontSize: 25),),
+        title: Text(
+          "Autism Test",
+          style: TextStyle(fontSize: 25),
+        ),
         actions: [
-          IconButton(onPressed: ()
-          {
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MenuScreen()),
-          );
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MenuScreen()),
+              );
             },
-            icon: const Icon(Icons.home),iconSize: 40,)
+            icon: const Icon(Icons.home),
+            iconSize: 40,
+          )
         ],
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
-        Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           _questionWidget(),
           _answerList(),
           _nextButton(),
@@ -86,7 +90,7 @@ class _QuizScreenState extends State<QuizScreen> {
           .answersList
           .map(
             (e) => _answerButton(e),
-      )
+          )
           .toList(),
     );
   }
@@ -108,16 +112,13 @@ class _QuizScreenState extends State<QuizScreen> {
         onPressed: () {
           if (selectedAnswer == null) {
             if (answer.Correctness == 3) {
-              score+=3;
-            }
-            else if (answer.Correctness == 2) {
-              score+=2;
-            }
-            else if (answer.Correctness == 1) {
-              score+=1;
-            }
-            else if (answer.Correctness == 0) {
-              score+=0;
+              score += 3;
+            } else if (answer.Correctness == 2) {
+              score += 2;
+            } else if (answer.Correctness == 1) {
+              score += 1;
+            } else if (answer.Correctness == 0) {
+              score += 0;
             }
             setState(() {
               selectedAnswer = answer;
@@ -165,18 +166,17 @@ class _QuizScreenState extends State<QuizScreen> {
     bool isAutistic = false;
 
     if (score >= 13) {
-
       isAutistic = true;
     }
-    String title = isAutistic ? "May Indicate Autism " : "No Indication for Autism";
+    String title =
+        isAutistic ? "May Indicate Autism " : "No Indication for Autism";
 
     return AlertDialog(
       title: Text(
         title + " | Your Score is $score / 42",
         style: TextStyle(color: isAutistic ? Colors.redAccent : Colors.green),
       ),
-      content:
-      ElevatedButton(
+      content: ElevatedButton(
         child: const Text("more info"),
         onPressed: () {
           Navigator.push(

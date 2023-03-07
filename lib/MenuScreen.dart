@@ -14,8 +14,9 @@ class MenuScreen extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(Icons.person),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder:(_) => ProfileScreen()));
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => ProfileScreen()));
           },
         ),
       ),
@@ -167,7 +168,6 @@ class MenuScreen extends StatelessWidget {
             ),
           ),
         ),
-
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
