@@ -4,6 +4,8 @@ import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
+import 'package:graduation_project_app/QuizScreen.dart';
+import 'package:graduation_project_app/QuuizInfoScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 import 'package:graduation_project_app/TestScreen.dart';
 
@@ -20,7 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< Updated upstream
       home: LoginScreen(),
+=======
+      home:LoginScreen(),
+>>>>>>> Stashed changes
     );
   }
 }
