@@ -98,7 +98,7 @@ List<Question> getQuestions() {
     ],
   ));
   list.add(Question(
-    "Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too loudly.)",
+    "Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly).",
     [
       Answer("True now & when I was young", 3),
       Answer("True only now", 2),
@@ -134,7 +134,7 @@ List<Question> getQuestions() {
     ],
   ));
   list.add(Question(
-    "I get extremely upset when the way I like to do things is suddenly changed..",
+    "I get extremely upset when the way I like to do things is suddenly changed.",
     [
       Answer("True now & when I was young", 3),
       Answer("True only now", 2),
