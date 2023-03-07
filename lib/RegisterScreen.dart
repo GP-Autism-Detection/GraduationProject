@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
+import 'package:graduation_project_app/firebaseStorage.dart';
+import 'User.dart' as u;
 
 class RegisterScreen extends StatefulWidget {
 
@@ -158,9 +160,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     color: Colors.blue,
                     child: MaterialButton(onPressed: () async{
                       if(FormKey.currentState!.validate() ) {
+                        u.User user = u.User(name: usernameController.text, email: emailController.text, password: passwordController.text);
                        try{
                         UserCredential Credentail = await Auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-
+                        await firebaseStorage().uploadUserData(user: user);
                         final snackBar1 = SnackBar(
                           content: const Text('account has been registered successfuly!'),
                         );

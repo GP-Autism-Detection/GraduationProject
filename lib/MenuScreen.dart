@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ExamStartScreen.dart';
+import 'package:graduation_project_app/ProfileScreen.dart';
 import '/TestScreen.dart';
 import '/NearestCentersScreen.dart';
 
@@ -9,6 +11,12 @@ class MenuScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Menu',
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.person),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder:(_) => ProfileScreen()));
+          },
         ),
       ),
       body: Column(children: [
@@ -33,8 +41,7 @@ class MenuScreen extends StatelessWidget {
                         children: [
                           Image(
                             image: NetworkImage(
-                                'http'
-                                    's://cdn-icons-png.flaticon.com/512/4243/4243421.png'),
+                                'https://cdn-icons-png.flaticon.com/512/4243/4243421.png'),
                             height: 80.0,
                             width: 80.0,
                             fit: BoxFit.cover,
@@ -43,7 +50,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Upload photo',
+                            'Image Test',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -69,7 +76,7 @@ class MenuScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TestScreen(),
+                          builder: (context) => ExamStartScreen(),
                         ),
                       );
                     },
@@ -88,7 +95,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Take photo',
+                            'Questions Test',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -160,6 +167,7 @@ class MenuScreen extends StatelessWidget {
             ),
           ),
         ),
+
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
