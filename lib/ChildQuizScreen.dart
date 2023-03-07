@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
-import 'package:graduation_project_app/QuestionsModelScreen.dart';
+import 'package:graduation_project_app/ChildQuestionModelScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
 
-class QuizScreen extends StatefulWidget {
+class ChildQuizScreen extends StatefulWidget {
   @override
-  State<QuizScreen> createState() => _QuizScreenState();
+  State<ChildQuizScreen> createState() => _ChildQuizScreen();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _ChildQuizScreen extends State<ChildQuizScreen> {
   //define the datas
-  List<Question> questionList = getQuestions();
+  List<CQuestion> questionList = getQuestions();
   int currentQuestionIndex = 0;
   int score = 0;
-  Answer? selectedAnswer;
+  CAnswer? selectedAnswer;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Adult Autism Test",
+          "Childern Autism Test",
           style: TextStyle(fontSize: 25),
         ),
         actions: [
@@ -95,7 +95,7 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  Widget _answerButton(Answer answer) {
+  Widget _answerButton(CAnswer answer) {
     bool isSelected = answer == selectedAnswer;
 
     return Container(
@@ -111,9 +111,7 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
         onPressed: () {
           if (selectedAnswer == null) {
-            if (answer.Correctness == 3) {
-              score += 3;
-            } else if (answer.Correctness == 2) {
+            if (answer.Correctness == 2) {
               score += 2;
             } else if (answer.Correctness == 1) {
               score += 1;
@@ -173,7 +171,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return AlertDialog(
       title: Text(
-        title + " | Your Score is $score / 42",
+        title + " | Your Score is $score / 54",
         style: TextStyle(color: isAutistic ? Colors.redAccent : Colors.green),
       ),
       content: ElevatedButton(

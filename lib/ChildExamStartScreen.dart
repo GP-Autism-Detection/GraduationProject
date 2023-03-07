@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ChildQuizScreen.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 
 class ChildExamStartScreen extends StatefulWidget {
@@ -58,11 +59,12 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => QuizScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => ChildQuizScreen()),
                         );
                       },
                       padding:
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 120),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 120),
                       color: Colors.blue,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),
