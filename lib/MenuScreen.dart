@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/ProfileScreen.dart';
 import '/TestScreen.dart';
@@ -73,22 +74,13 @@ class MenuScreen extends StatelessWidget {
                   width: 20.0,
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ExamStartScreen(),
-                        ),
-                      );
-                    },
                     child: Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image(
                             image: NetworkImage(
-                                'https://cdn-icons-png.flaticon.com/512/4243/4243419.png'),
+                                'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
                             height: 80.0,
                             width: 80.0,
                             fit: BoxFit.cover,
@@ -97,7 +89,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Questions Test',
+                            'Game',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -112,7 +104,6 @@ class MenuScreen extends StatelessWidget {
                         color: Colors.grey[400],
                       ),
                     ),
-                  ),
                 ),
               ],
             ),
@@ -169,41 +160,50 @@ class MenuScreen extends StatelessWidget {
             ),
           ),
         ),
-
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                              'https://cdn-icons-png.flaticon.com/512/4243/4243454.png'),
-                          height: 80.0,
-                          width: 80.0,
-                          fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ExamStartScreen(),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Text(
-                          'Game 1',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                      );
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: NetworkImage(
+                                'https://cdn-icons-png.flaticon.com/512/3403/3403504.png'),
+                            height: 80.0,
+                            width: 80.0,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        10.0,
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Adults Test',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      color: Colors.grey[400],
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.0,
+                        ),
+                        color: Colors.grey[400],
+                      ),
                     ),
                   ),
                 ),
@@ -211,34 +211,44 @@ class MenuScreen extends StatelessWidget {
                   width: 20.0,
                 ),
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                              'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
-                          height: 80.0,
-                          width: 80.0,
-                          fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChildExamStartScreen(),
                         ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Text(
-                          'Game 2',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                      );
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: NetworkImage(
+                                'https://cdn-icons-png.flaticon.com/512/2210/2210419.png'),
+                            height: 80.0,
+                            width: 80.0,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        10.0,
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Children Test',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      color: Colors.grey[400],
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.0,
+                        ),
+                        color: Colors.grey[400],
+                      ),
                     ),
                   ),
                 ),
