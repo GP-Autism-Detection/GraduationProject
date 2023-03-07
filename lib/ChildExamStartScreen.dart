@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ChildQuizScreen.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 
-class ExamStartScreen extends StatefulWidget {
-  const ExamStartScreen({Key? key}) : super(key: key);
+class ChildExamStartScreen extends StatefulWidget {
+  const ChildExamStartScreen({Key? key}) : super(key: key);
 
   @override
-  State<ExamStartScreen> createState() => _ExamStartScreenState();
+  State<ChildExamStartScreen> createState() => _ChildExamStartScreen();
 }
 
-class _ExamStartScreenState extends State<ExamStartScreen> {
+class _ChildExamStartScreen extends State<ChildExamStartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Adult Autism Test"),
+        title: Text("Children Autism Test"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -22,13 +23,13 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "14 questions",
+                "27 questions",
                 style: TextStyle(fontSize: 15),
               ),
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "This test can help you determine if you are experiencing symptoms of Autism Spectrum Disorder.",
+                  "This test can help you determine if your child or student is experiencing symptoms of Autism Spectrum Disorder.",
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.justify,
                 ),
@@ -45,7 +46,7 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Answer the question according to what is true for you.",
+                  "Select how the child stands out as different from other children of his/her age.",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -58,7 +59,8 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => QuizScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => ChildQuizScreen()),
                         );
                       },
                       padding:
