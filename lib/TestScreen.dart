@@ -4,31 +4,31 @@ import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class TestScreen extends StatefulWidget {
+class TestScreen extends StatefulWidget{
   const TestScreen({Key? key}) : super(key: key);
   @override
   State<TestScreen> createState() => _TestScreen();
-}
 
+}
 class _TestScreen extends State<TestScreen> {
   late File _image;
   late List _results;
-  bool imageSelect = false;
+  bool imageSelect=false;
   @override
-  void initState() {
+  void initState()
+  {
     super.initState();
     loadModel();
   }
-
-  Future loadModel() async {
+  Future loadModel()
+  async {
     Tflite.close();
     String res;
-    res = (await Tflite.loadModel(
-        model: "assets/model.tflite", labels: "assets/model.txt"))!;
-    print("Models Loading Status: $res");
+    res=(await Tflite.loadModel(model: "assets/model.tflite",labels: "assets/model.txt"))!;
+    print("Models loading status: $res");
   }
-
-  Future imageClassification(File image) async {
+  Future imageClassification(File image)
+  async {
     final List? recognitions = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 6,
@@ -37,12 +37,11 @@ class _TestScreen extends State<TestScreen> {
       imageStd: 127.5,
     );
     setState(() {
-      _results = recognitions!;
-      _image = image;
-      imageSelect = true;
+      _results=recognitions!;
+      _image=image;
+      imageSelect=true;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,30 +50,15 @@ class _TestScreen extends State<TestScreen> {
       ),
       body: ListView(
         children: [
-          (imageSelect)
-              ? Container(
-                  margin: const EdgeInsets.all(10),
-                  child: Image.file(_image),
-                )
-              : Container(
-                  margin: const EdgeInsets.all(10),
-                  child: const Opacity(
-                    opacity: 0.8,
-                    child: Center(
-                      child: Text("No image selected"),
-                    ),
-                  ),
-                ),
-          Container(
-            width: double.infinity,
-            color: Colors.blueAccent,
-            child: MaterialButton(
-              onPressed: pickImage,
-              child: Text(
-                'Take Photo',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+          (imageSelect)?Container(
+            margin: const EdgeInsets.all(10),
+            child: Image.file(_image),
+          ):Container(
+            margin: const EdgeInsets.all(10),
+            child: const Opacity(
+              opacity: 0.8,
+              child: Center(
+                child: Text("No image selected"),
               ),
             ),
           ),
@@ -82,7 +66,21 @@ class _TestScreen extends State<TestScreen> {
             width: double.infinity,
             color: Colors.blueAccent,
             child: MaterialButton(
-              onPressed: uploadImage,
+              onPressed:pickImage,
+              child: Text(
+                'Take Photo',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+
+          ),
+          Container(
+            width: double.infinity,
+            color: Colors.blueAccent,
+            child: MaterialButton(
+              onPressed:uploadImage,
               child: Text(
                 'Upload Photo',
                 style: TextStyle(
@@ -93,20 +91,19 @@ class _TestScreen extends State<TestScreen> {
           ),
           SingleChildScrollView(
             child: Column(
-              children: (imageSelect)
-                  ? _results.map((result) {
-                      return Card(
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(
-                            "${result['Label']} - ${result['Confidence'].toStringAsFixed(2)}",
-                            style: const TextStyle(
-                                color: Colors.lightBlue, fontSize: 20),
-                          ),
-                        ),
-                      );
-                    }).toList()
-                  : [],
+              children: (imageSelect)?_results.map((result) {
+                return Card(
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Text(
+                      "${result['label']} - ${result['confidence'].toStringAsFixed(2)}",
+                      style: const TextStyle(color: Colors.lightBlue,
+                          fontSize: 20),
+                    ),
+                  ),
+                );
+              }).toList():[],
+
             ),
           )
         ],
@@ -118,22 +115,23 @@ class _TestScreen extends State<TestScreen> {
       ),
     );
   }
-
-  Future uploadImage() async {
+  Future uploadImage()
+  async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile = await _picker.pickImage(
       source: ImageSource.gallery,
     );
-    File image = File(pickedFile!.path);
+    File image=File(pickedFile!.path);
     imageClassification(image);
   }
-
-  Future pickImage() async {
+  Future pickImage()
+  async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile = await _picker.pickImage(
       source: ImageSource.camera,
     );
-    File image = File(pickedFile!.path);
+    File image=File(pickedFile!.path);
     imageClassification(image);
   }
 }
+
