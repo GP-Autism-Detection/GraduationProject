@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
-import 'package:graduation_project_app/OTPVerificationScreen.dart';
-import 'package:graduation_project_app/OTPVerifyToResetPass.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 
 class OTPGeneratorScreen extends StatelessWidget {
