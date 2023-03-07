@@ -1,48 +1,139 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tflite/tflite.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-class TestScreen extends StatelessWidget {
-  var result = 0;
+class TestScreen extends StatefulWidget {
+  const TestScreen({Key? key}) : super(key: key);
+  @override
+  State<TestScreen> createState() => _TestScreen();
+}
+
+class _TestScreen extends State<TestScreen> {
+  late File _image;
+  late List _results;
+  bool imageSelect = false;
+  @override
+  void initState() {
+    super.initState();
+    loadModel();
+  }
+
+  Future loadModel() async {
+    Tflite.close();
+    String res;
+    res = (await Tflite.loadModel(
+        model: "assets/model.tflite", labels: "assets/model.txt"))!;
+    print("Models Loading Status: $res");
+  }
+
+  Future imageClassification(File image) async {
+    final List? recognitions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 6,
+      threshold: 0.05,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    setState(() {
+      _results = recognitions!;
+      _image = image;
+      imageSelect = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Test result',
-        ),
+        title: const Text("Image Classification"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Image(
-              image: NetworkImage(
-                  'https://domf5oio6qrcr.cloudfront.net/medialibrary/13292/700fc35b-3c70-4762-b24a-c9d895eb9863.jpg'),
-              height: 200.0,
-              width: 200.0,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(
-              height: 16.0,
-            ),
-            Container(
-              width: double.infinity,
-              color: Colors.indigoAccent,
-              child: MaterialButton(
-                onPressed: () {
-                  print('Result');
-                },
-                child: Text(
-                  'Show result',
-                  style: TextStyle(
-                    color: Colors.white,
+      body: ListView(
+        children: [
+          (imageSelect)
+              ? Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.file(_image),
+                )
+              : Container(
+                  margin: const EdgeInsets.all(10),
+                  child: const Opacity(
+                    opacity: 0.8,
+                    child: Center(
+                      child: Text("No image selected"),
+                    ),
                   ),
+                ),
+          Container(
+            width: double.infinity,
+            color: Colors.blueAccent,
+            child: MaterialButton(
+              onPressed: pickImage,
+              child: Text(
+                'Take Photo',
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            width: double.infinity,
+            color: Colors.blueAccent,
+            child: MaterialButton(
+              onPressed: uploadImage,
+              child: Text(
+                'Upload Photo',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: (imageSelect)
+                  ? _results.map((result) {
+                      return Card(
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          child: Text(
+                            "${result['Label']} - ${result['Confidence'].toStringAsFixed(2)}",
+                            style: const TextStyle(
+                                color: Colors.lightBlue, fontSize: 20),
+                          ),
+                        ),
+                      );
+                    }).toList()
+                  : [],
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: pickImage,
+        tooltip: "Pick Image",
+        child: const Icon(Icons.image),
       ),
     );
+  }
+
+  Future uploadImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    File image = File(pickedFile!.path);
+    imageClassification(image);
+  }
+
+  Future pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.camera,
+    );
+    File image = File(pickedFile!.path);
+    imageClassification(image);
   }
 }
