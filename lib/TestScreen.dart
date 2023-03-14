@@ -89,44 +89,44 @@ class _TestScreen extends State<TestScreen> {
                   child: imageSelect == true
                       ? null //show nothing if no picture selected
                       : Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          height:
-                          MediaQuery.of(context).size.width * 0.83,
-                          width: MediaQuery.of(context).size.width * 0.83,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              _image,
-                              fit: BoxFit.fill,
-                            ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.83,
+                                width: MediaQuery.of(context).size.width * 0.83,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.file(
+                                    _image,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                height: 25,
+                                thickness: 1,
+                              ),
+                              // ignore: unnecessary_null_comparison
+                              finalconf != false
+                                  ? Text(
+                                      'Result: ${_results[0]['label']}'
+                                      "\n"
+                                      'Confidence : ${(totalconf * 100).toStringAsFixed(2)} %',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  : Container(),
+                              Divider(
+                                height: 25,
+                                thickness: 1,
+                              ),
+                            ],
                           ),
                         ),
-                        Divider(
-                          height: 25,
-                          thickness: 1,
-                        ),
-                        // ignore: unnecessary_null_comparison
-                        finalconf != false
-                            ? Text(
-                          'Result: ${_results[0]['label']}'
-                              "\n"
-                              'Confidence : ${(totalconf * 100).toStringAsFixed(2)} %',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                            : Container(),
-                        Divider(
-                          height: 25,
-                          thickness: 1,
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
               Container(
@@ -138,7 +138,7 @@ class _TestScreen extends State<TestScreen> {
                         width: MediaQuery.of(context).size.width - 150,
                         alignment: Alignment.center,
                         padding:
-                        EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(15),
@@ -162,7 +162,7 @@ class _TestScreen extends State<TestScreen> {
                         width: MediaQuery.of(context).size.width - 150,
                         alignment: Alignment.center,
                         padding:
-                        EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(15),
@@ -199,6 +199,11 @@ class _TestScreen extends State<TestScreen> {
     );
     File image = File(pickedFile!.path);
     imageClassification(image);
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      totalconf = _results[0]['confidence'];
+      finalconf = true;
+    });
   }
 
   Future uploadImage2() async {
@@ -224,6 +229,6 @@ class _TestScreen extends State<TestScreen> {
       finalconf = true;
     });
 
-    print("Final Confidence : ${totalconf..toStringAsFixed(2)}" "%");
+    print("Final Confidence : ${(totalconf * 100).toStringAsFixed(2)}" "%");
   }
 }
