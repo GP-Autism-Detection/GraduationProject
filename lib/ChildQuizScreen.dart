@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/ChildQuestionModelScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
@@ -19,8 +20,16 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: (){
+            setState(() {
+              selectedAnswer = null;
+              currentQuestionIndex--;
+            });
+          },
+        ),
         title: Text(
-          "Childern Autism Test",
+          "Children Autism Test",
           style: TextStyle(fontSize: 25),
         ),
         actions: [
@@ -28,7 +37,8 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MenuScreen()),
+                MaterialPageRoute(
+                    builder: (context) => ChildExamStartScreen()),
               );
             },
             icon: const Icon(Icons.home),
@@ -110,7 +120,8 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
           onPrimary: isSelected ? Colors.white : Colors.black,
         ),
         onPressed: () {
-          if (selectedAnswer == null) {
+          if (selectedAnswer == null)
+          {
             if (answer.Correctness == 2) {
               score += 2;
             } else if (answer.Correctness == 1) {

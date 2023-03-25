@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/QuestionsModelScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
@@ -19,6 +20,14 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: (){
+            setState(() {
+              selectedAnswer = null;
+              currentQuestionIndex--;
+            });
+          },
+        ),
         title: Text(
           "Adult Autism Test",
           style: TextStyle(fontSize: 25),
@@ -28,7 +37,8 @@ class _QuizScreenState extends State<QuizScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MenuScreen()),
+                MaterialPageRoute(
+                    builder: (context) => ExamStartScreen()),
               );
             },
             icon: const Icon(Icons.home),
