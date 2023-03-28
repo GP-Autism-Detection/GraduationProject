@@ -13,6 +13,7 @@ class MenuScreen extends StatelessWidget {
         title: Text(
           'Menu',
         ),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Icon(Icons.person),

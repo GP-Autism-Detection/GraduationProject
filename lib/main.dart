@@ -9,6 +9,9 @@ import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 import 'package:graduation_project_app/TestScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String? uid;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +21,18 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+  Future getuid()async{
+    SharedPreferences prefs =await SharedPreferences.getInstance();
+    uid = prefs.getString("ID");
+  }
+
   @override
   Widget build(BuildContext context) {
+    getuid();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: uid==null?LoginScreen():MenuScreen(),
     );
   }
 }

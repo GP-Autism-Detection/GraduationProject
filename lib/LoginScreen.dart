@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'MenuScreen.dart';
 
@@ -13,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   FirebaseAuth Auth = FirebaseAuth.instance; // server auth db
+
   @override
   void initstate() {
     super.initState();
@@ -126,6 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 await Auth.signInWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text);
+                            SharedPreferences pref =await SharedPreferences.getInstance();
+                            pref.setString("ID", "useremail@gmail.com");
                             Navigator.push(
                               context,
                               MaterialPageRoute(

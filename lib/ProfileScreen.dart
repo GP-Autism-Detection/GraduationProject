@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'firebaseStorage.dart';
 import 'User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -14,6 +16,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController namecontroller;
   late TextEditingController passwordcontroller;
   User? user;
+  late bool _passwordVisible;
+
   _getData() async {
     user = await firebaseStorage().getUserData();
     setState(() {});
@@ -22,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    _passwordVisible = false;
     namecontroller = TextEditingController();
     passwordcontroller = TextEditingController();
     _getData();
@@ -146,10 +151,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         TextField(
                           controller: passwordcontroller,
+                          obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                            hintText: user!.password,
+                            hintText: _passwordVisible? user!.password:"********",
                             hintStyle: TextStyle(
                               fontSize: 18.0,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -160,21 +181,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: double.infinity,
                           color: Colors.indigoAccent,
                           child: MaterialButton(
-                            onPressed: () async{
+                            onPressed: () async {
                               print('Save');
                               User newuser = user!.copyWith(
                                 password: passwordcontroller.text,
                                 name: namecontroller.text,
                               );
-                              await firebaseStorage().uploadUserData(user: newuser);
-                              await firebaseStorage().updateUserData(user: user!,newuser: newuser);
-                              setState(() {
-
-                              });
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                              await firebaseStorage()
+                                  .uploadUserData(user: newuser);
+                              await firebaseStorage().updateUserData(
+                                  user: user!, newuser: newuser);
+                              setState(() {});
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => LoginScreen()));
                             },
                             child: Text(
                               'save',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 60.0,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          color: Colors.red,
+                          child: MaterialButton(
+                            onPressed: () async {
+                              SharedPreferences pref =
+                                  await SharedPreferences.getInstance();
+                              pref.remove("ID");
+
+                              setState(() {});
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return LoginScreen();
+                                  },
+                                ),
+                                    (_) => false,
+                              );
+                            },
+                            child: Text(
+                              'log out',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
