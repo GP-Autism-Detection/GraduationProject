@@ -16,12 +16,12 @@ class centers {
   });
 
   Map<String, dynamic> get data => {
-    'Name': Name,
-    'Area': Area,
-    'Contact Num': ContactNum,
-    'Image': Image,
-    'Address': Address,
-  };
+        'Name': Name,
+        'Area': Area,
+        'Contact Num': ContactNum,
+        'Image': Image,
+        'Address': Address,
+      };
 
   factory centers.fromMap(Map<String, dynamic> map) {
     return centers(

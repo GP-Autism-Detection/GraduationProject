@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
@@ -15,16 +16,34 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentQuestionIndex = 0;
   int score = 0;
   Answer? selectedAnswer;
+  var ans;
+  var backans;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: (){
+          onPressed: () {
             setState(() {
               selectedAnswer = null;
-              currentQuestionIndex--;
+              if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ExamStartScreen()),
+                );
+              }
+              if (backans == "True now & when I was young") {
+                score -= 3;
+              } else if (backans == "True only now") {
+                score -= 2;
+              } else if (backans == "True only when I was < 16") {
+                score -= 1;
+              } else if (backans == "Never true") {
+                score -= 0;
+              }
             });
           },
         ),
@@ -37,8 +56,7 @@ class _QuizScreenState extends State<QuizScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => ExamStartScreen()),
+                MaterialPageRoute(builder: (context) => MenuScreen()),
               );
             },
             icon: const Icon(Icons.home),
@@ -120,20 +138,10 @@ class _QuizScreenState extends State<QuizScreen> {
           onPrimary: isSelected ? Colors.white : Colors.black,
         ),
         onPressed: () {
-          if (selectedAnswer == null) {
-            if (answer.Correctness == 3) {
-              score += 3;
-            } else if (answer.Correctness == 2) {
-              score += 2;
-            } else if (answer.Correctness == 1) {
-              score += 1;
-            } else if (answer.Correctness == 0) {
-              score += 0;
-            }
-            setState(() {
-              selectedAnswer = answer;
-            });
-          }
+          setState(() {
+            selectedAnswer = answer;
+            ans = answer.answerText;
+          });
         },
       ),
     );
@@ -156,6 +164,17 @@ class _QuizScreenState extends State<QuizScreen> {
           onPrimary: Colors.white,
         ),
         onPressed: () {
+          if (ans == "True now & when I was young") {
+            score += 3;
+          } else if (ans == "True only now") {
+            score += 2;
+          } else if (ans == "True only when I was < 16") {
+            score += 1;
+          } else if (ans == "Never true") {
+            score += 0;
+          }
+          backans = ans;
+          ans = null;
           if (isLastQuestion) {
             //display score
 

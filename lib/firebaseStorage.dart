@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:graduation_project_app/Centers.dart';
 
-class firebaseStorage{
+class firebaseStorage {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   fb.FirebaseAuth firebaseAuth = fb.FirebaseAuth.instance;
 
@@ -19,10 +19,7 @@ class firebaseStorage{
 
   Future<List<centers>> getAllData() async {
     List<centers> center = [];
-    await firebaseFirestore
-        .collection("Centers")
-        .get()
-        .then((value) {
+    await firebaseFirestore.collection("Centers").get().then((value) {
       for (var element in value.docs) {
         center.add(centers.fromMap(element.data()));
       }
@@ -36,11 +33,13 @@ class firebaseStorage{
         .doc(firebaseAuth.currentUser!.uid)
         .set(user.data);
   }
-  
-  Future updateUserData({required User user,required User newuser}) async {
+
+  Future updateUserData({required User user, required User newuser}) async {
     print(newuser.email);
     print(newuser.password);
-    await firebaseAuth.signInWithEmailAndPassword(email: user.email, password: user.password).then((userCredential) {
+    await firebaseAuth
+        .signInWithEmailAndPassword(email: user.email, password: user.password)
+        .then((userCredential) {
       userCredential.user!.updateEmail(newuser.email);
       userCredential.user!.updatePassword(newuser.password);
     });
@@ -48,10 +47,6 @@ class firebaseStorage{
   }
 
   Future uploadCenterData({required centers center}) async {
-    await firebaseFirestore
-        .collection("Centers")
-        .doc()
-        .set(center.data);
+    await firebaseFirestore.collection("Centers").doc().set(center.data);
   }
-  
 }

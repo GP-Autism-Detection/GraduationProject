@@ -16,8 +16,9 @@ class MenuScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.person),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder:(_) => ProfileScreen()));
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => ProfileScreen()));
             },
           ),
         ],
@@ -74,36 +75,36 @@ class MenuScreen extends StatelessWidget {
                   width: 20.0,
                 ),
                 Expanded(
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: NetworkImage(
-                                'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
-                            height: 80.0,
-                            width: 80.0,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          Text(
-                            'Game',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          10.0,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: NetworkImage(
+                              'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
+                          height: 80.0,
+                          width: 80.0,
+                          fit: BoxFit.cover,
                         ),
-                        color: Colors.grey[400],
-                      ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        Text(
+                          'Game',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        10.0,
+                      ),
+                      color: Colors.grey[400],
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -160,18 +160,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: double.infinity,
                           color: Colors.indigoAccent,
                           child: MaterialButton(
-                            onPressed: () async{
+                            onPressed: () async {
                               print('Save');
                               User newuser = user!.copyWith(
                                 password: passwordcontroller.text,
                                 name: namecontroller.text,
                               );
-                              await firebaseStorage().uploadUserData(user: newuser);
-                              await firebaseStorage().updateUserData(user: user!,newuser: newuser);
-                              setState(() {
-
-                              });
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                              await firebaseStorage()
+                                  .uploadUserData(user: newuser);
+                              await firebaseStorage().updateUserData(
+                                  user: user!, newuser: newuser);
+                              setState(() {});
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => LoginScreen()));
                             },
                             child: Text(
                               'save',

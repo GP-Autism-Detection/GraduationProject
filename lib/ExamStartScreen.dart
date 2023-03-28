@@ -52,7 +52,8 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "If you can not determine a specific answer you can skip the question and its weight won't be considered in the final result",                  style: TextStyle(fontSize: 18),
+                  "If you can not determine a specific answer you can skip the question and its weight won't be considered in the final result",
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               Row(
