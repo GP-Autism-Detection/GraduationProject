@@ -5,6 +5,7 @@ import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/firebaseStorage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart' as u;
 
 class RegisterScreen extends StatefulWidget {
@@ -193,6 +194,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     email: emailController.text,
                                     password: passwordController.text);
                             await firebaseStorage().uploadUserData(user: user);
+                            SharedPreferences pref =await SharedPreferences.getInstance();
+                            pref.setString("ID", "useremail@gmail.com");
                             final snackBar1 = SnackBar(
                               content: const Text(
                                   'account has been registered successfuly!'),
