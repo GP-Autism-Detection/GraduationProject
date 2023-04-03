@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     getuid();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: uid==null?LoginScreen():MenuScreen(),
+      home: uid==null?TestScreen():TestScreen(),
     );
   }
 }
