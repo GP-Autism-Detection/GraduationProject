@@ -128,7 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 await Auth.signInWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text);
-                            SharedPreferences pref =await SharedPreferences.getInstance();
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
                             pref.setString("ID", "useremail@gmail.com");
                             Navigator.push(
                               context,

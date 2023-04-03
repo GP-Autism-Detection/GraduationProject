@@ -194,7 +194,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     email: emailController.text,
                                     password: passwordController.text);
                             await firebaseStorage().uploadUserData(user: user);
-                            SharedPreferences pref =await SharedPreferences.getInstance();
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
                             pref.setString("ID", "useremail@gmail.com");
                             final snackBar1 = SnackBar(
                               content: const Text(

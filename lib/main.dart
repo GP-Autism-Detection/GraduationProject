@@ -22,8 +22,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  Future getuid()async{
-    SharedPreferences prefs =await SharedPreferences.getInstance();
+  Future getuid() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     uid = prefs.getString("ID");
   }
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     getuid();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: uid==null?TestScreen():TestScreen(),
+      home: uid == null ? LoginScreen() : MenuScreen(),
     );
   }
 }

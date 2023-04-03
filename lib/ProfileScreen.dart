@@ -153,7 +153,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           controller: passwordcontroller,
                           obscureText: !_passwordVisible,
                           decoration: InputDecoration(
-                            hintText: _passwordVisible? user!.password:"********",
+                            hintText:
+                                _passwordVisible ? user!.password : "********",
                             hintStyle: TextStyle(
                               fontSize: 18.0,
                             ),
@@ -226,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     return LoginScreen();
                                   },
                                 ),
-                                    (_) => false,
+                                (_) => false,
                               );
                             },
                             child: Text(
