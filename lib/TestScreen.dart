@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:image/image.dart' as img;
 import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -36,20 +37,16 @@ class _TestScreen extends State<TestScreen> {
   var imgbytes;
   late File _Croppedfile;
   bool imagecrop = false;
+  bool detected = false;
   late File file1;
   late File croppedFile;
   late var finallabel = '';
-  // if (tempDir.existsSync()) {
-  //   tempDir.deleteSync(recursive: true);
-  // }
-  //tempDir.deleteSync(recursive: true);
-  //tempDir.create();
-  //late File croppedFile;
-  //late File file1;
+  late FToast fToast;
   @override
   void initState() {
     super.initState();
-
+    fToast = FToast();
+    fToast.init(context);
     loadModel();
   }
 
@@ -65,6 +62,26 @@ class _TestScreen extends State<TestScreen> {
     res = (await Tflite.loadModel(
         model: "assets/converted_model.tflite", labels: "assets/model.txt"))!;
     print("Models loading status: $res");
+  }
+
+  showToast() {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 17.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.blue,
+      ),
+      child: const Text("Please Pick A Valid Image/Images ! ",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          )),
+    );
+    fToast.showToast(
+      child: toast,
+      toastDuration: Duration(seconds: 7),
+    );
   }
 
   Future imageClassification(File image) async {
@@ -156,14 +173,14 @@ class _TestScreen extends State<TestScreen> {
                                       'Result: $finallabel'
                                       "\n"
                                       'Confidence : ${(totalconf * 100).toStringAsFixed(2)} %',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     )
                                   : Container(),
-                              Divider(
+                              const Divider(
                                 height: 25,
                                 thickness: 1,
                               ),
@@ -176,7 +193,19 @@ class _TestScreen extends State<TestScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: pickImage,
+                      onTap: () {
+                        labels.clear();
+                        conf.clear();
+                        totalconf = 0.0;
+                        counter = 0;
+                        croppedImages.clear();
+                        _faces.clear();
+                        imagecrop = false;
+                        finalconf = false;
+                        imageCache.clear();
+                        PaintingBinding.instance.imageCache.clear();
+                        pickImage();
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 150,
                         alignment: Alignment.center,
@@ -207,11 +236,7 @@ class _TestScreen extends State<TestScreen> {
                         finalconf = false;
                         imageCache.clear();
                         PaintingBinding.instance.imageCache.clear();
-
                         uploadImage2();
-                        //file1.delete();
-                        //croppedFile.delete();
-                        //print(key.currentContext?.size);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 150,
@@ -238,34 +263,33 @@ class _TestScreen extends State<TestScreen> {
     );
   }
 
-  Future uploadImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? pickedFile = await _picker.pickImage(
-      source: ImageSource.gallery,
-    );
-    File image = File(pickedFile!.path);
-    //imageClassification(image);
-    final options = FaceDetectorOptions();
-    final faceDetector = FaceDetector(options: options);
-    final inputImage = InputImage.fromFile(image);
-
-    final List<Face> faces = await faceDetector.processImage(inputImage);
-
-    if (mounted) {
-      _loadImage(image);
-      setState(() {
-        _faces = faces;
-      });
-    }
-  }
+  // Future uploadImage() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   final XFile? pickedFile = await _picker.pickImage(
+  //     source: ImageSource.gallery,
+  //   );
+  //   File image = File(pickedFile!.path);
+  //   final options = FaceDetectorOptions();
+  //   final faceDetector = FaceDetector(options: options);
+  //   final inputImage = InputImage.fromFile(image);
+  //
+  //   final List<Face> faces = await faceDetector.processImage(inputImage);
+  //
+  //   if (mounted) {
+  //     _loadImage(image);
+  //     setState(() {
+  //       _faces = faces;
+  //     });
+  //   }
+  // }
 
   Future _loadImage(File file) async {
     final data = await file.readAsBytes();
 
     await decodeImageFromList(data).then((value) => setState(() {
           _uiimage = value;
-          getImage();
         }));
+    await getImage();
   }
 
   Future getImage() async {
@@ -280,27 +304,22 @@ class _TestScreen extends State<TestScreen> {
     var pngBytes =
         await renderedImage.toByteData(format: ui.ImageByteFormat.png);
     var bytes = await pngBytes!.buffer.asUint8List();
-    cropimage(_faces);
 
     setState(() {
       _uiimage = renderedImage;
       imgbytes = bytes;
     });
+    await cropimage();
   }
 
-  Future cropimage(List<Face> faces) async {
-    int x = faces[0].boundingBox.left.toInt();
-    int y = faces[0].boundingBox.top.toInt();
-    int w = faces[0].boundingBox.width.toInt();
-    int h = faces[0].boundingBox.height.toInt();
+  Future cropimage() async {
+    int x = _faces[0].boundingBox.left.toInt();
+    int y = _faces[0].boundingBox.top.toInt();
+    int w = _faces[0].boundingBox.width.toInt();
+    int h = _faces[0].boundingBox.height.toInt();
 
     final Directory tempDir = await getTemporaryDirectory();
 
-    // if (tempDir.existsSync()) {
-    //   tempDir.deleteSync(recursive: true);
-    // }
-    //tempDir.deleteSync(recursive: true);
-    //tempDir.create();
     file1 = File("${tempDir.path}/image.png");
 
     final data = await _uiimage.toByteData(
@@ -318,32 +337,14 @@ class _TestScreen extends State<TestScreen> {
 
     final jpg = img.encodeJpg(cropped);
 
-    //final tempDir2 = await getTemporaryDirectory();
-    //tempDir2.deleteSync(recursive: true);
-    //tempDir2.create();
     croppedFile = File("${tempDir.path}/image$counter _cropped.png");
 
     croppedFile.writeAsBytes(jpg);
     counter++;
     croppedImages.add(croppedFile);
-    //await Future.delayed(const Duration(seconds: 1));
 
-    //_Croppedfile = croppedFile;
-
-    //await Future.delayed(const Duration(seconds: 1));
     await Future.delayed(const Duration(seconds: 1));
-    imageClassification(croppedFile);
-    //await Future.delayed(const Duration(seconds: 1));
-    //await Future.delayed(const Duration(seconds: 1));
-    // await Future.delayed(const Duration(seconds: 1));
-
-    // setState(() {
-    //   imagecrop =true;
-    // });
-
-    // setState(() {
-    //   //_Croppedfile = croppedFile;
-    // });
+    await imageClassification(croppedFile);
   }
 
   Future pickImage() async {
@@ -358,18 +359,31 @@ class _TestScreen extends State<TestScreen> {
       source: ImageSource.camera,
     );
     File image = File(pickedFile!.path);
-    imageClassification(image);
-    await Future.delayed(const Duration(seconds: 1));
-    Navigator.of(context).pop();
-    setState(() {
-      _image = image;
+    final options = FaceDetectorOptions();
+    final faceDetector = FaceDetector(options: options);
+    final inputImage = InputImage.fromFile(image);
+    final List<Face> faces = await faceDetector.processImage(inputImage);
+
+    if (faces.isEmpty) {
+      Navigator.of(context).pop();
+      showToast();
+      setState(() {
+        imagecrop = false;
+      });
+    } else {
+      _faces = faces;
+      await _loadImage(image);
       totalconf = _results[0]['confidence'];
       finallabel = _results[0]['label'];
-      finalconf = true;
-      imageSelect = false;
-      imagecrop = true;
-      _Croppedfile = image;
-    });
+      setState(() {
+        _Croppedfile = croppedImages[0];
+        detected = true;
+        finalconf = true;
+        imagecrop = true;
+      });
+      Navigator.of(context).pop();
+    }
+    //imageClassification(image);
   }
 
   Future uploadImage2() async {
@@ -389,64 +403,56 @@ class _TestScreen extends State<TestScreen> {
         }
       }
     });
-    //Loading Circle Screen
     for (var i = 0; i < selectedImages.length; i++) {
       final options = FaceDetectorOptions();
       final faceDetector = FaceDetector(options: options);
       final inputImage = InputImage.fromFile(selectedImages[i]);
-
       final List<Face> faces = await faceDetector.processImage(inputImage);
-      _faces = faces;
-
+      detected = false;
       if (mounted) {
-        //await Future.delayed(const Duration(seconds: 1));
-        setState(() {
-          _image = selectedImages[i];
-        });
-
-        _loadImage(selectedImages[i]);
-
-        //await imageClassification;
-        await Future.delayed(const Duration(seconds: 1));
-        await Future.delayed(const Duration(seconds: 1));
-        await Future.delayed(const Duration(seconds: 1));
-        await Future.delayed(const Duration(seconds: 1));
-        await Future.delayed(const Duration(seconds: 1));
-        //await Future.delayed(const Duration(seconds: 1));
-        setState(() {
-          _Croppedfile = croppedImages[i];
-          imagecrop = true;
-        });
-        if (_results[0]['confidence'] == 1) {
-          var tmp = 0.9999;
-          conf.add(tmp);
-          labels.add(_results[0]['label']);
+        //Check if face is detected or not
+        if (faces.isEmpty) {
+          Navigator.of(context).pop();
+          showToast();
+          setState(() {
+            imagecrop = false;
+          });
         } else {
-          conf.add(_results[0]['confidence']);
-          labels.add(_results[0]['label']);
+          setState(() {
+            detected = true;
+            _faces = faces;
+            _image = selectedImages[i];
+          });
+          //If Detected Continue the Model
+          await _loadImage(selectedImages[i]);
+          setState(() {
+            _Croppedfile = croppedImages[i];
+            imagecrop = true;
+          });
+
+          if (_results[0]['confidence'] == 1) {
+            var tmp = 0.9999;
+            conf.add(tmp);
+            labels.add(_results[0]['label']);
+          } else {
+            conf.add(_results[0]['confidence']);
+            labels.add(_results[0]['label']);
+          }
         }
       }
-      // await Future.delayed(const Duration(seconds: 1));
-      // conf.add(_results[0]['confidence']);
-      // totalconf += conf[i];
     }
-
-    GetResults();
+    if (detected != false) {
+      GetResults();
+    }
   }
 
   Future GetResults() async {
-    //await Future.delayed(const Duration(seconds: 3));
-
     if (selectedImages.length > 1) {
       for (var i = 0; i < selectedImages.length; i++) {
         if (labels[i] == 'Autistic') {
           totalconf += conf[i];
         } else if (labels[i] == 'Non-autistic') {
           totalconf += 1 - conf[i];
-
-          // if(conf[i]>(1-conf[i+1])){
-          //   finallabel=labels[i];
-          // }
         }
       }
 
@@ -461,17 +467,6 @@ class _TestScreen extends State<TestScreen> {
           finallabel = 'Autistic';
         });
       }
-      // if(totalconf<0.5) {
-      //   totalconf = 1 - totalconf;
-      //   setState(() {
-      //     finallabel = 'Non-autistic';
-      //   });
-      // }
-      // else if (totalconf> 0.5){
-      //   setState(() {
-      //     finallabel = 'Autistic';
-      //   });
-      // }
     } else {
       if (labels[0] == 'Autistic') {
         totalconf += conf[0];
@@ -490,10 +485,7 @@ class _TestScreen extends State<TestScreen> {
     }
     Navigator.of(context).pop();
     setState(() {
-      //finallabel = 'Autistic';
       finalconf = true;
-      //file1.delete();
-      //croppedFile.delete();
     });
 
     print("Final Confidence : ${(totalconf * 100).toStringAsFixed(2)}" "%");

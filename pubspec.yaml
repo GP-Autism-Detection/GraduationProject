@@ -51,6 +51,7 @@ dependencies:
   google_ml_kit: ^0.13.0
   image: ^4.0.15
   path_provider: ^2.0.14
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
   flutter_test:
