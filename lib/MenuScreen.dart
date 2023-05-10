@@ -5,6 +5,9 @@ import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/ProfileScreen.dart';
 import '/TestScreen.dart';
 import '/NearestCentersScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+get userid => FirebaseAuth.instance.currentUser?.uid;
 
 class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {

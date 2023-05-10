@@ -71,7 +71,7 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                         );
                       },
                       padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 120),
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                       color: Colors.blue,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),

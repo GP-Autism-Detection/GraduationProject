@@ -6,14 +6,15 @@ class centers {
   final String Area;
   final String ContactNum;
   final String Image;
+  final num Rating;
 
-  centers({
-    required this.Name,
-    required this.Address,
-    required this.Area,
-    required this.ContactNum,
-    required this.Image,
-  });
+  centers(
+      {required this.Name,
+      required this.Address,
+      required this.Area,
+      required this.ContactNum,
+      required this.Image,
+      required this.Rating});
 
   Map<String, dynamic> get data => {
         'Name': Name,
@@ -30,6 +31,7 @@ class centers {
       Image: map['Image'] ?? '',
       ContactNum: map['Contact Num'] ?? '',
       Address: map['Address'] ?? '',
+      Rating: map['Rating'] ?? '',
     );
   }
 
