@@ -5,6 +5,7 @@ import 'package:graduation_project_app/MenuScreen.dart';
 import 'comments.dart';
 import 'firebaseStorage.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class NearestCentersScreen extends StatefulWidget {
   const NearestCentersScreen({Key? key}) : super(key: key);
@@ -138,7 +139,22 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                           width: 80.0,
                           fit: BoxFit.fill,
                         ),
-                        _reviewsStarWidget(center[index].Rating),
+                        //_reviewsStarWidget(center[index].Rating),
+                        RatingBar.builder(
+                          initialRating: center[index].Rating.toDouble(),
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          ignoreGestures: true,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                          itemSize: 15,
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          onRatingUpdate: (r) {
+                          },
+                        ),
                         Text("Rating : " "${center[index].Rating}",
                             style: const TextStyle(
                               fontSize: 10.0,

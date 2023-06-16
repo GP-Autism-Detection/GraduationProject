@@ -8,6 +8,8 @@ import 'firebaseStorage.dart';
 import 'User.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 
 final _collectionReference = FirebaseFirestore.instance.collection("Centers");
 TextEditingController commentController = TextEditingController();
@@ -73,10 +75,11 @@ class CommentsState extends State<Centers> {
   }
 
   TextEditingController commentController = TextEditingController();
-  TextEditingController ratingController = TextEditingController();
+  //TextEditingController ratingController = TextEditingController();
+  var user_rating=2.5;
   bool _validate = false;
   bool _validate2 = false;
-  var avgrating;
+  num avgrating=0.0;
 
   final String centerId;
   final String userId;
@@ -107,19 +110,24 @@ class CommentsState extends State<Centers> {
             // print("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
             // print(doc.data());
             // print("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
+            if (Comment.fromDocument(doc).comment == userId) {}
             comments.add(Comment.fromDocument(doc));
           });
           //print("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
           if (comments.isNotEmpty) {
-            var sumRating = 0;
+            double sumRating = 0;
             for (var i = 0; i < comments.length; i++) {
-              sumRating += comments[i].rating as int;
+              sumRating += comments[i].rating;
             }
-
-            avgrating = sumRating ~/ comments.length;
-
+            //https://stackoverflow.com/questions/68075977/how-to-round-up-and-down-double-to-the-nearest-interval-in-dart-flutter
+            var avg_before_ceiling = sumRating / comments.length;
+            avgrating = (avg_before_ceiling*2).ceilToDouble()/2;
             //print(sumRating);
-            //print(avgrating);
+            //print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //print(avg_before_ceiling);
+            print(avgrating);
+            //print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
           }
           //print("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
           return ListView(
@@ -147,7 +155,8 @@ class CommentsState extends State<Centers> {
       "userId": userid,
       "comment": commentController.text,
       "time": DateTime.now().millisecondsSinceEpoch,
-      "rating": int.parse(ratingController.text),
+      "rating": user_rating,
+      "Commented":true,
       //"timestamp": DateTime.now().millisecondsSinceEpoch,
     });
     // print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
@@ -155,6 +164,7 @@ class CommentsState extends State<Centers> {
       "Rating": avgrating,
       //"timestamp": DateTime.now().millisecondsSinceEpoch,
     });
+
     // print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
     //print(userid);
     //print(user?.name);
@@ -162,7 +172,7 @@ class CommentsState extends State<Centers> {
     //print(DateTime.now().millisecondsSinceEpoch);
     // print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
     commentController.clear();
-    ratingController.clear();
+    //ratingController.clear();
   }
 
   // String? get _errorText {
@@ -176,8 +186,10 @@ class CommentsState extends State<Centers> {
   //   // return null if the text is valid
   //   return null;
   // }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(title: const Text("Reviews")),
       body: Column(
@@ -201,29 +213,49 @@ class CommentsState extends State<Centers> {
                           return null;
                         },
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(hintText: 'comment'),
+                        decoration: const InputDecoration(hintText: 'Comment'),
                       ),
                     ),
-                    ListTile(
-                      title: TextFormField(
-                        controller: ratingController,
-                        keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        decoration: const InputDecoration(hintText: 'Rating'),
-                        validator: (ratingController) {
-                          if (ratingController!.isEmpty) {
-                            return 'Please enter a number ';
-                          }
-                          if (ratingController.contains('.')) {
-                            return 'Please pick a number between 0 & 5';
-                          }
-                          if (int.parse(ratingController) < 1 ||
-                              int.parse(ratingController) > 5) {
-                            return 'Please pick a number between 1 & 5 ';
-                          }
-                          return null;
-                        },
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    RatingBar.builder(
+                      initialRating: 2.5,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
                       ),
+                      onRatingUpdate: (rating) {
+                        user_rating = rating;
+                      },
+
+                      //   title: TextFormField(
+                      //     controller: ratingController,
+                      //     keyboardType: const TextInputType.numberWithOptions(
+                      //         decimal: true),
+                      //     decoration: const InputDecoration(hintText: 'Rating'),
+                      //     validator: (ratingController) {
+                      //       if (ratingController!.isEmpty) {
+                      //         return 'Please enter a number ';
+                      //       }
+                      //       if (ratingController.contains('.')) {
+                      //         return 'Please pick a number between 0 & 5';
+                      //       }
+                      //       if (int.parse(ratingController) < 1 ||
+                      //           int.parse(ratingController) > 5) {
+                      //         return 'Please pick a number between 1 & 5 ';
+                      //       }
+                      //       return null;
+                      //     },
+                      //   ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     SizedBox(
                       width: 175,
@@ -244,6 +276,7 @@ class CommentsState extends State<Centers> {
                             addComment(centerId);
                           }
                         },
+
                         child: const Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
@@ -251,8 +284,14 @@ class CommentsState extends State<Centers> {
                               style: TextStyle(
                                 fontSize: 12.0,
                               )),
+
                         ),
+
                       ),
+
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                   ],
                 ),
@@ -361,14 +400,29 @@ class Comment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              _reviewsStarWidget(rating),
-              Text(
-                dateString,
-                style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
+              RatingBar.builder(
+                initialRating: rating,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                ignoreGestures: true,
+                itemPadding: EdgeInsets.symmetric(horizontal: 1),
+                itemSize: 19,
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
+                onRatingUpdate: (r) {
+                },
               ),
+              //   _reviewsStarWidget(rating),
+                Text(
+                  dateString,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
             ],
           ),
           dense: false,
