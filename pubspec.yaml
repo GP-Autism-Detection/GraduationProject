@@ -57,6 +57,7 @@ dependencies:
   intl: ^0.18.1
   flutter_rating_bar: ^4.0.1
   provider: ^6.0.5
+  audioplayers: ^4.0.1
 
 
 dev_dependencies:
@@ -84,6 +85,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/Game/crying.png
+    - assets/Game/Fear.png
+    - assets/Game/happy.png
+    - assets/Game/sad.png
+    - assets/Game/Laugh.png
+    - assets/Game/angry.png
+    - assets/Game/sleepy.png
+    - assets/Game/love.png
+    - assets/Game/wrong.wav
+    - assets/Game/true.wav
+    - assets/Game/fail.wav
+    - assets/Game/yay.wav
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

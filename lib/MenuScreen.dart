@@ -6,7 +6,7 @@ import 'package:graduation_project_app/ProfileScreen.dart';
 import '/TestScreen.dart';
 import '/NearestCentersScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:graduation_project_app/GameScreen.dart';
 get userid => FirebaseAuth.instance.currentUser?.uid;
 
 class MenuScreen extends StatelessWidget {
@@ -80,37 +80,79 @@ class MenuScreen extends StatelessWidget {
                   width: 20.0,
                 ),
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                              'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
-                          height: 80.0,
-                          width: 80.0,
-                          fit: BoxFit.cover,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GameScreen(),
                         ),
-                        SizedBox(
-                          height: 15.0,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.0,
                         ),
-                        Text(
-                          'Game',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        10.0,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
-                      color: Theme.of(context).colorScheme.secondary,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Image(
+                            image: NetworkImage(
+                                'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
+                            height: 80.0,
+                            width: 80.0,
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Game',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+                // Expanded(
+                //   child: Container(
+                //     child: Column(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Image(
+                //           image: NetworkImage(
+                //               'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
+                //           height: 80.0,
+                //           width: 80.0,
+                //           fit: BoxFit.cover,
+                //         ),
+                //         SizedBox(
+                //           height: 15.0,
+                //         ),
+                //         Text(
+                //           'Game',
+                //           style: TextStyle(
+                //             fontSize: 20.0,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(
+                //         10.0,
+                //       ),
+                //       color: Theme.of(context).colorScheme.secondary,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
