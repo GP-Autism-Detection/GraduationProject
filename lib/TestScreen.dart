@@ -69,11 +69,10 @@ class _TestScreen extends State<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 17.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        color: Colors.blue,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: const Text("Please Pick A Valid Image/Images ! ",
           style: TextStyle(
-            color: Colors.white,
             fontSize: 15,
             fontWeight: FontWeight.w400,
           )),
@@ -111,7 +110,7 @@ class _TestScreen extends State<TestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
         leading: BackButton(
           onPressed: () {
@@ -124,20 +123,19 @@ class _TestScreen extends State<TestScreen> {
         title: Text(
           'Autisim Classification',
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 23,
           ),
         ),
       ),
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background,
         padding: EdgeInsets.symmetric(horizontal: 35, vertical: 50),
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.all(30),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Column(
@@ -174,7 +172,6 @@ class _TestScreen extends State<TestScreen> {
                                       "\n"
                                       'Confidence : ${(totalconf * 100).toStringAsFixed(2)} %',
                                       style: const TextStyle(
-                                        color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -212,12 +209,12 @@ class _TestScreen extends State<TestScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 24, vertical: 17),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           'Take A Photo',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),
@@ -244,12 +241,12 @@ class _TestScreen extends State<TestScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 24, vertical: 17),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           'Pick From Gallery',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),

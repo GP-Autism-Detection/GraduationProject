@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
+import 'package:provider/provider.dart';
+import 'Provider/theme_provider.dart';
 import 'firebaseStorage.dart';
 import 'User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,11 +46,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   //user == null ? CircularProgressIndicator() : Text(user!.name)
   Widget build(BuildContext context) {
+    final provider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'My profile',
-        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const Text('My profile'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.dark_mode),
+            onPressed: () {
+              provider.toggleTheme();
+            },
+          )
+        ],
       ),
       body: user == null
           ? Center(child: CircularProgressIndicator())
@@ -176,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 60.0,
                         ),
                         Container(
                           width: double.infinity,
@@ -208,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 60.0,
+                          height: 40.0,
                         ),
                         Container(
                           width: double.infinity,
@@ -239,6 +249,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
+                        // Container(
+                        //   child: Consumer<ThemeProvider>(
+                        //     builder: (context,provider,child) {
+                        //       return DropdownButton<String>(
+                        //       value: provider.currentTheme,
+                        //         items: const [
+                        //           DropdownMenuItem<String>(
+                        //             value: 'light',
+                        //             child: Text(
+                        //               'Light',
+                        //             ),
+                        //           ),
+                        //           DropdownMenuItem<String>(
+                        //             value: 'dark',
+                        //             child: Text('Dark',),
+                        //           ),
+                        //           DropdownMenuItem<String>(
+                        //             value: 'system',
+                        //             child: Text(
+                        //               'System',
+                        //             ),
+                        //           ),
+                        //         ],
+                        //         onChanged: (String? value) {
+                        //         provider.changeTheme(value??'system');
+                        //         },
+                        //       );
+                        //         }),
+                        //   ),
                       ],
                     ),
                   ],

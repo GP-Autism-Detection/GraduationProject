@@ -160,9 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'LOGIN', // mafe4 width so wrap to container
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(),
                       ),
                     ),
                   ), // onPressed ---> annonumse func --> (){}
@@ -181,7 +179,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => RegisterScreen()),
                             );
                           },
-                          child: Text('Register Now')),
+                          child: Text('Register Now',
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary))),
                     ],
                   ),
 
@@ -197,7 +199,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => OTPGeneratorScreen()),
                             );
                           },
-                          child: Text('Reset Password')),
+                          child: Text('Reset Password',
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary))),
                     ],
                   ),
                 ],

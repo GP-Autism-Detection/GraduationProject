@@ -14,6 +14,7 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Autism Test",
           style: TextStyle(fontSize: 25),

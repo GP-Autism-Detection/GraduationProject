@@ -13,6 +13,7 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Adult Autism Test"),
       ),
       body: Padding(
@@ -73,10 +74,7 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                       color: Colors.blue,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: Text(
-                        "Start",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: Text("Start"),
                     ),
                   ),
                 ],

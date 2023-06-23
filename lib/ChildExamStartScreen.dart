@@ -14,6 +14,7 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Children Autism Test"),
       ),
       body: Padding(

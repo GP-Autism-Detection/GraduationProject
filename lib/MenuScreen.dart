@@ -13,6 +13,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           'Menu',
         ),
@@ -70,7 +71,7 @@ class MenuScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           10.0,
                         ),
-                        color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -106,7 +107,7 @@ class MenuScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                         10.0,
                       ),
-                      color: Colors.grey[400],
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -156,7 +157,7 @@ class MenuScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           10.0,
                         ),
-                        color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -207,7 +208,7 @@ class MenuScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           10.0,
                         ),
-                        color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),
@@ -252,7 +253,7 @@ class MenuScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           10.0,
                         ),
-                        color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),

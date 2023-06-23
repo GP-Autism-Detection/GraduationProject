@@ -23,6 +23,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: BackButton(
           onPressed: () {
             setState(() {
@@ -64,7 +65,6 @@ class _QuizScreenState extends State<QuizScreen> {
           )
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
@@ -85,7 +85,6 @@ class _QuizScreenState extends State<QuizScreen> {
         Text(
           "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
           style: const TextStyle(
-            color: Colors.blue,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -206,7 +205,10 @@ class _QuizScreenState extends State<QuizScreen> {
         style: TextStyle(color: isAutistic ? Colors.redAccent : Colors.green),
       ),
       content: ElevatedButton(
-        child: const Text("more info"),
+        style: ElevatedButton.styleFrom(
+          primary: Theme.of(context).colorScheme.primary, // Background color
+        ),
+        child: Text("more info"),
         onPressed: () {
           Navigator.push(
             context,

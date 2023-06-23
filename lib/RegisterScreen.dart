@@ -237,9 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       child: Text(
                         'Register', // mafe4 width so wrap to container
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(),
                       ),
                     ),
                   ), // onPressed ---> annonumse func --> (){}

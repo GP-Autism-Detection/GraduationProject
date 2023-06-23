@@ -22,6 +22,7 @@ class centers {
         'Contact Num': ContactNum,
         'Image': Image,
         'Address': Address,
+        'Rating': Rating,
       };
 
   factory centers.fromMap(Map<String, dynamic> map) {

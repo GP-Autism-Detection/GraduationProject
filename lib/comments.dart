@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-
 final _collectionReference = FirebaseFirestore.instance.collection("Centers");
 TextEditingController commentController = TextEditingController();
 TextEditingController ratingController = TextEditingController();
@@ -76,10 +75,10 @@ class CommentsState extends State<Centers> {
 
   TextEditingController commentController = TextEditingController();
   //TextEditingController ratingController = TextEditingController();
-  var user_rating=2.5;
+  var user_rating = 2.5;
   bool _validate = false;
   bool _validate2 = false;
-  num avgrating=0.0;
+  num avgrating = 0.0;
 
   final String centerId;
   final String userId;
@@ -121,13 +120,12 @@ class CommentsState extends State<Centers> {
             }
             //https://stackoverflow.com/questions/68075977/how-to-round-up-and-down-double-to-the-nearest-interval-in-dart-flutter
             var avg_before_ceiling = sumRating / comments.length;
-            avgrating = (avg_before_ceiling*2).ceilToDouble()/2;
+            avgrating = (avg_before_ceiling * 2).ceilToDouble() / 2;
             //print(sumRating);
             //print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             //print(avg_before_ceiling);
             print(avgrating);
             //print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
           }
           //print("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
           return ListView(
@@ -156,7 +154,7 @@ class CommentsState extends State<Centers> {
       "comment": commentController.text,
       "time": DateTime.now().millisecondsSinceEpoch,
       "rating": user_rating,
-      "Commented":true,
+      "Commented": true,
       //"timestamp": DateTime.now().millisecondsSinceEpoch,
     });
     // print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
@@ -189,8 +187,8 @@ class CommentsState extends State<Centers> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(title: const Text("Reviews")),
       body: Column(
         children: <Widget>[
@@ -260,6 +258,11 @@ class CommentsState extends State<Centers> {
                     SizedBox(
                       width: 175,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context)
+                              .colorScheme
+                              .primary, // Background color
+                        ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             // Fluttertoast.showToast(
@@ -276,7 +279,6 @@ class CommentsState extends State<Centers> {
                             addComment(centerId);
                           }
                         },
-
                         child: const Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
@@ -284,11 +286,8 @@ class CommentsState extends State<Centers> {
                               style: TextStyle(
                                 fontSize: 12.0,
                               )),
-
                         ),
-
                       ),
-
                     ),
                     const SizedBox(
                       height: 10,
@@ -412,17 +411,16 @@ class Comment extends StatelessWidget {
                   Icons.star,
                   color: Colors.amber,
                 ),
-                onRatingUpdate: (r) {
-                },
+                onRatingUpdate: (r) {},
               ),
               //   _reviewsStarWidget(rating),
-                Text(
-                  dateString,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                  ),
+              Text(
+                dateString,
+                style: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
                 ),
+              ),
             ],
           ),
           dense: false,

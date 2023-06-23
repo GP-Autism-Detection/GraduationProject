@@ -33,6 +33,7 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
     ;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
           'Help Centers',
         ),
@@ -152,8 +153,7 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                             Icons.star,
                             color: Colors.amber,
                           ),
-                          onRatingUpdate: (r) {
-                          },
+                          onRatingUpdate: (r) {},
                         ),
                         Text("Rating : " "${center[index].Rating}",
                             style: const TextStyle(
@@ -172,7 +172,6 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                     IconButton(
                       icon: Icon(
                         Icons.comment,
-                        color: Colors.blue[900],
                         size: 28,
                       ),
                       onPressed: () => getcenterid(index, center, userid),
@@ -180,7 +179,6 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                     IconButton(
                       icon: Icon(
                         Icons.call,
-                        color: Colors.blue[900],
                         size: 28,
                       ),
                       onPressed: () async => {

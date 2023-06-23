@@ -22,6 +22,7 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: BackButton(
           onPressed: () {
             setState(() {
@@ -62,7 +63,6 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
           )
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
         child:
@@ -83,7 +83,6 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
         Text(
           "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
           style: const TextStyle(
-            color: Colors.blue,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
