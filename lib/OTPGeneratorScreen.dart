@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class OTPGeneratorScreen extends StatelessWidget {
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Enter your Email Address', // aw hint text bs bttshal lma tktb
+                        labelText: 'Pass_reset_Email'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email) // icon fl a5er posticon
                         ),
@@ -46,10 +47,10 @@ class OTPGeneratorScreen extends StatelessWidget {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'email address must not be empty';
+                        return 'Pass_reset_Email_Validation'.tr();
                       }
                       if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return "Please enter a valid email address";
+                        return "Pass_reset_Email_Validation2".tr();
                       }
                       return null;
                     },
@@ -69,8 +70,7 @@ class OTPGeneratorScreen extends StatelessWidget {
                             await Auth.sendPasswordResetEmail(
                                 email: emailController.text.trim());
                             final snackBar = SnackBar(
-                              content: const Text(
-                                  'Email has been sent successfuly, reset password and login!'),
+                              content: Text('Pass_reset_Successfully'.tr()),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -82,9 +82,9 @@ class OTPGeneratorScreen extends StatelessWidget {
                           } on FirebaseAuthException catch (e) {
                             print('auth/user-not-found');
                             final snackBar = SnackBar(
-                                content: const Text('this mail not registered'),
+                                content: Text('Pass_reset_EmailNotFound'.tr()),
                                 action: SnackBarAction(
-                                  label: 'Register Now!',
+                                  label: 'Pass_reset_Register'.tr(),
                                   onPressed: () {
                                     Navigator.push(
                                       context,
@@ -103,7 +103,8 @@ class OTPGeneratorScreen extends StatelessWidget {
                         }
                       },
                       child: Text(
-                        'Send a Link to your Email', // mafe4 width so wrap to container
+                        'Pass_reset_Send_Link'
+                            .tr(), // mafe4 width so wrap to container
                         style: TextStyle(
                           color: Colors.white,
                         ),

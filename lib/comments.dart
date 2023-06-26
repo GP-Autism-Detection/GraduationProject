@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
@@ -23,7 +24,7 @@ showToast() {
       borderRadius: BorderRadius.circular(100.0),
       color: Colors.green,
     ),
-    child: const Text("Thanks For Your Review ! ",
+    child: Text("Center_review_post".tr(),
         style: TextStyle(
           color: Colors.white,
           fontSize: 15,
@@ -189,7 +190,7 @@ class CommentsState extends State<Centers> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(title: const Text("Reviews")),
+      appBar: AppBar(title: Text("Center_review_appbar".tr())),
       body: Column(
         children: <Widget>[
           Expanded(child: buildComments()),
@@ -206,12 +207,13 @@ class CommentsState extends State<Centers> {
                         controller: commentController,
                         validator: (commentController) {
                           if (commentController!.isEmpty) {
-                            return 'Please enter a valid comment ';
+                            return 'Center_comment_valid'.tr();
                           }
                           return null;
                         },
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(hintText: 'Comment'),
+                        decoration: InputDecoration(
+                            hintText: 'Center_review_comment'.tr()),
                       ),
                     ),
                     const SizedBox(
@@ -279,10 +281,10 @@ class CommentsState extends State<Centers> {
                             addComment(centerId);
                           }
                         },
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
-                          child: Text("Post Review",
+                          child: Text("Center_review_post_review".tr(),
                               style: TextStyle(
                                 fontSize: 12.0,
                               )),

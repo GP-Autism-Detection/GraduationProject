@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'itemModel.dart';
 
@@ -18,14 +19,32 @@ class _GameScreenState extends State<GameScreen> {
     gameOver = false;
     score = 0;
     items = [
-      ItemModel(value: 'crying', name: 'Crying', img: 'assets/Game/crying.png'),
-      ItemModel(value: 'sad', name: 'Sad', img: 'assets/Game/sad.png'),
-      ItemModel(value: 'happy', name: 'Happy', img: 'assets/Game/happy.png'),
-      ItemModel(value: 'Laugh', name: 'Laughing', img: 'assets/Game/Laugh.png'),
-      ItemModel(value: 'love', name: 'Lovely', img: 'assets/Game/love.png'),
-      ItemModel(value: 'sleepy', name: 'Sleepy', img: 'assets/Game/sleepy.png'),
-      ItemModel(value: 'Fear', name: 'Fear', img: 'assets/Game/Fear.png'),
-      ItemModel(value: 'angry', name: 'Angry', img: 'assets/Game/angry.png'),
+      ItemModel(
+          value: 'crying',
+          name: 'Game_Crying'.tr(),
+          img: 'assets/Game/crying.png'),
+      ItemModel(
+          value: 'sad', name: 'Game_Sad'.tr(), img: 'assets/Game/sad.png'),
+      ItemModel(
+          value: 'happy',
+          name: 'Game_Happy'.tr(),
+          img: 'assets/Game/happy.png'),
+      ItemModel(
+          value: 'Laugh',
+          name: 'Game_Laughing'.tr(),
+          img: 'assets/Game/Laugh.png'),
+      ItemModel(
+          value: 'love', name: 'Game_love'.tr(), img: 'assets/Game/love.png'),
+      ItemModel(
+          value: 'sleepy',
+          name: 'Game_Sleepy'.tr(),
+          img: 'assets/Game/sleepy.png'),
+      ItemModel(
+          value: 'Fear', name: 'Game_Fear'.tr(), img: 'assets/Game/Fear.png'),
+      ItemModel(
+          value: 'angry',
+          name: 'Game_Angry'.tr(),
+          img: 'assets/Game/angry.png'),
     ];
     items2 = List<ItemModel>.from(items);
 
@@ -45,8 +64,8 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text(
-          'Game',
+        title: Text(
+          'Game_appbar'.tr(),
         ),
       ),
       body: SafeArea(
@@ -58,8 +77,8 @@ class _GameScreenState extends State<GameScreen> {
                 child: Text.rich(
                   TextSpan(
                     children: [
-                      const TextSpan(
-                          text: 'Score : ',
+                      TextSpan(
+                          text: 'Game_Score'.tr(),
                           style: TextStyle(
                             fontSize: 25.0,
                           )),
@@ -170,7 +189,7 @@ class _GameScreenState extends State<GameScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Game Over',
+                          'Game_Game_over'.tr(),
                           style: Theme.of(context)
                               .textTheme
                               .headline6!
@@ -185,7 +204,7 @@ class _GameScreenState extends State<GameScreen> {
                         child: Text(
                           result(),
                           style: const TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.bold),
+                              fontSize: 25.0, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -203,8 +222,8 @@ class _GameScreenState extends State<GameScreen> {
                           initGame();
                         });
                       },
-                      child: const Text(
-                        'New Game',
+                      child: Text(
+                        'Game_New_Game'.tr(),
                         style: TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
@@ -223,10 +242,10 @@ class _GameScreenState extends State<GameScreen> {
   String result() {
     if (score == 80) {
       player.play(AssetSource('Game/yay.wav'));
-      return 'Awesome!';
+      return 'Game_Awesome'.tr();
     } else {
       player.play(AssetSource('Game/fail.wav'));
-      return 'You can do better!';
+      return 'Game_Can_do_better'.tr();
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/Centers.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
@@ -34,8 +35,8 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text(
-          'Help Centers',
+        title: Text(
+          'Center_appbar'.tr(),
         ),
       ),
       body: center.isEmpty
@@ -155,7 +156,10 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                           ),
                           onRatingUpdate: (r) {},
                         ),
-                        Text("Rating : " "${center[index].Rating}",
+                        Text(
+                            "Center_rating".tr() +
+                                " " +
+                                "${center[index].Rating}",
                             style: const TextStyle(
                               fontSize: 10.0,
                             ))

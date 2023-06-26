@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ChildExamStartScreen.dart';
@@ -7,6 +8,7 @@ import '/TestScreen.dart';
 import '/NearestCentersScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:graduation_project_app/GameScreen.dart';
+
 get userid => FirebaseAuth.instance.currentUser?.uid;
 
 class MenuScreen extends StatelessWidget {
@@ -15,7 +17,7 @@ class MenuScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          'Menu',
+          'MainMenu_Menu'.tr(),
         ),
         automaticallyImplyLeading: false,
         actions: [
@@ -59,7 +61,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Image Test',
+                            'MainMenu_Image_Test'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -98,7 +100,7 @@ class MenuScreen extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Image(
                             image: NetworkImage(
                                 'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
@@ -110,7 +112,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Game',
+                            'MainMenu_Game'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -187,7 +189,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Help Centers',
+                            'MainMenu_Help_Centers'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -238,7 +240,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Adults Test',
+                            'MainMenu_Adults_Test'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -283,7 +285,7 @@ class MenuScreen extends StatelessWidget {
                             height: 15.0,
                           ),
                           Text(
-                            'Children Test',
+                            'MainMenu_Children_Test'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,

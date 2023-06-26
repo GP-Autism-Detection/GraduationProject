@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -71,7 +72,7 @@ class _TestScreen extends State<TestScreen> {
         borderRadius: BorderRadius.circular(15.0),
         color: Theme.of(context).colorScheme.secondary,
       ),
-      child: const Text("Please Pick A Valid Image/Images ! ",
+      child: Text("Model_toast".tr(),
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
@@ -121,7 +122,7 @@ class _TestScreen extends State<TestScreen> {
           },
         ),
         title: Text(
-          'Autisim Classification',
+          'Model_appbar'.tr(),
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 23,
@@ -130,10 +131,10 @@ class _TestScreen extends State<TestScreen> {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.background,
-        padding: EdgeInsets.symmetric(horizontal: 35, vertical: 50),
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 35, vertical: 50),
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsetsDirectional.all(10),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.background,
             borderRadius: BorderRadius.circular(30),
@@ -148,7 +149,7 @@ class _TestScreen extends State<TestScreen> {
                       : Container(
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 key: key,
                                 height:
                                     MediaQuery.of(context).size.width * 0.83,
@@ -168,9 +169,10 @@ class _TestScreen extends State<TestScreen> {
                               // ignore: unnecessary_null_comparison
                               finalconf != false
                                   ? Text(
-                                      'Result: $finallabel'
-                                      "\n"
-                                      'Confidence : ${(totalconf * 100).toStringAsFixed(2)} %',
+                                      '${'Model_result'.tr()}$finallabel\n${'Model_Confidence'.tr(namedArgs: {
+                                            'conf':
+                                                '${(totalconf * 100).toStringAsFixed(2)} %'
+                                          })}',
                                       style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
@@ -213,7 +215,7 @@ class _TestScreen extends State<TestScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
-                          'Take A Photo',
+                          'Model_take_photo'.tr(),
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -245,7 +247,7 @@ class _TestScreen extends State<TestScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
-                          'Pick From Gallery',
+                          'Model_from_gal'.tr(),
                           style: TextStyle(fontSize: 16),
                         ),
                       ),

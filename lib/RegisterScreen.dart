@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Enter your Email Address', // aw hint text bs bttshal lma tktb
+                        labelText: 'Register_Email'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email) // icon fl a5er posticon
                         ),
@@ -58,10 +59,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'email address must not be empty';
+                        return 'Register_Email_Validation'.tr();
                       }
                       if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return "Please enter a valid email address";
+                        return "Register_Email_Validation2".tr();
                       }
                       return null;
                     },
@@ -73,8 +74,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextFormField(
                     controller: usernameController,
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Enter your Name', // aw hint text bs bttshal lma tktb
+                        labelText: 'Register_Name'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person) // icon fl a5er posticon
                         ),
@@ -85,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'User Name must not be empty';
+                        return 'Register_Validation'.tr();
                       }
                       return null;
                     },
@@ -98,8 +99,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller:
                         passwordController, // return el value le gwa el textbox
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Create your Password', // aw hint text bs bttshal lma tktb
+                        labelText: 'Register_Pass'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
                         suffixIcon: GestureDetector(
@@ -120,14 +121,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'password must not be empty';
+                        return 'Register_Pass_Validation'.tr();
                       }
                       if (value!.length > 0 && value!.length < 8) {
-                        return ' password must be larger than 8 digits';
+                        return 'Register_Pass_Validation2'.tr();
                       }
                       if (passwordController.text !=
                           ConfirmpasswordController.text) {
-                        return 'Password are not identical';
+                        return 'Register_Pass_Validation3'.tr();
                       }
 
                       return null;
@@ -140,8 +141,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller:
                         ConfirmpasswordController, // return el value le gwa el textbox
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Confirm your Password', // aw hint text bs bttshal lma tktb
+                        labelText: 'Register_Pass_Confirm'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
                         suffixIcon: GestureDetector(
@@ -162,14 +163,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'password must not be empty';
+                        return 'Register_Pass_Validation'.tr();
                       }
                       if (value!.length > 0 && value!.length < 8) {
-                        return ' password must be larger than 8 digits';
+                        return 'Register_Pass_Validation2'.tr();
                       }
                       if (passwordController.text !=
                           ConfirmpasswordController.text) {
-                        return 'Password are not identical ';
+                        return 'Register_Pass_Validation3'.tr();
                       }
 
                       return null;
@@ -198,8 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 await SharedPreferences.getInstance();
                             pref.setString("ID", "useremail@gmail.com");
                             final snackBar1 = SnackBar(
-                              content: const Text(
-                                  'account has been registered successfuly!'),
+                              content: Text('Register_Complete'.tr()),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar1);
@@ -212,8 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             if (e.code == 'email-already-in-use') {
                               print('email already exist');
                               final snackBar = SnackBar(
-                                  content: const Text(
-                                      'email already exist!, You can login now!'),
+                                  content: Text('Register_Email_Exist'.tr()),
                                   action: SnackBarAction(
                                     label: 'Login Screen',
                                     onPressed: () {
@@ -236,7 +235,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                       },
                       child: Text(
-                        'Register', // mafe4 width so wrap to container
+                        'Register_register'
+                            .tr(), // mafe4 width so wrap to container
                         style: TextStyle(),
                       ),
                     ),

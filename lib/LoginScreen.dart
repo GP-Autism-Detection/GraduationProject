@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Enter your Email Address', // aw hint text bs bttshal lma tktb
+                        labelText: 'Login_Email'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email) // icon fl a5er posticon
                         ),
@@ -67,10 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'email address must not be empty';
+                        return 'Login_Email_Validation'.tr();
                       }
                       if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return "Please enter a valid email address";
+                        return "Login_Email_validation2".tr();
                       }
                       return null;
                     },
@@ -83,8 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller:
                         passwordController, // return el value le gwa el textbox
                     decoration: InputDecoration(
-                        labelText:
-                            'Please Enter your Password', // aw hint text bs bttshal lma tktb
+                        labelText: 'Login_Password'
+                            .tr(), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
 
@@ -106,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'password must not be empty';
+                        return 'Login_Password_Validation'.tr();
                       }
                       //  if (value!.length > 0 && value!.length < 8) {
                       //  return ' password must be larger than 8 digits';
@@ -138,16 +139,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'wrong-password') {
-                              print('wrong password');
+                              print('Login_wrong_pass'.tr());
                               final snackBar1 = SnackBar(
-                                content: const Text('Wrong Passwsord'),
+                                content: Text('Login_wrong_pass'.tr()),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar1);
                             } else if (e.code == 'user-not-found') {
-                              print('User not found');
+                              print('Login_wrong_user'.tr());
                               final snackBar2 = SnackBar(
-                                content: const Text('User not registered'),
+                                content: Text('Login_wrong_user_SnackBar'.tr()),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar2);
@@ -159,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       child: Text(
-                        'LOGIN', // mafe4 width so wrap to container
+                        'Login_Login'.tr(), // mafe4 width so wrap to container
                         style: TextStyle(),
                       ),
                     ),
@@ -170,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an account ?'),
+                      Text('Login_no_account'.tr()),
                       TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -179,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => RegisterScreen()),
                             );
                           },
-                          child: Text('Register Now',
+                          child: Text('Login_register'.tr(),
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Forgot your Password ?'),
+                      Text('Login_forget_pass'.tr()),
                       TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -199,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context) => OTPGeneratorScreen()),
                             );
                           },
-                          child: Text('Reset Password',
+                          child: Text('Login_pass_reset'.tr(),
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .colorScheme

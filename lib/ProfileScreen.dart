@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:provider/provider.dart';
+import 'Localization/localiation_checker.dart';
 import 'Provider/theme_provider.dart';
 import 'firebaseStorage.dart';
 import 'User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -50,12 +52,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text('My profile'),
+        title: Text('Profile_MyProfile'.tr()),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.dark_mode),
             onPressed: () {
               provider.toggleTheme();
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              LocalizationChecker.changeLanguage(context);
             },
           )
         ],
@@ -81,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 10.0,
                           ),
                           Text(
-                            'Hello,',
+                            'Profile_Hello'.tr(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -106,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Name:',
+                          'Profile_Name:'.tr(),
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -128,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 15.0,
                         ),
                         Text(
-                          'Email:',
+                          'Profile_Email:'.tr(),
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -150,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 15.0,
                         ),
                         Text(
-                          'Password:',
+                          'Profile_Password:'.tr(),
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -193,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.indigoAccent,
                           child: MaterialButton(
                             onPressed: () async {
-                              print('Save');
+                              print('Profile_Save:'.tr());
                               User newuser = user!.copyWith(
                                 password: passwordcontroller.text,
                                 name: namecontroller.text,
@@ -209,7 +217,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       builder: (_) => LoginScreen()));
                             },
                             child: Text(
-                              'save',
+                              'Profile_Save:'.tr(),
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
@@ -241,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
                             },
                             child: Text(
-                              'log out',
+                              'Profile_Log_Out:'.tr(),
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,

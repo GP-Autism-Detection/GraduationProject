@@ -1,20 +1,17 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
-import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/Provider/dark_theme.dart';
 import 'package:graduation_project_app/Provider/light_theme.dart';
 import 'package:graduation_project_app/Provider/theme_provider.dart';
-import 'package:graduation_project_app/QuizScreen.dart';
-import 'package:graduation_project_app/QuizInfoScreen.dart';
-import 'package:graduation_project_app/RegisterScreen.dart';
-import 'package:graduation_project_app/TestScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +20,15 @@ String? uid;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(ChangeNotifierProvider<ThemeProvider>(
-      create: (_) => ThemeProvider()..initialize(), child: MyApp()));
+  await EasyLocalization.ensureInitialized();
+  runApp(
+      // ChangeNotifierProvider<ThemeProvider>(
+      // create: (_) => ThemeProvider()..initialize(), child: MyApp()),
+      EasyLocalization(
+          supportedLocales: const [Locale('en', 'US'), Locale('ar', 'AE')],
+          path: 'assets/Translations',
+          fallbackLocale: const Locale('en', 'US'),
+          child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -38,14 +42,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     getuid();
-    return Consumer<ThemeProvider>(builder: (context, provider, child) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: uid == null ? LoginScreen() : MenuScreen(),
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: provider.theme,
-      );
-    });
+    return ChangeNotifierProvider(
+        create: (context) => ThemeProvider()..initialize(),
+        builder: (context, child) {
+          final provider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: uid == null ? LoginScreen() : MenuScreen(),
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: provider.theme,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+          );
+        });
   }
 }
