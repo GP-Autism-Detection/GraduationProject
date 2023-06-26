@@ -196,65 +196,97 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           height: 60.0,
                         ),
-                        Container(
-                          width: double.infinity,
-                          color: Colors.indigoAccent,
-                          child: MaterialButton(
-                            onPressed: () async {
-                              print('Profile_Save:'.tr());
-                              User newuser = user!.copyWith(
-                                password: passwordcontroller.text,
-                                name: namecontroller.text,
-                              );
-                              await firebaseStorage()
-                                  .uploadUserData(user: newuser);
-                              await firebaseStorage().updateUserData(
-                                  user: user!, newuser: newuser);
-                              setState(() {});
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => LoginScreen()));
-                            },
-                            child: Text(
-                              'Profile_Save:'.tr(),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Flexible(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: MaterialButton(
+                                    onPressed: () async {
+                                      print('Profile_Save:'.tr());
+                                      User newuser = user!.copyWith(
+                                        password: passwordcontroller.text,
+                                        name: namecontroller.text,
+                                      );
+                                      await firebaseStorage()
+                                          .uploadUserData(user: newuser);
+                                      await firebaseStorage().updateUserData(
+                                          user: user!, newuser: newuser);
+                                      setState(() {});
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => LoginScreen()));
+                                    },
+                                    padding: EdgeInsetsDirectional.symmetric(
+                                        vertical: 0, horizontal: 130),
+                                    color: Colors.indigoAccent,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30))),
+                                    child: Text(
+                                      'Profile_Save:'.tr(),
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         SizedBox(
                           height: 40.0,
                         ),
-                        Container(
-                          width: double.infinity,
-                          color: Colors.red,
-                          child: MaterialButton(
-                            onPressed: () async {
-                              SharedPreferences pref =
-                                  await SharedPreferences.getInstance();
-                              pref.remove("ID");
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Flexible(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: MaterialButton(
+                                    onPressed: () async {
+                                      SharedPreferences pref =
+                                          await SharedPreferences.getInstance();
+                                      pref.remove("ID");
 
-                              setState(() {});
-                              Navigator.of(context, rootNavigator: true)
-                                  .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return LoginScreen();
-                                  },
+                                      setState(() {});
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                            return LoginScreen();
+                                          },
+                                        ),
+                                        (_) => false,
+                                      );
+                                    },
+                                    padding: EdgeInsetsDirectional.symmetric(
+                                        vertical: 0, horizontal: 120),
+                                    color: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30))),
+                                    child: Text(
+                                      'Profile_Log_Out:'.tr(),
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                (_) => false,
-                              );
-                            },
-                            child: Text(
-                              'Profile_Log_Out:'.tr(),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         // Container(

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class CQuestion {
   final String questionText;
   final List<CAnswer> answersList;
@@ -17,220 +19,220 @@ List<CQuestion> getQuestions() {
   //ADD questions and answer here
 
   list.add(CQuestion(
-    "Is old-fashioned or precocious ?",
+    "Child_Question_ModelQ1".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
 
   list.add(CQuestion(
-    "Is regarded as an eccentric professor by the other children ?",
+    "Child_Question_ModelQ2".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Lives somewhat in a world of his/her own with restricted idiosyncratic intellectual interests",
+    "Child_Question_ModelQ3".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Accumulates facts on certain subjects (good rote memory) but does not really understand the meaning",
+    "Child_Question_ModelQ4".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has a literal understanding of ambiguous and metaphorical language ?",
+    "Child_Question_ModelQ5".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has a deviant style of communication with a formal, fussy, old-fashioned or robot-like language ?",
+    "Child_Question_ModelQ6".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Invents idiosyncratic words and expressions",
+    "Child_Question_ModelQ7".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has a different voice or speech ?",
+    "Child_Question_ModelQ8".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Expresses sounds involuntarily; clears throats, grunts, smacks, cries or screams",
+    "Child_Question_ModelQ9".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Is surprisingly good at some things and surprisingly poor at others ?",
+    "Child_Question_ModelQ10".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Uses language freely but fails to make adjustment fit social contexts or the needs of different listeners",
+    "Child_Question_ModelQ11".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Lacks empathy ",
+    "Child_Question_ModelQ12".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Makes naive or embarrassing remarks ",
+    "Child_Question_ModelQ13".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has a deviant style of gaze? ",
+    "Child_Question_ModelQ14".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Wishes to be sociable but fails to make relationships with peers ",
+    "Child_Question_ModelQ15".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Can be with other children but only on his/her terms ? ",
+    "Child_Question_ModelQ16".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Lacks best friend ",
+    "Child_Question_ModelQ17".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Lacks common sense ",
+    "Child_Question_ModelQ18".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Is poor at games: no idea of cooperating in a team, scores own goals ? ",
+    "Child_Question_ModelQ19".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has clumsy, ill coordinated, ungainly, awkward movements or gestures ? ",
+    "Child_Question_ModelQ20".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has involuntary face or body movements ?",
+    "Child_Question_ModelQ21".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has difficulties in completing simple daily activities because of compulsory repetition of certain actions or thoughts ? ",
+    "Child_Question_ModelQ22".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has special routines: insists on no change ? ",
+    "Child_Question_ModelQ23".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "shows idiosyncratic attachment to objects",
+    "Child_Question_ModelQ24".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Is bullied by other children",
+    "Child_Question_ModelQ25".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has markedly unusual facial expression",
+    "Child_Question_ModelQ26".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
   list.add(CQuestion(
-    "Has markedly unusual posture",
+    "Child_Question_ModelQ27".tr(),
     [
-      CAnswer("Yes", 2),
-      CAnswer("Somewhat", 1),
-      CAnswer("No", 0),
+      CAnswer("Child_Question_ModelA1".tr(), 2),
+      CAnswer("Child_Question_ModelA2".tr(), 1),
+      CAnswer("Child_Question_ModelA3".tr(), 0),
     ],
   ));
 

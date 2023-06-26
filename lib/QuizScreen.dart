@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
@@ -36,20 +37,20 @@ class _QuizScreenState extends State<QuizScreen> {
                   MaterialPageRoute(builder: (context) => ExamStartScreen()),
                 );
               }
-              if (backans == "True now & when I was young") {
+              if (backans == "Quiz_Screen_A1".tr()) {
                 score -= 3;
-              } else if (backans == "True only now") {
+              } else if (backans == "Quiz_Screen_A1".tr()) {
                 score -= 2;
-              } else if (backans == "True only when I was < 16") {
+              } else if (backans == "Quiz_Screen_A1".tr()) {
                 score -= 1;
-              } else if (backans == "Never true") {
+              } else if (backans == "Quiz_Screen_A1".tr()) {
                 score -= 0;
               }
             });
           },
         ),
         title: Text(
-          "Adult Autism Test",
+          "Quiz_Screen_appbar".tr(),
           style: TextStyle(fontSize: 25),
         ),
         actions: [
@@ -83,7 +84,9 @@ class _QuizScreenState extends State<QuizScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Question ${currentQuestionIndex + 1}/${questionList.length.toString()}",
+          "Child_Quiz_Screen_Question".tr() +
+              " " +
+              "${currentQuestionIndex + 1}/${questionList.length.toString()}",
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -156,20 +159,22 @@ class _QuizScreenState extends State<QuizScreen> {
       width: MediaQuery.of(context).size.width * 0.5,
       height: 48,
       child: ElevatedButton(
-        child: Text(isLastQuestion ? "Submit" : "Next"),
+        child: Text(isLastQuestion
+            ? "Child_Quiz_Screen_Submit".tr()
+            : "Child_Quiz_Screen_Next".tr()),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
           primary: Colors.blue,
           onPrimary: Colors.white,
         ),
         onPressed: () {
-          if (ans == "True now & when I was young") {
+          if (ans == "Quiz_Screen_A1".tr()) {
             score += 3;
-          } else if (ans == "True only now") {
+          } else if (ans == "Quiz_Screen_A2".tr()) {
             score += 2;
-          } else if (ans == "True only when I was < 16") {
+          } else if (ans == "Quiz_Screen_A3".tr()) {
             score += 1;
-          } else if (ans == "Never true") {
+          } else if (ans == "Quiz_Screen_A4".tr()) {
             score += 0;
           }
           backans = ans;
@@ -196,19 +201,20 @@ class _QuizScreenState extends State<QuizScreen> {
     if (score >= 13) {
       isAutistic = true;
     }
-    String title =
-        isAutistic ? "May Indicate Autism " : "No Indication for Autism";
+    String title = isAutistic
+        ? "Child_Quiz_Screen_Res_Autis".tr()
+        : "Child_Quiz_Screen_Res_Non_Autis".tr();
 
     return AlertDialog(
       title: Text(
-        title + " | Your Score is $score / 42",
+        title + "Child_Quiz_Screen_Score".tr() + " " + "$score / 42",
         style: TextStyle(color: isAutistic ? Colors.redAccent : Colors.green),
       ),
       content: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).colorScheme.primary, // Background color
+          primary: Theme.of(context).colorScheme.secondary, // Background color
         ),
-        child: Text("more info"),
+        child: Text("Child_Quiz_Screen_more_info").tr(),
         onPressed: () {
           Navigator.push(
             context,

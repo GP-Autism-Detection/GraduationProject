@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 
@@ -14,70 +15,106 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text("Adult Autism Test"),
+        title: Text("Exam_Start_Screen_appbar".tr()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "14 questions",
-                style: TextStyle(fontSize: 15),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "This test can help you determine if you are experiencing symptoms of Autism Spectrum Disorder.",
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "This is not a diagnostic test. Please consult a physician if you are concerned about autism spectrum disorder.",
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              SizedBox(height: 200.0),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Answer the question according to what is true for you.",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "If you can not determine a specific answer you can skip the question and its weight won't be considered in the final result",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(40),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => QuizScreen()),
-                        );
-                      },
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 100),
-                      color: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: Text("Start"),
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    maxWidth: 700,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 12,
+                        offset: Offset(0, 5),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Exam_Start_Screen_nQuestions'.tr(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                          child: Text(
+                            "Exam_Start_Screen_T1".tr(),
+                            style: TextStyle(fontSize: 18.0),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Flexible(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => QuizScreen()),
+                                      );
+                                    },
+                                    padding: EdgeInsetsDirectional.symmetric(
+                                        vertical: 5, horizontal: 100),
+                                    color: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30))),
+                                    child: Text(
+                                      "Exam_Start_Screen_T2".tr(),
+                                      style: TextStyle(fontSize: 18.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),

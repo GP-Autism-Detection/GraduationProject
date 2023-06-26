@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class Question {
   final String questionText;
   final List<Answer> answersList;
@@ -17,129 +19,129 @@ List<Question> getQuestions() {
   //ADD questions and answer here
 
   list.add(Question(
-    "It is difficult for me to understand how other people are feeling when we are talking.",
+    "Question_Model_Screen_Q1".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "Some ordinary textures that do not bother others feel very offensive when they touch my skin.",
+    "Question_Model_Screen_Q2".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "It is very difficult for me to work and function in groups.",
+    "Question_Model_Screen_Q3".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "It is difficult to figure out what other people expect of me",
+    "Question_Model_Screen_Q4".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "I often don't know how to act in social situations.",
+    "Question_Model_Screen_Q5".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "I can chat and make small talk with people",
+    "Question_Model_Screen_Q6".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "When I feel overwhelmed by my senses, I have to isolate myself to shut them down.",
+    "Question_Model_Screen_Q7".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "How to make friends and socialize is a mystery to me.",
+    "Question_Model_Screen_Q8".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "When talking to someone, I have a hard time telling when it is my turn to talk or to listen.",
+    "Question_Model_Screen_Q9".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly).",
+    "Question_Model_Screen_Q10".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "It can be very hard to read someone's face,hand,and body movements when we are talking.",
+    "Question_Model_Screen_Q11".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "I focus on details rather than the overall idea.",
+    "Question_Model_Screen_Q12".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "I take things too literally,so I often miss what people are trying to say.",
+    "Question_Model_Screen_Q13".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
   list.add(Question(
-    "I get extremely upset when the way I like to do things is suddenly changed.",
+    "Question_Model_Screen_Q14".tr(),
     [
-      Answer("True now & when I was young", 3),
-      Answer("True only now", 2),
-      Answer("True only when I was < 16", 1),
-      Answer("Never true", 0),
+      Answer("Quiz_Screen_A1".tr(), 3),
+      Answer("Quiz_Screen_A2".tr(), 2),
+      Answer("Quiz_Screen_A3".tr(), 1),
+      Answer("Quiz_Screen_A4".tr(), 0),
     ],
   ));
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
@@ -16,7 +17,7 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "Autism Test",
+          "Quiz_info_Screen_appbar".tr(),
           style: TextStyle(fontSize: 25),
         ),
         actions: [
@@ -36,34 +37,73 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Scores of 13 or above may indicate Autism Spectrum Disorder.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    maxWidth: 700,
                   ),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              // SizedBox(height: 50.0),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Next Steps:",
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Autism spectrum disorder is a spectrum of disorders with a shared core of symptoms including difficulties with social interaction, empathy, communication, and flexible behavior. While autism is usually diagnosed at a young age, some adults with high-functioning autism do go undiagnosed until adulthood. If you're interested in being evaluated for ASD, begin with your family doctor, who will evaluate you and likely refer to a you psychiatrist or psychologist for in-depth assessment. Adult ASD can be treated with different types of psychotherapy depending on the challenges you're experiencing.",
-                  style: TextStyle(fontSize: 18),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 12,
+                        offset: Offset(0, 5),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Quiz_info_Screen_T1'.tr(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                          child: Text(
+                            "Quiz_info_Screen_T2".tr(),
+                            style: TextStyle(fontSize: 18.0),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
