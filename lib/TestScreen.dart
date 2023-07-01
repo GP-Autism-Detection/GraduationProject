@@ -70,7 +70,7 @@ class _TestScreen extends State<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 17.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        color: Theme.of(context).colorScheme.secondary,
+        color: Colors.blue[500],
       ),
       child: Text("Model_toast".tr(),
           style: TextStyle(
@@ -111,7 +111,7 @@ class _TestScreen extends State<TestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
         leading: BackButton(
           onPressed: () {
@@ -130,132 +130,135 @@ class _TestScreen extends State<TestScreen> {
         ),
       ),
       body: Container(
-        color: Theme.of(context).colorScheme.background,
+        //color: Theme.of(context).colorScheme.background,
         padding: EdgeInsetsDirectional.symmetric(horizontal: 35, vertical: 50),
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsetsDirectional.all(10),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.circular(30),
+            color: Theme.of(context).colorScheme.surfaceVariant,
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: Center(
-                  child: imagecrop == false
-                      ? null //show nothing if no picture selected
-                      : Container(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                key: key,
-                                height:
-                                    MediaQuery.of(context).size.width * 0.83,
-                                width: MediaQuery.of(context).size.width * 0.83,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.file(
-                                    _Croppedfile,
-                                    fit: BoxFit.fill,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Center(
+                    child: imagecrop == false
+                        ? null //show nothing if no picture selected
+                        : Container(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  key: key,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.file(
+                                      _Croppedfile,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Divider(
-                                height: 25,
-                                thickness: 1,
-                              ),
-                              // ignore: unnecessary_null_comparison
-                              finalconf != false
-                                  ? Text(
-                                      '${'Model_result'.tr()}$finallabel\n${'Model_Confidence'.tr(namedArgs: {
-                                            'conf':
-                                                '${(totalconf * 100).toStringAsFixed(2)} %'
-                                          })}',
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    )
-                                  : Container(),
-                              const Divider(
-                                height: 25,
-                                thickness: 1,
-                              ),
-                            ],
+                                Divider(
+                                  height: 25,
+                                  thickness: 1,
+                                ),
+                                // ignore: unnecessary_null_comparison
+                                finalconf != false
+                                    ? Text(
+                                        '${'Model_result'.tr()}$finallabel\n${'Model_Confidence'.tr(namedArgs: {
+                                              'conf':
+                                                  '${(totalconf * 100).toStringAsFixed(2)} %'
+                                            })}',
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    : Container(),
+                                const Divider(
+                                  height: 25,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
+                          ),
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          labels.clear();
+                          conf.clear();
+                          totalconf = 0.0;
+                          counter = 0;
+                          croppedImages.clear();
+                          _faces.clear();
+                          imagecrop = false;
+                          finalconf = false;
+                          imageCache.clear();
+                          PaintingBinding.instance.imageCache.clear();
+                          pickImage();
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 150,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 17),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[500],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            'Model_take_photo'.tr(),
+                            style: TextStyle(fontSize: 16),
                           ),
                         ),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        labels.clear();
-                        conf.clear();
-                        totalconf = 0.0;
-                        counter = 0;
-                        croppedImages.clear();
-                        _faces.clear();
-                        imagecrop = false;
-                        finalconf = false;
-                        imageCache.clear();
-                        PaintingBinding.instance.imageCache.clear();
-                        pickImage();
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width - 150,
-                        alignment: Alignment.center,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          'Model_take_photo'.tr(),
-                          style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(height: 30),
+                      GestureDetector(
+                        onTap: () {
+                          labels.clear();
+                          conf.clear();
+                          totalconf = 0.0;
+                          counter = 0;
+                          croppedImages.clear();
+                          selectedImages.clear();
+                          //_Croppedfile.delete();
+                          _faces.clear();
+                          imagecrop = false;
+                          finalconf = false;
+                          imageCache.clear();
+                          PaintingBinding.instance.imageCache.clear();
+                          uploadImage2();
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width - 150,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 17),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[500],
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            'Model_from_gal'.tr(),
+                            style: TextStyle(fontSize: 16),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
-                    GestureDetector(
-                      onTap: () {
-                        labels.clear();
-                        conf.clear();
-                        totalconf = 0.0;
-                        counter = 0;
-                        croppedImages.clear();
-                        selectedImages.clear();
-                        //_Croppedfile.delete();
-                        _faces.clear();
-                        imagecrop = false;
-                        finalconf = false;
-                        imageCache.clear();
-                        PaintingBinding.instance.imageCache.clear();
-                        uploadImage2();
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width - 150,
-                        alignment: Alignment.center,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          'Model_from_gal'.tr(),
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -350,7 +353,10 @@ class _TestScreen extends State<TestScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(
+            child: CircularProgressIndicator(
+          color: Colors.blue,
+        ));
       },
     );
     final ImagePicker _picker = ImagePicker();
@@ -389,7 +395,10 @@ class _TestScreen extends State<TestScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(
+            child: CircularProgressIndicator(
+          color: Colors.blue,
+        ));
       },
     );
     final ImagePicker _picker = ImagePicker();

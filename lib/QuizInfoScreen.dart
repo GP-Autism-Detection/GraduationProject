@@ -15,7 +15,8 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Quiz_info_Screen_appbar".tr(),
           style: TextStyle(fontSize: 25),
@@ -48,13 +49,8 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
                     maxWidth: 700,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 12,
-                        offset: Offset(0, 5),
-                      )
-                    ],
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    boxShadow: [BoxShadow()],
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Padding(

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 class ItemModel {
   final String name;
-  final String img;
+  final Widget img;
   final String value;
   bool accepting;
   ItemModel(

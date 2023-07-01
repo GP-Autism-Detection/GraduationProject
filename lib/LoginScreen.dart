@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rive/rive.dart';
+import 'package:get/get.dart' hide Trans;
 
 import 'MenuScreen.dart';
 
@@ -15,7 +17,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   FirebaseAuth Auth = FirebaseAuth.instance; // server auth db
+  StateMachineController? controller;
 
+  SMIInput<bool>? isChecking;
+  SMIInput<bool>? isHandsUp;
+  SMIInput<bool>? trigSuccess;
+  SMIInput<bool>? trigFail;
   @override
   void initstate() {
     super.initState();
@@ -35,179 +42,274 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //appBar: AppBar(
-      // title: Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
-      //),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: FormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image(
-                      image: NetworkImage(
-                          'https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
-                  //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
-                  SizedBox(height: 40.0), // masaf ben login w textbox
-                  TextFormField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        labelText: 'Login_Email'
-                            .tr(), // aw hint text bs bttshal lma tktb
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email) // icon fl a5er posticon
-                        ),
-                    keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (String value) {
-                      // aw onchanged be return ay change
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Login_Email_Validation'.tr();
-                      }
-                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return "Login_Email_validation2".tr();
-                      }
-                      return null;
-                    },
+    final Size Screensize = MediaQuery.of(context).size;
+    return WillPopScope(
+      onWillPop: () async {
+        final AlertValue = await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text("Alert"),
+                content: const Text("Do you want to Exit ?"),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text("No"),
                   ),
-
-                  SizedBox(
-                    height: 15,
-                  ), // space fe el col --> height
-                  TextFormField(
-                    controller:
-                        passwordController, // return el value le gwa el textbox
-                    decoration: InputDecoration(
-                        labelText: 'Login_Password'
-                            .tr(), // aw hint text bs bttshal lma tktb
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
-
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isPassword = !isPassword;
-                            });
-                          },
-                          child: Icon(isPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                        )),
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: isPassword,
-                    onFieldSubmitted: (String value) {
-                      // aw onchanged be return ay change
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Login_Password_Validation'.tr();
-                      }
-                      //  if (value!.length > 0 && value!.length < 8) {
-                      //  return ' password must be larger than 8 digits';
-                      //}
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    color: Colors.blue,
-                    child: MaterialButton(
-                      onPressed: () async {
-                        if (FormKey.currentState!.validate()) {
-                          try {
-                            UserCredential Credentail =
-                                await Auth.signInWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text);
-                            SharedPreferences pref =
-                                await SharedPreferences.getInstance();
-                            pref.setString("ID", "useremail@gmail.com");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MenuScreen()),
-                            );
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'wrong-password') {
-                              print('Login_wrong_pass'.tr());
-                              final snackBar1 = SnackBar(
-                                content: Text('Login_wrong_pass'.tr()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar1);
-                            } else if (e.code == 'user-not-found') {
-                              print('Login_wrong_user'.tr());
-                              final snackBar2 = SnackBar(
-                                content: Text('Login_wrong_user_SnackBar'.tr()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar2);
-                            }
-                          }
-
-                          print(emailController.text);
-                          print(passwordController.text);
-                        }
-                      },
-                      child: Text(
-                        'Login_Login'.tr(), // mafe4 width so wrap to container
-                        style: TextStyle(),
-                      ),
-                    ),
-                  ), // onPressed ---> annonumse func --> (){}
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Login_no_account'.tr()),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterScreen()),
-                            );
-                          },
-                          child: Text('Login_register'.tr(),
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary))),
-                    ],
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Login_forget_pass'.tr()),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OTPGeneratorScreen()),
-                            );
-                          },
-                          child: Text('Login_pass_reset'.tr(),
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary))),
-                    ],
-                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: const Text("Exit"),
+                  )
                 ],
+              );
+            });
+        if (AlertValue != null) {
+          return Future.value(AlertValue);
+        } else {
+          return Future.value(false);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xffD6E2EA),
+        //appBar: AppBar(
+        // title: Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
+        //),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: FormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: Container(
+                          width: Screensize.width,
+                          height: 280,
+                          child: RiveAnimation.asset(
+                            'assets/Animations/animated-login-character.riv',
+                            stateMachines: const ["Login Machine"],
+                            onInit: (artboard) {
+                              controller = StateMachineController.fromArtboard(
+                                  artboard, "Login Machine");
+                              if (controller == null) return;
+                              artboard.addController(controller!);
+                              isChecking = controller?.findInput("isChecking");
+                              isHandsUp = controller?.findInput("isHandsUp");
+                              trigSuccess =
+                                  controller?.findInput("trigSuccess");
+                              trigFail = controller?.findInput("trigFail");
+                            },
+                          )),
+                    ),
+
+                    //SizedBox(height: 10.0), // masaf ben login w textbox
+                    TextFormField(
+                      onChanged: (value) {
+                        if (isHandsUp != null) {
+                          isHandsUp!.change(false);
+                        }
+                        if (trigFail != null) {
+                          trigFail!.change(false);
+                        }
+                        if (isChecking == null) return;
+                        isChecking!.change(true);
+                      },
+                      controller: emailController,
+                      decoration: InputDecoration(
+                          labelText: 'Login_Email'
+                              .tr(), // aw hint text bs bttshal lma tktb
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email) // icon fl a5er posticon
+                          ),
+                      keyboardType: TextInputType.emailAddress,
+                      onFieldSubmitted: (String value) {
+                        // aw onchanged be return ay change
+                        print(value);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Login_Email_Validation'.tr();
+                        }
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                          return "Login_Email_validation2".tr();
+                        }
+                        return null;
+                      },
+                    ),
+
+                    SizedBox(
+                      height: 15,
+                    ), // space fe el col --> height
+                    TextFormField(
+                      onChanged: (value) {
+                        if (isChecking != null) {
+                          isChecking!.change(false);
+                        }
+                        if (trigFail != null) {
+                          trigFail!.change(false);
+                        }
+                        if (isHandsUp == null) return;
+
+                        isHandsUp!.change(true);
+                      },
+                      controller:
+                          passwordController, // return el value le gwa el textbox
+                      decoration: InputDecoration(
+                          labelText: 'Login_Password'
+                              .tr(), // aw hint text bs bttshal lma tktb
+                          border: OutlineInputBorder(),
+                          prefixIcon:
+                              Icon(Icons.lock), // icon fl a5er suffixicon
+
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isPassword = !isPassword;
+                              });
+                            },
+                            child: Icon(isPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          )),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: isPassword,
+                      onFieldSubmitted: (String value) {
+                        // aw onchanged be return ay change
+                        print(value);
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Login_Password_Validation'.tr();
+                        }
+                        //  if (value!.length > 0 && value!.length < 8) {
+                        //  return ' password must be larger than 8 digits';
+                        //}
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: MaterialButton(
+                        onPressed: () async {
+                          if (FormKey.currentState!.validate()) {
+                            try {
+                              UserCredential Credentail =
+                                  await Auth.signInWithEmailAndPassword(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                              SharedPreferences pref =
+                                  await SharedPreferences.getInstance();
+                              pref.setString("ID", "useremail@gmail.com");
+                              Get.to(() => MenuScreen(),
+                                  transition: Transition.zoom);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MenuScreen()),
+                              // );
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'wrong-password') {
+                                if (isHandsUp != null) {
+                                  isHandsUp!.change(false);
+                                }
+                                if (isChecking != null) {
+                                  isChecking!.change(false);
+                                }
+                                if (trigFail != null) {
+                                  trigFail!.change(true);
+                                }
+                                print('Login_wrong_pass'.tr());
+                                final snackBar1 = SnackBar(
+                                  content: Text('Login_wrong_pass'.tr()),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar1);
+                              } else if (e.code == 'user-not-found') {
+                                if (isHandsUp != null) {
+                                  isHandsUp!.change(false);
+                                }
+                                if (isChecking != null) {
+                                  isChecking!.change(false);
+                                }
+                                if (trigFail != null) {
+                                  trigFail!.change(true);
+                                }
+                                print('Login_wrong_user'.tr());
+                                final snackBar2 = SnackBar(
+                                  content:
+                                      Text('Login_wrong_user_SnackBar'.tr()),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar2);
+                              }
+                            }
+                            print(emailController.text);
+                            print(passwordController.text);
+                          }
+                        },
+                        child: Text(
+                          'Login_Login'
+                              .tr(), // mafe4 width so wrap to container
+                          style: TextStyle(),
+                        ),
+                      ),
+                    ), // onPressed ---> annonumse func --> (){}
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Login_no_account'.tr()),
+                        TextButton(
+                            onPressed: () {
+                              Get.to(() => RegisterScreen(),
+                                  transition: Transition.rightToLeftWithFade);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => RegisterScreen()),
+                              // );
+                            },
+                            child: Text('Login_register'.tr(),
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary))),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Login_forget_pass'.tr()),
+                        TextButton(
+                            onPressed: () {
+                              Get.to(() => OTPGeneratorScreen(),
+                                  transition: Transition.rightToLeftWithFade);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => OTPGeneratorScreen()),
+                              // );
+                            },
+                            child: Text('Login_pass_reset'.tr(),
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary))),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

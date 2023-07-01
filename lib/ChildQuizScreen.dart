@@ -23,7 +23,8 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         leading: BackButton(
           onPressed: () {
             setState(() {
@@ -96,13 +97,13 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.blue[500],
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
             questionList[currentQuestionIndex].questionText,
             style: const TextStyle(
-              color: Colors.white,
+              //color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -162,7 +163,7 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
             : "Child_Quiz_Screen_Next".tr()),
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: Colors.blue,
+          primary: Colors.blue[500],
           onPrimary: Colors.white,
         ),
         onPressed: () {
@@ -204,9 +205,10 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
     return AlertDialog(
       title: Text(
         title + "Child_Quiz_Screen_Score".tr() + "$score / 54",
-        style: TextStyle(color: isAutistic ? Colors.redAccent : Colors.green),
+        style: TextStyle(
+            color: isAutistic ? Colors.redAccent : Colors.green, fontSize: 16),
       ),
-      content: ElevatedButton(
+      content: FilledButton(
         child: Text("Child_Quiz_Screen_more_info".tr()),
         onPressed: () {
           Navigator.push(
@@ -217,8 +219,8 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
           );
         },
         style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).colorScheme.secondary, // Background color
-        ),
+            //primary: Theme.of(context).colorScheme.secondary, // Background color
+            ),
       ),
     );
   }

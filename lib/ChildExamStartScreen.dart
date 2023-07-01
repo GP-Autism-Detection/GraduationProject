@@ -15,7 +15,8 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Child_Exam_Start_appbar").tr(),
       ),
       body: Padding(
@@ -28,12 +29,13 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
               Align(
                 alignment: AlignmentDirectional(0, 0),
                 child: Container(
+                  alignment: Alignment(0, 0),
                   width: double.infinity,
                   constraints: BoxConstraints(
                     maxWidth: 700,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 12,
@@ -62,9 +64,9 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                                     Text(
                                       'Child_Exam_Start_nQuestions'.tr(),
                                       style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.underline),
                                     ),
                                   ],
                                 ),
@@ -88,24 +90,28 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                               Flexible(
                                 child: Align(
                                   alignment: AlignmentDirectional(0, 0),
-                                  child: MaterialButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ChildQuizScreen()),
-                                      );
-                                    },
-                                    padding: EdgeInsetsDirectional.symmetric(
-                                        vertical: 5, horizontal: 100),
-                                    color: Colors.blue,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    child: Text(
-                                      "Child_Exam_Start_T2".tr(),
-                                      style: TextStyle(fontSize: 18.0),
+                                  child: SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: FilledButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChildQuizScreen()),
+                                        );
+                                      },
+                                      //  padding: EdgeInsetsDirectional.symmetric(
+                                      //      vertical: 5, horizontal: 100),
+                                      // // color: Colors.blue,
+                                      //  shape: RoundedRectangleBorder(
+                                      //      borderRadius: BorderRadius.all(
+                                      //          Radius.circular(30))),
+                                      child: Text(
+                                        "Child_Exam_Start_T2".tr(),
+                                        style: TextStyle(fontSize: 18.0),
+                                      ),
                                     ),
                                   ),
                                 ),

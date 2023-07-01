@@ -8,6 +8,7 @@ import 'firebaseStorage.dart';
 import 'User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart' hide Trans;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -51,7 +52,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final provider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text('Profile_MyProfile'.tr()),
         actions: <Widget>[
           IconButton(
@@ -224,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     },
                                     padding: EdgeInsetsDirectional.symmetric(
                                         vertical: 0, horizontal: 130),
-                                    color: Colors.indigoAccent,
+                                    color: Colors.blue[500],
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
@@ -260,19 +262,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       pref.remove("ID");
 
                                       setState(() {});
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) {
-                                            return LoginScreen();
-                                          },
-                                        ),
-                                        (_) => false,
-                                      );
+                                      Get.to(() => LoginScreen(),
+                                          transition: Transition.zoom,
+                                          duration:
+                                              Duration(milliseconds: 500));
+                                      // Navigator.of(context, rootNavigator: true)
+                                      //     .pushAndRemoveUntil(
+                                      //   MaterialPageRoute(
+                                      //     builder: (BuildContext context) {
+                                      //       return LoginScreen();
+                                      //     },
+                                      //   ),
+                                      //   (_) => false,
+                                      // );
                                     },
                                     padding: EdgeInsetsDirectional.symmetric(
                                         vertical: 0, horizontal: 120),
-                                    color: Colors.red,
+                                    color: Colors.red[500],
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),

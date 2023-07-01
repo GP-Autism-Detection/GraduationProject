@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
@@ -14,6 +15,7 @@ import 'package:graduation_project_app/Provider/light_theme.dart';
 import 'package:graduation_project_app/Provider/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 String? uid;
 
@@ -46,10 +48,11 @@ class MyApp extends StatelessWidget {
         create: (context) => ThemeProvider()..initialize(),
         builder: (context, child) {
           final provider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(
+          return GetMaterialApp(
+            //change to MaterialApp and remove transitions for on-time translations
             debugShowCheckedModeBanner: false,
             home: uid == null ? LoginScreen() : MenuScreen(),
-            theme: lightTheme,
+            theme: lightTheme, //lightTheme,
             darkTheme: darkTheme,
             themeMode: provider.theme,
             localizationsDelegates: context.localizationDelegates,

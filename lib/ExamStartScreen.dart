@@ -14,7 +14,8 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Exam_Start_Screen_appbar".tr()),
       ),
       body: Padding(
@@ -32,7 +33,7 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                     maxWidth: 700,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 12,
@@ -61,9 +62,9 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                                     Text(
                                       'Exam_Start_Screen_nQuestions'.tr(),
                                       style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.underline),
                                     ),
                                   ],
                                 ),

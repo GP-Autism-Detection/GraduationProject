@@ -8,6 +8,7 @@ import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/firebaseStorage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart' as u;
+import 'package:get/get.dart' hide Trans;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -203,11 +204,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar1);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MenuScreen()),
-                            );
+                            Get.to(() => MenuScreen(),
+                                transition: Transition.zoom);
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => MenuScreen()),
+                            // );
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'email-already-in-use') {
                               print('email already exist');
@@ -216,12 +220,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   action: SnackBarAction(
                                     label: 'Login Screen',
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
-                                      );
+                                      Get.to(() => LoginScreen(),
+                                          transition:
+                                              Transition.leftToRightWithFade);
+
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           LoginScreen()),
+                                      // );
                                       // Some code to undo the change.
                                     },
                                   ));

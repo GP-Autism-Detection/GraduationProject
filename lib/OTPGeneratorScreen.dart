@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
+import 'package:get/get.dart' hide Trans;
 
 class OTPGeneratorScreen extends StatelessWidget {
   FirebaseAuth Auth = FirebaseAuth.instance;
@@ -74,11 +75,13 @@ class OTPGeneratorScreen extends StatelessWidget {
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()),
-                            );
+                            Get.to(() => LoginScreen(),
+                                transition: Transition.rightToLeftWithFade);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => LoginScreen()),
+                            // );
                           } on FirebaseAuthException catch (e) {
                             print('auth/user-not-found');
                             final snackBar = SnackBar(
@@ -86,12 +89,15 @@ class OTPGeneratorScreen extends StatelessWidget {
                                 action: SnackBarAction(
                                   label: 'Pass_reset_Register'.tr(),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegisterScreen()),
-                                    );
+                                    Get.to(() => RegisterScreen(),
+                                        transition:
+                                            Transition.leftToRightWithFade);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           RegisterScreen()),
+                                    // );
                                     // Some code to undo the change.
                                   },
                                 ));

@@ -34,7 +34,8 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
     ;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           'Center_appbar'.tr(),
         ),
@@ -135,11 +136,19 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                     ),
                     Column(
                       children: <Widget>[
-                        Image(
-                          image: NetworkImage(center[index].Image),
-                          height: 80.0,
-                          width: 80.0,
-                          fit: BoxFit.fill,
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey, //<-- SEE HERE
+                              width: 1,
+                            ),
+                          ),
+                          child: Image(
+                            image: NetworkImage(center[index].Image),
+                            height: 80.0,
+                            width: 80.0,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         //_reviewsStarWidget(center[index].Rating),
                         RatingBar.builder(

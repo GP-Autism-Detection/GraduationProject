@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'itemModel.dart';
 
 class GameScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _GameScreenState extends State<GameScreen> {
   late List<ItemModel> items2;
   late int score;
   late bool gameOver;
-
+  late String final_animation;
   initGame() {
     gameOver = false;
     score = 0;
@@ -22,29 +23,75 @@ class _GameScreenState extends State<GameScreen> {
       ItemModel(
           value: 'crying',
           name: 'Game_Crying'.tr(),
-          img: 'assets/Game/crying.png'),
+          img: Lottie.asset(
+            'assets/Animations/crying-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
-          value: 'sad', name: 'Game_Sad'.tr(), img: 'assets/Game/sad.png'),
+          value: 'sad',
+          name: 'Game_Sad'.tr(),
+          img: Lottie.asset(
+            'assets/Animations/sad-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
           value: 'happy',
           name: 'Game_Happy'.tr(),
-          img: 'assets/Game/happy.png'),
+          img: Lottie.asset(
+            'assets/Animations/happy-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
           value: 'Laugh',
           name: 'Game_Laughing'.tr(),
-          img: 'assets/Game/Laugh.png'),
+          img: Lottie.asset(
+            'assets/Animations/laugh-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
-          value: 'love', name: 'Game_love'.tr(), img: 'assets/Game/love.png'),
+          value: 'love',
+          name: 'Game_love'.tr(),
+          img: Lottie.asset(
+            'assets/Animations/love-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
           value: 'sleepy',
           name: 'Game_Sleepy'.tr(),
-          img: 'assets/Game/sleepy.png'),
+          img: Lottie.asset(
+            'assets/Animations/sleep-emoji.json',
+            width: 75,
+            height: 75,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
-          value: 'Fear', name: 'Game_Fear'.tr(), img: 'assets/Game/Fear.png'),
+          value: 'Fear',
+          name: 'Game_Fear'.tr(),
+          img: Lottie.asset(
+            'assets/Animations/fear-emoji.json',
+            width: 65,
+            height: 65,
+            fit: BoxFit.fill,
+          )),
       ItemModel(
           value: 'angry',
           name: 'Game_Angry'.tr(),
-          img: 'assets/Game/angry.png'),
+          img: Lottie.asset(
+            'assets/Animations/angry-emoji.json',
+            width: 60,
+            height: 60,
+            fit: BoxFit.fill,
+          )),
     ];
     items2 = List<ItemModel>.from(items);
 
@@ -63,7 +110,8 @@ class _GameScreenState extends State<GameScreen> {
     if (items.length == 0) gameOver = true;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           'Game_appbar'.tr(),
         ),
@@ -102,21 +150,9 @@ class _GameScreenState extends State<GameScreen> {
                           margin: EdgeInsets.all(5),
                           child: Draggable<ItemModel>(
                             data: item,
-                            childWhenDragging: CircleAvatar(
-                              backgroundColor: Colors.grey[500],
-                              backgroundImage: AssetImage(item.img),
-                              radius: 50,
-                            ),
-                            feedback: CircleAvatar(
-                              backgroundColor: Colors.grey[500],
-                              backgroundImage: AssetImage(item.img),
-                              radius: 30,
-                            ),
-                            child: CircleAvatar(
-                              backgroundColor: Colors.grey[500],
-                              backgroundImage: AssetImage(item.img),
-                              radius: 30,
-                            ),
+                            childWhenDragging: item.img,
+                            feedback: item.img,
+                            child: item.img,
                           ),
                         );
                       }).toList(),
@@ -133,8 +169,7 @@ class _GameScreenState extends State<GameScreen> {
                               });
                               score += 10;
                               item.accepting = false;
-
-                              player.play(AssetSource('Game/true.wav'));
+                              player.play(AssetSource('Game/true2.wav'));
                             } else {
                               setState(() {
                                 score -= 10;
@@ -159,12 +194,8 @@ class _GameScreenState extends State<GameScreen> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: item.accepting
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .secondary
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context).colorScheme.primary,
                                   ),
                                   alignment: Alignment.center,
                                   height:
@@ -199,12 +230,18 @@ class _GameScreenState extends State<GameScreen> {
                         ),
                       ),
                       const SizedBox(height: 40.0),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(20.0),
+                      //   child: Text(
+                      //     result(),
+                      //     style: const TextStyle(
+                      //         fontSize: 25.0, fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          result(),
-                          style: const TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.bold),
+                        child: Lottie.asset(
+                          result() as String,
                         ),
                       ),
                     ],
@@ -213,6 +250,7 @@ class _GameScreenState extends State<GameScreen> {
               if (gameOver)
                 Container(
                   height: MediaQuery.of(context).size.width / 10,
+                  width: MediaQuery.of(context).size.width / 2,
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(8)),
@@ -239,13 +277,17 @@ class _GameScreenState extends State<GameScreen> {
 
   //Functions:
 
-  String result() {
+  result() {
     if (score == 80) {
       player.play(AssetSource('Game/yay.wav'));
-      return 'Game_Awesome'.tr();
+      final_animation = 'assets/Animations/game-congrats.json';
+      //return 'Game_Awesome'.tr();
+      return final_animation;
     } else {
       player.play(AssetSource('Game/fail.wav'));
-      return 'Game_Can_do_better'.tr();
+      final_animation = 'assets/Animations/game-you-can-do-it.json';
+      //return 'Game_Can_do_better'.tr();
+      return final_animation;
     }
   }
 }

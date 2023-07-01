@@ -189,8 +189,9 @@ class CommentsState extends State<Centers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(title: Text("Center_review_appbar".tr())),
+      //backgroundColor: Theme.of(context).colorScheme.background,
+      appBar:
+          AppBar(centerTitle: true, title: Text("Center_review_appbar".tr())),
       body: Column(
         children: <Widget>[
           Expanded(child: buildComments()),
@@ -259,12 +260,10 @@ class CommentsState extends State<Centers> {
                     ),
                     SizedBox(
                       width: 175,
-                      child: ElevatedButton(
+                      child: FilledButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context)
-                              .colorScheme
-                              .primary, // Background color
-                        ),
+                            // Background color
+                            ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             // Fluttertoast.showToast(
