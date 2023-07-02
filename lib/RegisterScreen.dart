@@ -97,6 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 15,
                   ),
                   TextFormField(
+
                     controller:
                         passwordController, // return el value le gwa el textbox
                     decoration: InputDecoration(
@@ -182,8 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Container(
                     width: double.infinity,
-                    color: Colors.blue,
-                    child: MaterialButton(
+                    child: FilledButton(
                       onPressed: () async {
                         if (FormKey.currentState!.validate()) {
                           u.User user = u.User(

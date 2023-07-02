@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/RegisterScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text("No"),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(true),
+                    onPressed: () => SystemNavigator.pop(),
                     child: const Text("Exit"),
                   )
                 ],
@@ -70,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffD6E2EA),
+        //backgroundColor: Color(0xffD6E2EA),
         //appBar: AppBar(
         // title: Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
         //),
@@ -86,9 +89,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       child: Container(
                           width: Screensize.width,
-                          height: 280,
+                          height: 200,
                           child: RiveAnimation.asset(
-                            'assets/Animations/animated-login-character.riv',
+                            'assets/Animations/animated-login-screen.riv',
                             stateMachines: const ["Login Machine"],
                             onInit: (artboard) {
                               controller = StateMachineController.fromArtboard(
@@ -103,15 +106,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           )),
                     ),
+                    SizedBox(height: 15,),
 
                     //SizedBox(height: 10.0), // masaf ben login w textbox
                     TextFormField(
                       onChanged: (value) {
                         if (isHandsUp != null) {
                           isHandsUp!.change(false);
-                        }
-                        if (trigFail != null) {
-                          trigFail!.change(false);
                         }
                         if (isChecking == null) return;
                         isChecking!.change(true);
@@ -147,11 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (isChecking != null) {
                           isChecking!.change(false);
                         }
-                        if (trigFail != null) {
-                          trigFail!.change(false);
-                        }
                         if (isHandsUp == null) return;
-
                         isHandsUp!.change(true);
                       },
                       controller:
@@ -195,9 +192,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(20)),
-                      child: MaterialButton(
+                      child: FilledButton(
                         onPressed: () async {
                           if (FormKey.currentState!.validate()) {
                             try {
@@ -207,9 +203,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: passwordController.text);
                               SharedPreferences pref =
                                   await SharedPreferences.getInstance();
+                              isHandsUp!.value=false;
+                              isChecking!.value=false;
                               pref.setString("ID", "useremail@gmail.com");
                               Get.to(() => MenuScreen(),
-                                  transition: Transition.zoom);
+                                  transition: Transition.rightToLeft,
+                                  duration: Duration(milliseconds: 500));
                               // Navigator.push(
                               //   context,
                               //   MaterialPageRoute(
@@ -217,15 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               // );
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'wrong-password') {
-                                if (isHandsUp != null) {
-                                  isHandsUp!.change(false);
-                                }
-                                if (isChecking != null) {
-                                  isChecking!.change(false);
-                                }
-                                if (trigFail != null) {
-                                  trigFail!.change(true);
-                                }
                                 print('Login_wrong_pass'.tr());
                                 final snackBar1 = SnackBar(
                                   content: Text('Login_wrong_pass'.tr()),
@@ -233,15 +223,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar1);
                               } else if (e.code == 'user-not-found') {
-                                if (isHandsUp != null) {
-                                  isHandsUp!.change(false);
-                                }
-                                if (isChecking != null) {
-                                  isChecking!.change(false);
-                                }
-                                if (trigFail != null) {
-                                  trigFail!.change(true);
-                                }
                                 print('Login_wrong_user'.tr());
                                 final snackBar2 = SnackBar(
                                   content:
@@ -250,6 +231,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar2);
                               }
+                              isHandsUp!.value=false;
+                              isChecking!.value=false;
+                              trigFail!.value=true;
                             }
                             print(emailController.text);
                             print(passwordController.text);
@@ -258,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Login_Login'
                               .tr(), // mafe4 width so wrap to container
-                          style: TextStyle(),
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ), // onPressed ---> annonumse func --> (){}

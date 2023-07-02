@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 
 ThemeData darkTheme = FlexThemeData.dark(
   colors: const FlexSchemeColor(
-    primary: Color(0xff2196f3),
-    primaryContainer: Color(0xff1e88e5),
-    secondary: Color(0xffffb59d),
-    secondaryContainer: Color(0xff1e88e5),
-    tertiary: Color(0xff86d2e1),
-    tertiaryContainer: Color(0xff004e59),
-    appBarColor: Color(0xff1e88e5),
+    primary: Color(0xff537895),
+    primaryContainer: Color(0xff537895),
+    secondary: Color(0xff537895),
+    secondaryContainer: Color(0xff537895),
+    tertiary: Color(0xff537895),
+    tertiaryContainer: Color(0xff537895),
+    appBarColor: Color(0xff537895),
     error: Color(0xffcf6679),
   ),
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 16,
   transparentStatusBar: false,
   subThemesData: const FlexSubThemesData(
-    blendOnLevel: 10,
+    blendOnLevel: 40,
     useTextTheme: true,
     useM2StyleDividerInM3: true,
     filledButtonSchemeColor: SchemeColor.primaryContainer,

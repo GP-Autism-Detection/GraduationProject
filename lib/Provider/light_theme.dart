@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = FlexThemeData.light(
   colors: const FlexSchemeColor(
-    primary: Color(0xff2196f3),
-    primaryContainer: Color(0xff1e88e5),
-    secondary: Color(0xff2196f3),
-    secondaryContainer: Color(0xff2196f3),
-    tertiary: Color(0xff95f0ff),
-    tertiaryContainer: Color(0xff01d7f2),
-    appBarColor: Color(0xff2196f3),
+    primary: Color(0xff537895),
+    primaryContainer: Color(0xff537895),
+    secondary: Color(0xff537895),
+    secondaryContainer: Color(0xff537895),
+    tertiary: Color(0xff95acbd),
+    tertiaryContainer: Color(0xff95acbd),
+    appBarColor: Color(0xff537895),
     error: Color(0xffb00020),
   ),
   transparentStatusBar: false,
   subThemesData: const FlexSubThemesData(
     blendOnLevel: 20,
-    blendOnColors: false,
     useTextTheme: true,
     useM2StyleDividerInM3: true,
     adaptiveAppBarScrollUnderOff: FlexAdaptive.all(),

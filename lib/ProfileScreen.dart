@@ -219,10 +219,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       await firebaseStorage().updateUserData(
                                           user: user!, newuser: newuser);
                                       setState(() {});
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => LoginScreen()));
+                                      Get.to(() => LoginScreen(),
+                                          transition: Transition.downToUp,
+                                          duration:
+                                          Duration(milliseconds: 500));
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (_) => LoginScreen()));
                                     },
                                     padding: EdgeInsetsDirectional.symmetric(
                                         vertical: 0, horizontal: 130),
@@ -263,7 +267,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                       setState(() {});
                                       Get.to(() => LoginScreen(),
-                                          transition: Transition.zoom,
+                                          transition: Transition.downToUp,
                                           duration:
                                               Duration(milliseconds: 500));
                                       // Navigator.of(context, rootNavigator: true)

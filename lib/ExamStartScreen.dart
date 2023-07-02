@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
+import 'package:get/get.dart' hide Trans;
+
+import 'MenuScreen.dart';
 
 class ExamStartScreen extends StatefulWidget {
   const ExamStartScreen({Key? key}) : super(key: key);
@@ -17,6 +20,21 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
         centerTitle: true,
         //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Exam_Start_Screen_appbar".tr()),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => MenuScreen(),
+                  transition: Transition.rightToLeft,
+                  duration: Duration(milliseconds: 500));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => MenuScreen()),
+              // );
+            },
+            icon: const Icon(Icons.home),
+            iconSize: 40,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -28,6 +46,7 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
               Align(
                 alignment: AlignmentDirectional(0, 0),
                 child: Container(
+                  alignment: Alignment(0, 0),
                   width: double.infinity,
                   constraints: BoxConstraints(
                     maxWidth: 700,
@@ -88,23 +107,31 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                               Flexible(
                                 child: Align(
                                   alignment: AlignmentDirectional(0, 0),
-                                  child: MaterialButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => QuizScreen()),
-                                      );
-                                    },
-                                    padding: EdgeInsetsDirectional.symmetric(
-                                        vertical: 5, horizontal: 100),
-                                    color: Colors.blue,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    child: Text(
-                                      "Exam_Start_Screen_T2".tr(),
-                                      style: TextStyle(fontSize: 18.0),
+                                  child: SizedBox(
+                                      width:
+                                      MediaQuery.of(context).size.width / 2,
+                                    child: FilledButton(
+
+                                      onPressed: () {
+                                        Get.to(() => QuizScreen(),
+                                            transition: Transition.leftToRight,
+                                            duration: Duration(milliseconds: 500));
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) => QuizScreen()),
+                                        // );
+                                      },
+                                      // padding: EdgeInsetsDirectional.symmetric(
+                                      //     vertical: 5, horizontal: 100),
+                                      //color: Colors.blue,
+                                      // shape: RoundedRectangleBorder(
+                                      //     borderRadius: BorderRadius.all(
+                                      //         Radius.circular(30))),
+                                      child: Text(
+                                        "Exam_Start_Screen_T2".tr(),
+                                        style: TextStyle(fontSize: 18.0),
+                                      ),
                                     ),
                                   ),
                                 ),

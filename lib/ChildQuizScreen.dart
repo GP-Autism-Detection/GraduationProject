@@ -4,6 +4,7 @@ import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/ChildQuestionModelScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
+import 'package:get/get.dart' hide Trans;
 
 class ChildQuizScreen extends StatefulWidget {
   @override
@@ -32,11 +33,14 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
               if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChildExamStartScreen()),
-                );
+                Get.to(() => ChildExamStartScreen(),
+                    transition: Transition.leftToRight,
+                    duration: Duration(milliseconds: 500));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => ChildExamStartScreen()),
+                // );
               }
               if (backans == "Child_Question_ModelA1".tr()) {
                 score -= 2;
@@ -55,10 +59,13 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MenuScreen()),
-              );
+              Get.to(() => MenuScreen(),
+                  transition: Transition.leftToRight,
+                  duration: Duration(milliseconds: 500));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => MenuScreen()),
+              // );
             },
             icon: const Icon(Icons.home),
             iconSize: 40,
@@ -211,12 +218,15 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
       content: FilledButton(
         child: Text("Child_Quiz_Screen_more_info".tr()),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QuizInfoScreen(),
-            ),
-          );
+          Get.to(() => QuizInfoScreen(),
+              transition: Transition.rightToLeft,
+              duration: Duration(milliseconds: 500));
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => QuizInfoScreen(),
+          //   ),
+          // );
         },
         style: ElevatedButton.styleFrom(
             //primary: Theme.of(context).colorScheme.secondary, // Background color

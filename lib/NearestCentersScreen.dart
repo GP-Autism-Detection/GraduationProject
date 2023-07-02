@@ -7,6 +7,7 @@ import 'comments.dart';
 import 'firebaseStorage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart' hide Trans;
 
 class NearestCentersScreen extends StatefulWidget {
   const NearestCentersScreen({Key? key}) : super(key: key);
@@ -81,128 +82,174 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
   }
 
   Widget buildMenuitem(int index, Uri CenterPhoneNum) => Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  center[index].Name,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
+                Align(
+                  alignment: AlignmentDirectional(-1, 0),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                    child: Text(
+                      center[index].Name,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        //decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            center[index].Address,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 14.0,
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5,top: 5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    center[index].Address,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: false,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    center[index].Area,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    center[index].ContactNum,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5, 0, 0, 0),
+                                      child: Wrap(
+                                        spacing: 40,
+                                        runSpacing: 0,
+                                        alignment: WrapAlignment.start,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.start,
+                                        direction: Axis.horizontal,
+                                        runAlignment: WrapAlignment.start,
+                                        verticalDirection: VerticalDirection.down,
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.comment,
+                                              size: 28,
+                                            ),
+                                            onPressed: () => getcenterid(
+                                                index, center, userid),
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.call,
+                                              size: 28,
+                                            ),
+                                            onPressed: () async => {
+                                              if (await canLaunchUrl(
+                                                  CenterPhoneNum))
+                                                {await launchUrl(CenterPhoneNum)}
+                                              else
+                                                {
+                                                  throw "Error occurred trying to call that number."
+                                                }
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          SizedBox(
-                            height: 1.0,
-                          ),
-                          Text(
-                            center[index].Area,
-                            style: TextStyle(
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2.0,
-                          ),
-                          Text(
-                            center[index].ContactNum,
-                            style: TextStyle(
-                              fontSize: 14.0,
+                          Align(
+                            alignment: AlignmentDirectional(0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 80,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey, //<-- SEE HERE
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Image(
+                                    image: NetworkImage(center[index].Image),
+                                    height: 80.0,
+                                    width: 80.0,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                RatingBar.builder(
+                                  initialRating: center[index].Rating.toDouble(),
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  ignoreGestures: true,
+                                  itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                                  itemSize: 15,
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (r) {},
+                                ),
+                                Text(
+                                    "Center_rating".tr() +
+                                        " " +
+                                        "${center[index].Rating}",
+                                    style: const TextStyle(
+                                      fontSize: 10.0,
+                                    ))
+                              ],
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      width: 6.0,
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey, //<-- SEE HERE
-                              width: 1,
-                            ),
-                          ),
-                          child: Image(
-                            image: NetworkImage(center[index].Image),
-                            height: 80.0,
-                            width: 80.0,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        //_reviewsStarWidget(center[index].Rating),
-                        RatingBar.builder(
-                          initialRating: center[index].Rating.toDouble(),
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          ignoreGestures: true,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                          itemSize: 15,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (r) {},
-                        ),
-                        Text(
-                            "Center_rating".tr() +
-                                " " +
-                                "${center[index].Rating}",
-                            style: const TextStyle(
-                              fontSize: 10.0,
-                            ))
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 6.0,
-                ),
-                Wrap(
-                  spacing: 40.0,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.comment,
-                        size: 28,
-                      ),
-                      onPressed: () => getcenterid(index, center, userid),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.call,
-                        size: 28,
-                      ),
-                      onPressed: () async => {
-                        if (await canLaunchUrl(CenterPhoneNum))
-                          {await launchUrl(CenterPhoneNum)}
-                        else
-                          {throw "Error occurred trying to call that number."}
-                      },
-                    ),
-                  ],
-                )
               ],
             ),
           ),
@@ -215,6 +262,7 @@ showComments(BuildContext context,
     required String mediaUrl,
     required centerId,
     required index}) {
+
   Navigator.push(context, MaterialPageRoute(builder: (context) {
     return Centers(
       centerId: centerId,

@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ChildQuizScreen.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
+import 'package:get/get.dart' hide Trans;
+
+import 'MenuScreen.dart';
 
 class ChildExamStartScreen extends StatefulWidget {
   const ChildExamStartScreen({Key? key}) : super(key: key);
@@ -18,6 +21,21 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
         centerTitle: true,
         //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text("Child_Exam_Start_appbar").tr(),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => MenuScreen(),
+                  transition: Transition.leftToRight,
+                  duration: Duration(milliseconds: 500));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => MenuScreen()),
+              // );
+            },
+            icon: const Icon(Icons.home),
+            iconSize: 40,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -95,12 +113,15 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                                         MediaQuery.of(context).size.width / 2,
                                     child: FilledButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChildQuizScreen()),
-                                        );
+                                        Get.to(() => ChildQuizScreen(),
+                                            transition: Transition.rightToLeft,
+                                            duration: Duration(milliseconds: 500));
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           ChildQuizScreen()),
+                                        // );
                                       },
                                       //  padding: EdgeInsetsDirectional.symmetric(
                                       //      vertical: 5, horizontal: 100),

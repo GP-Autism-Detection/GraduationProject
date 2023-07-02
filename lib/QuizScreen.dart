@@ -5,6 +5,7 @@ import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/QuestionsModelScreen.dart';
 import 'package:graduation_project_app/QuizInfoScreen.dart';
+import 'package:get/get.dart' hide Trans;
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -33,10 +34,13 @@ class _QuizScreenState extends State<QuizScreen> {
               if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ExamStartScreen()),
-                );
+                Get.to(() => ExamStartScreen(),
+                    transition: Transition.rightToLeft,
+                    duration: Duration(milliseconds: 500));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => ExamStartScreen()),
+                // );
               }
               if (backans == "Quiz_Screen_A1".tr()) {
                 score -= 3;
@@ -57,10 +61,13 @@ class _QuizScreenState extends State<QuizScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MenuScreen()),
-              );
+              Get.to(() => MenuScreen(),
+                  transition: Transition.rightToLeft,
+                  duration: Duration(milliseconds: 500));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => MenuScreen()),
+              // );
             },
             icon: const Icon(Icons.home),
             iconSize: 40,
@@ -218,12 +225,15 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
         child: Text("Child_Quiz_Screen_more_info").tr(),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QuizInfoScreen(),
-            ),
-          );
+          Get.to(() => QuizInfoScreen(),
+              transition: Transition.leftToRight,
+              duration: Duration(milliseconds: 500));
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => QuizInfoScreen(),
+          //   ),
+          // );
         },
       ),
     );

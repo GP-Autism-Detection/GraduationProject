@@ -63,8 +63,7 @@ class OTPGeneratorScreen extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    color: Colors.blue,
-                    child: MaterialButton(
+                    child: FilledButton(
                       onPressed: () async {
                         if (FormKey.currentState!.validate()) {
                           try {
@@ -76,7 +75,8 @@ class OTPGeneratorScreen extends StatelessWidget {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             Get.to(() => LoginScreen(),
-                                transition: Transition.rightToLeftWithFade);
+                                transition: Transition.leftToRight,
+                                duration: Duration(milliseconds: 500));
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
@@ -90,8 +90,8 @@ class OTPGeneratorScreen extends StatelessWidget {
                                   label: 'Pass_reset_Register'.tr(),
                                   onPressed: () {
                                     Get.to(() => RegisterScreen(),
-                                        transition:
-                                            Transition.leftToRightWithFade);
+                                        transition: Transition.rightToLeft,
+                                        duration: Duration(milliseconds: 500));
                                     // Navigator.push(
                                     //   context,
                                     //   MaterialPageRoute(

@@ -12,6 +12,7 @@ import 'package:image/image.dart' as img;
 import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart' hide Trans;
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _TestScreen extends State<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 17.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        color: Colors.blue[500],
+        color: Theme.of(context).primaryColor,
       ),
       child: Text("Model_toast".tr(),
           style: TextStyle(
@@ -80,7 +81,7 @@ class _TestScreen extends State<TestScreen> {
     );
     fToast.showToast(
       child: toast,
-      toastDuration: Duration(seconds: 7),
+      toastDuration: Duration(seconds: 5),
     );
   }
 
@@ -115,10 +116,13 @@ class _TestScreen extends State<TestScreen> {
         centerTitle: true,
         leading: BackButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuScreen()),
-            );
+            Get.to(() => MenuScreen(),
+                transition: Transition.downToUp,
+                duration: Duration(milliseconds: 500));
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => MenuScreen()),
+            //);
           },
         ),
         title: Text(
@@ -213,12 +217,12 @@ class _TestScreen extends State<TestScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 24, vertical: 17),
                           decoration: BoxDecoration(
-                            color: Colors.blue[500],
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             'Model_take_photo'.tr(),
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16,color:Colors.white),
                           ),
                         ),
                       ),
@@ -245,12 +249,12 @@ class _TestScreen extends State<TestScreen> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 24, vertical: 17),
                           decoration: BoxDecoration(
-                            color: Colors.blue[500],
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             'Model_from_gal'.tr(),
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16,color:Colors.white),
                           ),
                         ),
                       ),

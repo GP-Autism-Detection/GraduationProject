@@ -110,6 +110,7 @@ class _GameScreenState extends State<GameScreen> {
     if (items.length == 0) gameOver = true;
     return Scaffold(
       appBar: AppBar(
+        //backgroundColor: Color(0xFF537895),
         centerTitle: true,
         //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -204,8 +205,9 @@ class _GameScreenState extends State<GameScreen> {
                                   margin: EdgeInsets.all(8),
                                   child: Text(
                                     item.name,
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
+                                   style: TextStyle(fontSize: 18,color: Colors.white),
+
+
                                   )),
                         );
                       }).toList(),

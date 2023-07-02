@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:graduation_project_app/ChildExamStartScreen.dart';
 import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/ProfileScreen.dart';
@@ -29,7 +30,7 @@ class MenuScreen extends StatelessWidget {
                     child: const Text("No"),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(true),
+                    onPressed: () => SystemNavigator.pop(),
                     child: const Text("Exit"),
                   )
                 ],
@@ -44,10 +45,12 @@ class MenuScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          toolbarHeight: kToolbarHeight + 1.25,
           centerTitle: true,
           title: Text(
-            'MainMenu_Menu'.tr(),
+            "Autism'Mate",
           ),
+
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -57,196 +60,78 @@ class MenuScreen extends StatelessWidget {
                 // Navigator.push(
                 //     context, MaterialPageRoute(builder: (_) => ProfileScreen()));
                 Get.to(() => ProfileScreen(),
-                    transition: Transition.zoom,
+                    transition: Transition.upToDown,
                     duration: Duration(milliseconds: 500));
               },
             ),
+
           ],
         ),
         body: Column(children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => TestScreen(),
-                            transition: Transition.leftToRight,
-                            duration: Duration(milliseconds: 500));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => TestScreen(),
-                        //   ),
-                        // );
-                      },
+          ClipPath(
+            clipper: BezierClipper1(),
+            child: Container(
+              height: MediaQuery.of(context).size.height / 3,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      stops: [0.09, 1],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Color(0xFF09203F), Color(0xFF537895)])),
+              child: Stack(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => TestScreen(),
+                          transition: Transition.upToDown,
+                          duration: Duration(milliseconds: 500));
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => GameScreen(),
+                      //   ),
+                      // );
+                    },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 2),
                       child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Lottie.asset(
-                            //   'assets/Animations/shooting-photo-animation.json',
-                            //   width: 120,
-                            //   height: 100,
-                            //   fit: BoxFit.fill,
-                            // ),
-                            Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/512/4243/4243421.png'),
-                              height: 80.0,
-                              width: 80.0,
-                              fit: BoxFit.cover,
+                          width: 200,
+                          height: 200,
+                          child: Align(
+                            //alignment: Alignment.bottomCenter,
+                            child: Lottie.asset(
+                              'assets/Animations/shooting-photo-animation-5.json',
+                              width: 120,
+                              height: 120,
+                              //fit: BoxFit.fill,
                             ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            Text(
-                              'MainMenu_Image_Test'.tr(),
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            // gradient: LinearGradient(
-                            //     stops: [0.35, 1],
-                            //     begin: Alignment.topLeft,
-                            //     end: Alignment.bottomRight,
-                            //     colors: [Color(0xFF2196F3), Color(0xFF2147A1)]),
-                            // gradient: LinearGradient(
-                            //     stops: [0, 1],
-                            //     begin: Alignment.topLeft,
-                            //     end: Alignment.bottomRight,
-                            //     colors: [Color(0xFF1B2359), Color(0xFF78C1CB)]),
-                            // gradient: LinearGradient(
-                            //   colors: [Color(0xf7df1b0c), Color(0xfc00bcd4)],
-                            //   stops: [0, 1],
-                            //   begin: Alignment.bottomCenter,
-                            //   end: Alignment.topCenter,
-                            // ),
-                            borderRadius: BorderRadius.circular(
-                              10.0,
-                            ),
-                            //color: Theme.of(context).colorScheme.secondary,
-                            border: Border.all(
-                              color: Colors.grey[600]!,
-                              width: 2,
-                              //color: Theme.of(context).colorScheme.background
-                            )),
-                      ),
+                          )),
                     ),
                   ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => GameScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: Duration(milliseconds: 500));
-
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => GameScreen(),
-                        //   ),
-                        // );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            // gradient: LinearGradient(
-                            //     stops: [0.35, 1],
-                            //     begin: Alignment.topLeft,
-                            //     end: Alignment.bottomRight,
-                            //     colors: [Color(0xFF2196F3), Color(0xFF2147A1)]),
-                            // gradient: LinearGradient(
-                            //     stops: [0, 1],
-                            //     begin: Alignment.topLeft,
-                            //     end: Alignment.bottomRight,
-                            //     colors: [Color(0xFF1B2359), Color(0xFF78C1CB)]),
-                            borderRadius: BorderRadius.circular(
-                              10.0,
-                            ),
-                            //color: Theme.of(context).colorScheme.secondary,
-                            border: Border.all(
-                              color: Colors.grey[600]!,
-                              width: 2,
-                              //color:
-                              //Theme.of(context).colorScheme.background
-                            )),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Lottie.asset(
-                            //   'assets/Animations/face-scan-2-boy.json',
-                            //   width: 100,
-                            //   height: 100,
-                            //   fit: BoxFit.fill,
-                            // ),
-                            Image(
-                              image: NetworkImage(
-                                  'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
-                              height: 80.0,
-                              width: 80.0,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            Text(
-                              'MainMenu_Game'.tr(),
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                          ],
+                  Align(
+                    alignment: AlignmentDirectional(0, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Try The Children Facial Detection',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
                         ),
-                      ),
+                        (SizedBox(height: 50)),
+                      ],
                     ),
-                  ),
-                  // Expanded(
-                  //   child: Container(
-                  //     child: Column(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: [
-                  //         Image(
-                  //           image: NetworkImage(
-                  //               'https://cdn-icons-png.flaticon.com/512/9136/9136551.png'),
-                  //           height: 80.0,
-                  //           width: 80.0,
-                  //           fit: BoxFit.cover,
-                  //         ),
-                  //         SizedBox(
-                  //           height: 15.0,
-                  //         ),
-                  //         Text(
-                  //           'Game',
-                  //           style: TextStyle(
-                  //             fontSize: 20.0,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(
-                  //         10.0,
-                  //       ),
-                  //       color: Theme.of(context).colorScheme.secondary,
-                  //     ),
-                  //   ),
-                  // ),
+                  )
                 ],
               ),
             ),
+          ),
+          SizedBox(
+            height: 0,
           ),
           Expanded(
             child: Padding(
@@ -257,7 +142,7 @@ class MenuScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         Get.to(() => NearestCentersScreen(),
-                            transition: Transition.zoom,
+                            transition: Transition.leftToRight,
                             duration: Duration(milliseconds: 500));
 
                         // Navigator.push(
@@ -271,20 +156,19 @@ class MenuScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            // Lottie.asset(
+                            //   'assets/Animations/form-application-3.json',
+                            //   width: 100,
+                            //   height: 100,
+                            //   fit: BoxFit.fill,
+                            // ),
                             Lottie.asset(
                               'assets/Animations/help-center-1.json',
-                              width: 120,
-                              height: 120,
+                              width: 100,
+                              height: 100,
                               fit: BoxFit.fill,
                               animate: false,
                             ),
-                            // Image(
-                            //   image: NetworkImage(
-                            //       'https://cdn-icons-png.flaticon.com/512/4243/4243416.png'),
-                            //   height: 80.0,
-                            //   width: 80.0,
-                            //   fit: BoxFit.cover,
-                            // ),
                             SizedBox(
                               height: 15.0,
                             ),
@@ -293,12 +177,16 @@ class MenuScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Colors.white70),
                             ),
                           ],
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
+                            gradient: LinearGradient(
+                                stops: [0.09, 1],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Color(0xFF09203F), Color(0xFF537895)]),
                             // gradient: LinearGradient(
                             //     stops: [0.35, 1],
                             //     begin: Alignment.topLeft,
@@ -314,10 +202,84 @@ class MenuScreen extends StatelessWidget {
                             ),
                             //color: Theme.of(context).colorScheme.secondary,
                             border: Border.all(
-                              color: Colors.grey[600]!,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               width: 2,
                               //color:
                               //Theme.of(context).colorScheme.background
+                            )),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => GameScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: Duration(milliseconds: 500));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => GameScreen(),
+                        //   ),
+                        // );
+                      },
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Lottie.asset(
+                            //   'assets/Animations/form-application-4.json',
+                            //   width: 100,
+                            //   height: 100,
+                            //   fit: BoxFit.fill,
+                            // ),
+                            Image(
+                              image: AssetImage(
+                                  "assets/Game/Icon.png"),
+                              height: 80.0,
+                              width: 80.0,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            Text(
+                              'MainMenu_Game'.tr(),
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white70),
+                            ),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                stops: [0.09, 1],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Color(0xFF09203F), Color(0xFF537895)]),
+                            //color: Colors.grey[400],
+                            // gradient: LinearGradient(
+                            //     stops: [0.35, 1],
+                            //     begin: Alignment.topLeft,
+                            //     end: Alignment.bottomRight,
+                            //     colors: [Color(0xFF2196F3), Color(0xFF2147A1)]),
+                            // gradient: LinearGradient(
+                            //     stops: [0, 1],
+                            //     begin: Alignment.topLeft,
+                            //     end: Alignment.bottomRight,
+                            //     colors: [Color(0xFF1B2359), Color(0xFF78C1CB)]),
+                            borderRadius: BorderRadius.circular(
+                              10.0,
+                            ),
+                            //color: Theme.of(context).colorScheme.secondary,
+                            border: Border.all(
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                              width: 2,
+                              // color:Theme.of(context).colorScheme.background
                             )),
                       ),
                     ),
@@ -337,7 +299,6 @@ class MenuScreen extends StatelessWidget {
                         Get.to(() => ExamStartScreen(),
                             transition: Transition.leftToRight,
                             duration: Duration(milliseconds: 500));
-
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -370,12 +331,17 @@ class MenuScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Colors.white70),
                             ),
                           ],
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
+                            //color: Colors.grey[400],
+                            gradient: LinearGradient(
+                                stops: [0.09, 1],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Color(0xFF09203F), Color(0xFF537895)]),
                             // gradient: LinearGradient(
                             //     stops: [0.35, 1],
                             //     begin: Alignment.topLeft,
@@ -391,7 +357,7 @@ class MenuScreen extends StatelessWidget {
                             ),
                             //color: Theme.of(context).colorScheme.secondary,
                             border: Border.all(
-                              color: Colors.grey[600]!,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               width: 2,
                               //color:
                               //Theme.of(context).colorScheme.background
@@ -441,12 +407,17 @@ class MenuScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                  color: Colors.white70),
                             ),
                           ],
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey[400],
+                            // color: Colors.grey[400],
+                            gradient: LinearGradient(
+                                stops: [0.09, 1],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Color(0xFF09203F), Color(0xFF537895)]),
                             // gradient: LinearGradient(
                             //     stops: [0.35, 1],
                             //     begin: Alignment.topLeft,
@@ -462,7 +433,7 @@ class MenuScreen extends StatelessWidget {
                             ),
                             //color: Theme.of(context).colorScheme.secondary,
                             border: Border.all(
-                              color: Colors.grey[600]!,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               width: 2,
                               // color:Theme.of(context).colorScheme.background
                             )),
@@ -476,5 +447,35 @@ class MenuScreen extends StatelessWidget {
         ]),
       ),
     );
+  }
+}
+
+class BezierClipper1 extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var height = size.height;
+    var width = size.width;
+    var heightOffset = height * 0.2;
+    Path path = Path();
+    path.lineTo(
+      0, // x value
+      height - heightOffset, // y value
+    );
+    path.quadraticBezierTo(
+      width * 0.5, // x1 of P1
+      height, // y1 of P1
+      width, // x2 of P2
+      height - heightOffset, // y2 of P2
+    );
+    path.lineTo(
+      width, // x value
+      0, // y value
+    );
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }

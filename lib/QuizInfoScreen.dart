@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
+import 'package:get/get.dart' hide Trans;
 
 class QuizInfoScreen extends StatefulWidget {
   const QuizInfoScreen({Key? key}) : super(key: key);
@@ -24,10 +25,13 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MenuScreen()),
-              );
+              Get.to(() => MenuScreen(),
+                  transition: Transition.downToUp,
+                  duration: Duration(milliseconds: 500));
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => MenuScreen()),
+              // );
             },
             icon: const Icon(Icons.home),
             iconSize: 40,
