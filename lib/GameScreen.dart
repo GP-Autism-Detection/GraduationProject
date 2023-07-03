@@ -205,9 +205,8 @@ class _GameScreenState extends State<GameScreen> {
                                   margin: EdgeInsets.all(8),
                                   child: Text(
                                     item.name,
-                                   style: TextStyle(fontSize: 18,color: Colors.white),
-
-
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                   )),
                         );
                       }).toList(),

@@ -25,11 +25,11 @@ class MenuScreen extends StatelessWidget {
                 title: const Text("Alert"),
                 content: const Text("Do you want to Exit ?"),
                 actions: [
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () => Navigator.of(context).pop(false),
                     child: const Text("No"),
                   ),
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () => SystemNavigator.pop(),
                     child: const Text("Exit"),
                   )
@@ -50,7 +50,6 @@ class MenuScreen extends StatelessWidget {
           title: Text(
             "Autism'Mate",
           ),
-
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -64,7 +63,6 @@ class MenuScreen extends StatelessWidget {
                     duration: Duration(milliseconds: 500));
               },
             ),
-
           ],
         ),
         body: Column(children: [
@@ -101,7 +99,7 @@ class MenuScreen extends StatelessWidget {
                           child: Align(
                             //alignment: Alignment.bottomCenter,
                             child: Lottie.asset(
-                              'assets/Animations/shooting-photo-animation-5.json',
+                              'assets/Animations/shooting-photo-animation-3.json',
                               width: 120,
                               height: 120,
                               //fit: BoxFit.fill,
@@ -118,8 +116,11 @@ class MenuScreen extends StatelessWidget {
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: Text(
-                            'Try The Children Facial Detection',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            'MainMenu_Image_Test'.tr(),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         (SizedBox(height: 50)),
@@ -237,11 +238,10 @@ class MenuScreen extends StatelessWidget {
                             //   fit: BoxFit.fill,
                             // ),
                             Image(
-                              image: AssetImage(
-                                  "assets/Game/Icon.png"),
-                              height: 80.0,
-                              width: 80.0,
-                              fit: BoxFit.cover,
+                              image: AssetImage("assets/Game/Icon.png"),
+                              height: 100.0,
+                              width: 100.0,
+                              fit: BoxFit.fill,
                             ),
                             SizedBox(
                               height: 15.0,
@@ -321,7 +321,7 @@ class MenuScreen extends StatelessWidget {
                                   'https://cdn-icons-png.flaticon.com/512/3403/3403504.png'),
                               height: 80.0,
                               width: 80.0,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                             SizedBox(
                               height: 15.0,
@@ -397,7 +397,7 @@ class MenuScreen extends StatelessWidget {
                                   'https://cdn-icons-png.flaticon.com/512/2210/2210419.png'),
                               height: 80.0,
                               width: 80.0,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                             ),
                             SizedBox(
                               height: 15.0,

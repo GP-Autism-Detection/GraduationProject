@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
-import 'package:graduation_project_app/OTPGeneratorScreen.dart';
 import 'package:graduation_project_app/firebaseStorage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'User.dart' as u;
@@ -40,16 +39,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image(
-                      image: NetworkImage(
-                          'https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
+                  Center(
+                    child: Image(
+                      image: AssetImage('assets/icons/autism-day-3.png'),
+                      width: 250,
+                      height: 250,
+                    ),
+                  ),
                   //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
                   SizedBox(height: 40.0), // masaf ben login w textbox
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
-                        labelText: 'Register_Email'
-                            .tr(), // aw hint text bs bttshal lma tktb
+                        labelText: 'Register_Email'.tr(),
+                        labelStyle: TextStyle(
+                            fontSize: 15), // aw hint text bs bttshal lma tktb
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email) // icon fl a5er posticon
                         ),
@@ -77,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                         labelText: 'Register_Name'
                             .tr(), // aw hint text bs bttshal lma tktb
+                        labelStyle: TextStyle(fontSize: 15),
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person) // icon fl a5er posticon
                         ),
@@ -97,12 +102,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 15,
                   ),
                   TextFormField(
-
                     controller:
                         passwordController, // return el value le gwa el textbox
                     decoration: InputDecoration(
                         labelText: 'Register_Pass'
                             .tr(), // aw hint text bs bttshal lma tktb
+                        labelStyle: TextStyle(fontSize: 13),
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
                         suffixIcon: GestureDetector(
@@ -145,6 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                         labelText: 'Register_Pass_Confirm'
                             .tr(), // aw hint text bs bttshal lma tktb
+                        labelStyle: TextStyle(fontSize: 13),
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.lock), // icon fl a5er suffixicon
                         suffixIcon: GestureDetector(

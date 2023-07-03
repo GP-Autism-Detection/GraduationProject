@@ -56,7 +56,6 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
         title: Text(
           "Quiz_Screen_appbar".tr(),
-          style: TextStyle(fontSize: 25),
         ),
         actions: [
           IconButton(
@@ -114,7 +113,7 @@ class _QuizScreenState extends State<QuizScreen> {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
             ),
           ),
         )
@@ -217,7 +216,9 @@ class _QuizScreenState extends State<QuizScreen> {
       title: Text(
         title + "Child_Quiz_Screen_Score".tr() + " " + "$score / 42",
         style: TextStyle(
-            color: isAutistic ? Colors.redAccent : Colors.green, fontSize: 16),
+            color: isAutistic ? Colors.redAccent : Colors.green,
+            fontSize: 16,
+            fontWeight: FontWeight.bold),
       ),
       content: FilledButton(
         style: ElevatedButton.styleFrom(

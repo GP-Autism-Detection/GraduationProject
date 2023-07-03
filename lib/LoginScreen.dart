@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +8,6 @@ import 'package:graduation_project_app/RegisterScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rive/rive.dart';
 import 'package:get/get.dart' hide Trans;
-
 import 'MenuScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,11 +52,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: const Text("Alert"),
                 content: const Text("Do you want to Exit ?"),
                 actions: [
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () => Navigator.of(context).pop(false),
                     child: const Text("No"),
                   ),
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () => SystemNavigator.pop(),
                     child: const Text("Exit"),
                   )
@@ -106,7 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           )),
                     ),
-                    SizedBox(height: 15,),
+                    SizedBox(
+                      height: 15,
+                    ),
 
                     //SizedBox(height: 10.0), // masaf ben login w textbox
                     TextFormField(
@@ -121,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                           labelText: 'Login_Email'
                               .tr(), // aw hint text bs bttshal lma tktb
+                          labelStyle: TextStyle(fontSize: 15),
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.email) // icon fl a5er posticon
                           ),
@@ -156,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                           labelText: 'Login_Password'
                               .tr(), // aw hint text bs bttshal lma tktb
+                          labelStyle: TextStyle(fontSize: 15),
                           border: OutlineInputBorder(),
                           prefixIcon:
                               Icon(Icons.lock), // icon fl a5er suffixicon
@@ -203,8 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: passwordController.text);
                               SharedPreferences pref =
                                   await SharedPreferences.getInstance();
-                              isHandsUp!.value=false;
-                              isChecking!.value=false;
+                              isHandsUp!.value = false;
+                              isChecking!.value = false;
                               pref.setString("ID", "useremail@gmail.com");
                               Get.to(() => MenuScreen(),
                                   transition: Transition.rightToLeft,
@@ -231,9 +232,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar2);
                               }
-                              isHandsUp!.value=false;
-                              isChecking!.value=false;
-                              trigFail!.value=true;
+                              isHandsUp!.value = false;
+                              isChecking!.value = false;
+                              trigFail!.value = true;
                             }
                             print(emailController.text);
                             print(passwordController.text);

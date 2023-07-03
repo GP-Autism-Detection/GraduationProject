@@ -1,13 +1,8 @@
 import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:graduation_project_app/ChildExamStartScreen.dart';
-import 'package:graduation_project_app/ExamStartScreen.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:graduation_project_app/Provider/dark_theme.dart';
@@ -15,7 +10,6 @@ import 'package:graduation_project_app/Provider/light_theme.dart';
 import 'package:graduation_project_app/Provider/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 String? uid;
 

@@ -23,7 +23,7 @@ ThemeData lightTheme = FlexThemeData.light(
     switchThumbSchemeColor: SchemeColor.primaryContainer,
     checkboxSchemeColor: SchemeColor.primaryContainer,
     inputDecoratorSchemeColor: SchemeColor.onPrimary,
-    inputDecoratorBorderSchemeColor: SchemeColor.outlineVariant,
+    inputDecoratorBorderSchemeColor: SchemeColor.onBackground,
     inputDecoratorUnfocusedBorderIsColored: false,
     dialogBackgroundSchemeColor: SchemeColor.surfaceVariant,
     snackBarBackgroundSchemeColor: SchemeColor.primary,
@@ -33,6 +33,10 @@ ThemeData lightTheme = FlexThemeData.light(
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,
+  //
+  background: Color(0xFFF4F4F1),
+  scaffoldBackground: Color(0xFFF4F4F1)
+  //
   // To use the Playground font, add GoogleFonts package and uncomment
   // fontFamily: GoogleFonts.notoSans().fontFamily,
 );

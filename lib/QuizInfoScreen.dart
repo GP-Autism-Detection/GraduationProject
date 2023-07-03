@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:get/get.dart' hide Trans;
 
@@ -20,7 +19,6 @@ class _QuizInfoScreen extends State<QuizInfoScreen> {
         //backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Quiz_info_Screen_appbar".tr(),
-          style: TextStyle(fontSize: 25),
         ),
         actions: [
           IconButton(

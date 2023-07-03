@@ -28,9 +28,13 @@ class OTPGeneratorScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image(
-                      image: NetworkImage(
-                          'https://as1.ftcdn.net/v2/jpg/04/42/13/34/1000_F_442133421_UZGoJYPf2cLEPZTBmgeZabNLzgoiAyGg.jpg')),
+                  Center(
+                    child: Image(
+                      image: AssetImage('assets/icons/autism-day-3.png'),
+                      width: 250,
+                      height: 250,
+                    ),
+                  ),
                   //Text('Login', style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,),),
                   SizedBox(height: 40.0), // masaf ben login w textbox
                   TextFormField(

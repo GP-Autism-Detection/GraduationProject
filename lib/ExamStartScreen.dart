@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:get/get.dart' hide Trans;
-
 import 'MenuScreen.dart';
 
 class ExamStartScreen extends StatefulWidget {
@@ -108,14 +107,14 @@ class _ExamStartScreenState extends State<ExamStartScreen> {
                                 child: Align(
                                   alignment: AlignmentDirectional(0, 0),
                                   child: SizedBox(
-                                      width:
-                                      MediaQuery.of(context).size.width / 2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
                                     child: FilledButton(
-
                                       onPressed: () {
                                         Get.to(() => QuizScreen(),
                                             transition: Transition.leftToRight,
-                                            duration: Duration(milliseconds: 500));
+                                            duration:
+                                                Duration(milliseconds: 500));
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(

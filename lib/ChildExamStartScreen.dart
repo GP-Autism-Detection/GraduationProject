@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/ChildQuizScreen.dart';
-import 'package:graduation_project_app/QuizScreen.dart';
 import 'package:get/get.dart' hide Trans;
 
 import 'MenuScreen.dart';
@@ -115,7 +114,8 @@ class _ChildExamStartScreen extends State<ChildExamStartScreen> {
                                       onPressed: () {
                                         Get.to(() => ChildQuizScreen(),
                                             transition: Transition.rightToLeft,
-                                            duration: Duration(milliseconds: 500));
+                                            duration:
+                                                Duration(milliseconds: 500));
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -127,10 +125,10 @@ class _TestScreen extends State<TestScreen> {
         ),
         title: Text(
           'Model_appbar'.tr(),
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 23,
-          ),
+          // style: TextStyle(
+          //   fontWeight: FontWeight.w500,
+          //   fontSize: 23,
+          // ),
         ),
       ),
       body: Container(
@@ -222,7 +220,7 @@ class _TestScreen extends State<TestScreen> {
                           ),
                           child: Text(
                             'Model_take_photo'.tr(),
-                            style: TextStyle(fontSize: 16,color:Colors.white),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ),
@@ -254,7 +252,7 @@ class _TestScreen extends State<TestScreen> {
                           ),
                           child: Text(
                             'Model_from_gal'.tr(),
-                            style: TextStyle(fontSize: 16,color:Colors.white),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ),

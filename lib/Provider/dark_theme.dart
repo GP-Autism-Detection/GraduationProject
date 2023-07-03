@@ -24,7 +24,7 @@ ThemeData darkTheme = FlexThemeData.dark(
     switchThumbSchemeColor: SchemeColor.primaryContainer,
     checkboxSchemeColor: SchemeColor.primaryContainer,
     inputDecoratorSchemeColor: SchemeColor.shadow,
-    inputDecoratorBorderSchemeColor: SchemeColor.outlineVariant,
+    inputDecoratorBorderSchemeColor: SchemeColor.onBackground,
     inputDecoratorUnfocusedBorderIsColored: false,
     dialogBackgroundSchemeColor: SchemeColor.surfaceVariant,
     snackBarBackgroundSchemeColor: SchemeColor.primary,

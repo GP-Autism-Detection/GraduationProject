@@ -7,7 +7,6 @@ import 'comments.dart';
 import 'firebaseStorage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart' hide Trans;
 
 class NearestCentersScreen extends StatefulWidget {
   const NearestCentersScreen({Key? key}) : super(key: key);
@@ -107,7 +106,6 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                 ),
                 Card(
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -124,10 +122,11 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 5,top: 5),
+                              padding: const EdgeInsets.only(left: 5, top: 5),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
@@ -164,7 +163,8 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                                             WrapCrossAlignment.start,
                                         direction: Axis.horizontal,
                                         runAlignment: WrapAlignment.start,
-                                        verticalDirection: VerticalDirection.down,
+                                        verticalDirection:
+                                            VerticalDirection.down,
                                         clipBehavior: Clip.none,
                                         children: [
                                           IconButton(
@@ -183,7 +183,10 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                                             onPressed: () async => {
                                               if (await canLaunchUrl(
                                                   CenterPhoneNum))
-                                                {await launchUrl(CenterPhoneNum)}
+                                                {
+                                                  await launchUrl(
+                                                      CenterPhoneNum)
+                                                }
                                               else
                                                 {
                                                   throw "Error occurred trying to call that number."
@@ -222,12 +225,14 @@ class _NearestCentersScreenState extends State<NearestCentersScreen> {
                                   ),
                                 ),
                                 RatingBar.builder(
-                                  initialRating: center[index].Rating.toDouble(),
+                                  initialRating:
+                                      center[index].Rating.toDouble(),
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
                                   itemCount: 5,
                                   ignoreGestures: true,
-                                  itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 1.0),
                                   itemSize: 15,
                                   itemBuilder: (context, _) => Icon(
                                     Icons.star,
@@ -262,7 +267,6 @@ showComments(BuildContext context,
     required String mediaUrl,
     required centerId,
     required index}) {
-
   Navigator.push(context, MaterialPageRoute(builder: (context) {
     return Centers(
       centerId: centerId,

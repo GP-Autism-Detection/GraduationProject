@@ -54,7 +54,6 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
         ),
         title: Text(
           "Child_Exam_Start_appbar".tr(),
-          style: TextStyle(fontSize: 25),
         ),
         actions: [
           IconButton(
@@ -104,15 +103,15 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
           width: double.infinity,
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.blue[500],
+            color: Colors.blue,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
             questionList[currentQuestionIndex].questionText,
             style: const TextStyle(
-              //color: Colors.white,
+              color: Colors.white,
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
             ),
           ),
         )
@@ -213,7 +212,9 @@ class _ChildQuizScreen extends State<ChildQuizScreen> {
       title: Text(
         title + "Child_Quiz_Screen_Score".tr() + "$score / 54",
         style: TextStyle(
-            color: isAutistic ? Colors.redAccent : Colors.green, fontSize: 16),
+            color: isAutistic ? Colors.redAccent : Colors.green,
+            fontSize: 16,
+            fontWeight: FontWeight.bold),
       ),
       content: FilledButton(
         child: Text("Child_Quiz_Screen_more_info".tr()),

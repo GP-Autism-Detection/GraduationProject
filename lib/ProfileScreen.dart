@@ -222,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       Get.to(() => LoginScreen(),
                                           transition: Transition.downToUp,
                                           duration:
-                                          Duration(milliseconds: 500));
+                                              Duration(milliseconds: 500));
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(
