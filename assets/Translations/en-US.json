@@ -12,7 +12,7 @@
   "MainMenu_Help_Centers": "Help Centers",
   "MainMenu_Children_Test": "Children Test",
   "MainMenu_Adults_Test": "Adults Test",
-  "Model_appbar": "Autism Classification",
+  "Model_appbar": "Autism Detection",
   "Model_take_photo": "Take A Photo",
   "Model_from_gal": "Pick From Gallery",
   "Model_toast": "Please Pick A Valid Image/Images !",
