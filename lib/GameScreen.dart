@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'itemModel.dart';
+import 'package:quickalert/quickalert.dart';
 
 class GameScreen extends StatefulWidget {
   @override
@@ -110,6 +111,22 @@ class _GameScreenState extends State<GameScreen> {
     if (items.length == 0) gameOver = true;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(Icons.question_mark),
+              onPressed: () {
+                QuickAlert.show(
+                    context: context,
+                    type: QuickAlertType.info,
+                    text: 'Game_ShowDialog'.tr(),
+                    title: 'Game_HowToPlay'.tr(),
+                    confirmBtnText: 'Game_Dialog_Ok'.tr(),
+                    confirmBtnColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    textColor: Theme.of(context).colorScheme.onBackground,
+                    titleColor: Theme.of(context).colorScheme.onBackground);
+              })
+        ],
         //backgroundColor: Color(0xFF537895),
         centerTitle: true,
         //backgroundColor: Theme.of(context).colorScheme.primary,
