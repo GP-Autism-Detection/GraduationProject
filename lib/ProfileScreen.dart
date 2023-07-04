@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController passwordcontroller;
   User? user;
   late bool _passwordVisible;
-
+  var FormKey = GlobalKey<FormState>();
   _getData() async {
     user = await firebaseStorage().getUserData();
     setState(() {});
@@ -127,252 +127,345 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Profile_Name:'.tr(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 6.0,
-                        ),
-                        TextField(
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            hintText: user!.name,
-                            hintStyle: TextStyle(
-                              fontSize: 18.0,
+                    Form(
+                      key: FormKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Profile_Name:'.tr(),
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Text(
-                          'Profile_Email:'.tr(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                          SizedBox(
+                            height: 6.0,
                           ),
-                        ),
-                        SizedBox(
-                          height: 6.0,
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            enabled: false,
-                            hintText: user!.email,
-                            hintStyle: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.0,
-                        ),
-                        Text(
-                          'Profile_Password:'.tr(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 6.0,
-                        ),
-                        TextField(
-                          controller: passwordcontroller,
-                          obscureText: !_passwordVisible,
-                          decoration: InputDecoration(
-                            hintText:
-                                _passwordVisible ? user!.password : "********",
-                            hintStyle: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                // Based on passwordVisible state choose the icon
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Theme.of(context).primaryColorDark,
+                          TextField(
+                            controller: namecontroller,
+                            decoration: InputDecoration(
+                              hintText: user!.name,
+                              hintStyle: TextStyle(
+                                fontSize: 18.0,
                               ),
-                              onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 60.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Flexible(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: MaterialButton(
-                                    onPressed: () async {
-                                      if (namecontroller.text.isNotEmpty) {
-                                        ShowCircular();
-                                        var Centers = FirebaseFirestore.instance
-                                            .collection('Centers');
-                                        var Center = await Centers.get();
-                                        for (var doc in Center.docs) {
-                                          var comments = await doc.reference
-                                              .collection('comments')
-                                              .where("userId",
-                                                  isEqualTo: userid)
-                                              .get();
-                                          for (var doc in comments.docs) {
-                                            await doc.reference.update({
-                                              'username': namecontroller.text,
-                                            });
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Profile_Email:'.tr(),
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6.0,
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              enabled: false,
+                              hintText: user!.email,
+                              hintStyle: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Text(
+                            'Profile_Password:'.tr(),
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6.0,
+                          ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value!.length > 0 && value!.length < 8) {
+                                return 'Register_Pass_Validation2'.tr();
+                              }
+                              return null;
+                            },
+                            controller: passwordcontroller,
+                            obscureText: !_passwordVisible,
+                            decoration: InputDecoration(
+                              hintText: _passwordVisible
+                                  ? user!.password
+                                  : "********",
+                              hintStyle: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  // Based on passwordVisible state choose the icon
+                                  _passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
+                                onPressed: () {
+                                  // Update the state i.e. toogle the state of passwordVisible variable
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 60.0,
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Flexible(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: MaterialButton(
+                                      onPressed: () async {
+                                        if (namecontroller.text.isNotEmpty &&
+                                            passwordcontroller.text.isEmpty) {
+                                          ShowCircular();
+                                          var Centers = FirebaseFirestore
+                                              .instance
+                                              .collection('Centers');
+                                          var Center = await Centers.get();
+                                          for (var doc in Center.docs) {
+                                            var comments = await doc.reference
+                                                .collection('comments')
+                                                .where("userId",
+                                                    isEqualTo: userid)
+                                                .get();
+                                            for (var doc in comments.docs) {
+                                              await doc.reference.update({
+                                                'username': namecontroller.text,
+                                              });
+                                            }
+                                          }
+                                          User newuser = user!.copyWith(
+                                            password: passwordcontroller.text,
+                                            name: namecontroller.text,
+                                          );
+                                          await firebaseStorage()
+                                              .uploadUserData(user: newuser);
+                                          await firebaseStorage()
+                                              .updateUserData(
+                                                  user: user!,
+                                                  newuser: newuser);
+                                          SharedPreferences pref =
+                                              await SharedPreferences
+                                                  .getInstance();
+                                          pref.remove("ID");
+                                          Navigator.of(context).pop();
+                                          Get.to(() => LoginScreen(),
+                                              transition: Transition.downToUp,
+                                              duration:
+                                                  Duration(milliseconds: 500));
+                                        }
+
+                                        if (passwordcontroller
+                                            .text.isNotEmpty) {
+                                          if (FormKey.currentState!
+                                              .validate()) {
+                                            if (namecontroller
+                                                .text.isNotEmpty) {
+                                              ShowCircular();
+                                              var Centers = FirebaseFirestore
+                                                  .instance
+                                                  .collection('Centers');
+                                              var Center = await Centers.get();
+                                              for (var doc in Center.docs) {
+                                                var comments = await doc
+                                                    .reference
+                                                    .collection('comments')
+                                                    .where("userId",
+                                                        isEqualTo: userid)
+                                                    .get();
+                                                for (var doc in comments.docs) {
+                                                  await doc.reference.update({
+                                                    'username':
+                                                        namecontroller.text,
+                                                  });
+                                                }
+                                              }
+                                              User newuser = user!.copyWith(
+                                                password:
+                                                    passwordcontroller.text,
+                                                name: namecontroller.text,
+                                              );
+                                              await firebaseStorage()
+                                                  .uploadUserData(
+                                                      user: newuser);
+                                              await firebaseStorage()
+                                                  .updateUserData(
+                                                      user: user!,
+                                                      newuser: newuser);
+                                              SharedPreferences pref =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              pref.remove("ID");
+                                              Navigator.of(context).pop();
+                                              Get.to(() => LoginScreen(),
+                                                  transition:
+                                                      Transition.downToUp,
+                                                  duration: Duration(
+                                                      milliseconds: 500));
+                                            }
+                                            if (namecontroller.text.isEmpty) {
+                                              ShowCircular();
+                                              User newuser = user!.copyWith(
+                                                password:
+                                                    passwordcontroller.text,
+                                                name: namecontroller.text,
+                                              );
+                                              await firebaseStorage()
+                                                  .uploadUserData(
+                                                      user: newuser);
+                                              await firebaseStorage()
+                                                  .updateUserData(
+                                                      user: user!,
+                                                      newuser: newuser);
+                                              SharedPreferences pref =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              pref.remove("ID");
+                                              Navigator.of(context).pop();
+                                              Get.to(() => LoginScreen(),
+                                                  transition:
+                                                      Transition.downToUp,
+                                                  duration: Duration(
+                                                      milliseconds: 500));
+                                            }
                                           }
                                         }
-                                        Navigator.of(context).pop();
-                                      }
-                                      if (passwordcontroller.text.isNotEmpty ||
-                                          namecontroller.text.isNotEmpty) {
-                                        User newuser = user!.copyWith(
-                                          password: passwordcontroller.text,
-                                          name: namecontroller.text,
-                                        );
-                                        await firebaseStorage()
-                                            .uploadUserData(user: newuser);
-                                        await firebaseStorage().updateUserData(
-                                            user: user!, newuser: newuser);
+
+                                        if (passwordcontroller.text.isEmpty &&
+                                            namecontroller.text.isEmpty) {
+                                          Get.to(() => MenuScreen(),
+                                              transition: Transition.downToUp,
+                                              duration:
+                                                  Duration(milliseconds: 500));
+                                        }
+                                        print('Profile_Save:'.tr());
+                                        //Navigator.of(context).pop();
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (_) => LoginScreen()));
+                                      },
+                                      padding: EdgeInsetsDirectional.symmetric(
+                                          vertical: 0, horizontal: 130),
+                                      color: Colors.blue[500],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))),
+                                      child: Text(
+                                        'Profile_Save:'.tr(),
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 40.0,
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Flexible(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: MaterialButton(
+                                      onPressed: () async {
+                                        SharedPreferences pref =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        pref.remove("ID");
+
+                                        setState(() {});
                                         Get.to(() => LoginScreen(),
                                             transition: Transition.downToUp,
                                             duration:
                                                 Duration(milliseconds: 500));
-                                      }
-                                      if (passwordcontroller.text.isEmpty &&
-                                          namecontroller.text.isEmpty) {
-                                        Get.to(() => MenuScreen(),
-                                            transition: Transition.downToUp,
-                                            duration:
-                                                Duration(milliseconds: 500));
-                                      }
-                                      print('Profile_Save:'.tr());
-                                      //Navigator.of(context).pop();
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (_) => LoginScreen()));
-                                    },
-                                    padding: EdgeInsetsDirectional.symmetric(
-                                        vertical: 0, horizontal: 130),
-                                    color: Colors.blue[500],
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    child: Text(
-                                      'Profile_Save:'.tr(),
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
+                                        // Navigator.of(context, rootNavigator: true)
+                                        //     .pushAndRemoveUntil(
+                                        //   MaterialPageRoute(
+                                        //     builder: (BuildContext context) {
+                                        //       return LoginScreen();
+                                        //     },
+                                        //   ),
+                                        //   (_) => false,
+                                        // );
+                                      },
+                                      padding: EdgeInsetsDirectional.symmetric(
+                                          vertical: 0, horizontal: 120),
+                                      color: Colors.red[500],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))),
+                                      child: Text(
+                                        'Profile_Log_Out:'.tr(),
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 40.0,
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Flexible(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: MaterialButton(
-                                    onPressed: () async {
-                                      SharedPreferences pref =
-                                          await SharedPreferences.getInstance();
-                                      pref.remove("ID");
-
-                                      setState(() {});
-                                      Get.to(() => LoginScreen(),
-                                          transition: Transition.downToUp,
-                                          duration:
-                                              Duration(milliseconds: 500));
-                                      // Navigator.of(context, rootNavigator: true)
-                                      //     .pushAndRemoveUntil(
-                                      //   MaterialPageRoute(
-                                      //     builder: (BuildContext context) {
-                                      //       return LoginScreen();
-                                      //     },
-                                      //   ),
-                                      //   (_) => false,
-                                      // );
-                                    },
-                                    padding: EdgeInsetsDirectional.symmetric(
-                                        vertical: 0, horizontal: 120),
-                                    color: Colors.red[500],
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    child: Text(
-                                      'Profile_Log_Out:'.tr(),
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Container(
-                        //   child: Consumer<ThemeProvider>(
-                        //     builder: (context,provider,child) {
-                        //       return DropdownButton<String>(
-                        //       value: provider.currentTheme,
-                        //         items: const [
-                        //           DropdownMenuItem<String>(
-                        //             value: 'light',
-                        //             child: Text(
-                        //               'Light',
-                        //             ),
-                        //           ),
-                        //           DropdownMenuItem<String>(
-                        //             value: 'dark',
-                        //             child: Text('Dark',),
-                        //           ),
-                        //           DropdownMenuItem<String>(
-                        //             value: 'system',
-                        //             child: Text(
-                        //               'System',
-                        //             ),
-                        //           ),
-                        //         ],
-                        //         onChanged: (String? value) {
-                        //         provider.changeTheme(value??'system');
-                        //         },
-                        //       );
-                        //         }),
-                        //   ),
-                      ],
+                          // Container(
+                          //   child: Consumer<ThemeProvider>(
+                          //     builder: (context,provider,child) {
+                          //       return DropdownButton<String>(
+                          //       value: provider.currentTheme,
+                          //         items: const [
+                          //           DropdownMenuItem<String>(
+                          //             value: 'light',
+                          //             child: Text(
+                          //               'Light',
+                          //             ),
+                          //           ),
+                          //           DropdownMenuItem<String>(
+                          //             value: 'dark',
+                          //             child: Text('Dark',),
+                          //           ),
+                          //           DropdownMenuItem<String>(
+                          //             value: 'system',
+                          //             child: Text(
+                          //               'System',
+                          //             ),
+                          //           ),
+                          //         ],
+                          //         onChanged: (String? value) {
+                          //         provider.changeTheme(value??'system');
+                          //         },
+                          //       );
+                          //         }),
+                          //   ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
