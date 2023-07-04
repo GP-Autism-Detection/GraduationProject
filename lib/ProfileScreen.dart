@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/LoginScreen.dart';
+import 'package:graduation_project_app/MenuScreen.dart';
 import 'package:provider/provider.dart';
 import 'Localization/localiation_checker.dart';
 import 'Provider/theme_provider.dart';
@@ -44,6 +47,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     namecontroller.dispose();
     passwordcontroller.dispose();
     super.dispose();
+  }
+
+  ShowCircular() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+            child: CircularProgressIndicator(
+          color: Colors.blue,
+        ));
+      },
+    );
   }
 
   @override
@@ -209,20 +224,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: MaterialButton(
                                     onPressed: () async {
+                                      if (namecontroller.text.isNotEmpty) {
+                                        ShowCircular();
+                                        var Centers = FirebaseFirestore.instance
+                                            .collection('Centers');
+                                        var Center = await Centers.get();
+                                        for (var doc in Center.docs) {
+                                          var comments = await doc.reference
+                                              .collection('comments')
+                                              .where("userId",
+                                                  isEqualTo: userid)
+                                              .get();
+                                          for (var doc in comments.docs) {
+                                            await doc.reference.update({
+                                              'username': namecontroller.text,
+                                            });
+                                          }
+                                        }
+                                        Navigator.of(context).pop();
+                                      }
+                                      if (passwordcontroller.text.isNotEmpty ||
+                                          namecontroller.text.isNotEmpty) {
+                                        User newuser = user!.copyWith(
+                                          password: passwordcontroller.text,
+                                          name: namecontroller.text,
+                                        );
+                                        await firebaseStorage()
+                                            .uploadUserData(user: newuser);
+                                        await firebaseStorage().updateUserData(
+                                            user: user!, newuser: newuser);
+                                        Get.to(() => LoginScreen(),
+                                            transition: Transition.downToUp,
+                                            duration:
+                                                Duration(milliseconds: 500));
+                                      }
+                                      if (passwordcontroller.text.isEmpty &&
+                                          namecontroller.text.isEmpty) {
+                                        Get.to(() => MenuScreen(),
+                                            transition: Transition.downToUp,
+                                            duration:
+                                                Duration(milliseconds: 500));
+                                      }
                                       print('Profile_Save:'.tr());
-                                      User newuser = user!.copyWith(
-                                        password: passwordcontroller.text,
-                                        name: namecontroller.text,
-                                      );
-                                      await firebaseStorage()
-                                          .uploadUserData(user: newuser);
-                                      await firebaseStorage().updateUserData(
-                                          user: user!, newuser: newuser);
-                                      setState(() {});
-                                      Get.to(() => LoginScreen(),
-                                          transition: Transition.downToUp,
-                                          duration:
-                                              Duration(milliseconds: 500));
+                                      //Navigator.of(context).pop();
                                       // Navigator.push(
                                       //     context,
                                       //     MaterialPageRoute(

@@ -60,7 +60,7 @@ class _TestScreen extends State<TestScreen> {
     Tflite.close();
     String res;
     res = (await Tflite.loadModel(
-        model: "assets/converted_model.tflite", labels: "assets/model.txt"))!;
+        model: "assets/icp.tflite", labels: "assets/model.txt"))!;
     print("Models loading status: $res");
   }
 

@@ -149,7 +149,7 @@ class _GameScreenState extends State<GameScreen> {
                             fontSize: 25.0,
                           )),
                       TextSpan(
-                          text: '$score',
+                          text: '$score' + "/" + '80',
                           style: const TextStyle(
                               fontSize: 30.0,
                               color: Colors.teal,
