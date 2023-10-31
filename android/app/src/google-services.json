@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13810130873",
+    "project_id": "graduation-project-574e9",
+    "storage_bucket": "graduation-project-574e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13810130873:android:ee50e896e846e3cd0fa068",
+        "android_client_info": {
+          "package_name": "com.detection.autism.graduation_project_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13810130873-q5bfbiqhofn6rm61id6g3k4chjs2jadd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3Ws_nwUp456axW9AXG1ZoCm7Wbod181c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13810130873-q5bfbiqhofn6rm61id6g3k4chjs2jadd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
